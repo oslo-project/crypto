@@ -1,0 +1,67 @@
+{
+	"name": "@oslojs/crypto",
+	"type": "module",
+	"version": "0.1.1",
+	"description": "A very basic crypto library",
+	"scripts": {
+		"build": "rm -rf dist/* && tsc --project tsconfig.build.json",
+		"format": "prettier -w .",
+		"lint": "eslint src",
+		"test": "vitest run --sequence.concurrent"
+	},
+	"files": [
+		"/dist/"
+	],
+	"exports": {
+		"./hmac": "./dist/hmac/index.js",
+		"./random": "./dist/random/index.js",
+		"./sha1": "./dist/sha1/index.js",
+		"./sha2": "./dist/sha2/index.js",
+		"./subtle": "./dist/subtle/index.js"
+	},
+	"typesVersions": {
+		"*": {
+			"hmac": [
+				"dist/hmac/index.d.ts"
+			],
+			"random": [
+				"dist/random/index.d.ts"
+			],
+			"sha1": [
+				"dist/sha1/index.d.ts"
+			],
+			"sha2": [
+				"dist/sha2/index.d.ts"
+			],
+			"subtle": [
+				"dist/subtle/index.d.ts"
+			]
+		}
+	},
+	"keywords": [
+		"auth",
+		"crypto",
+		"encoding",
+		"auth",
+		"random",
+		"hash",
+		"sha",
+		"hmac"
+	],
+	"author": "pilcrowOnPaper",
+	"license": "MIT",
+	"devDependencies": {
+		"@scure/base": "^1.1.3",
+		"@types/node": "^20.8.6",
+		"@typescript-eslint/eslint-plugin": "^6.7.5",
+		"@typescript-eslint/parser": "^6.7.5",
+		"auri": "^2.0.0",
+		"eslint": "^8.51.0",
+		"prettier": "^3.0.3",
+		"typescript": "^5.2.2",
+		"vitest": "^0.34.6"
+	},
+	"dependencies": {
+		"@oslojs/binary": "^0.1.2"
+	}
+}
