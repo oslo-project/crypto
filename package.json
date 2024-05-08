@@ -48,6 +48,10 @@
 		"sha",
 		"hmac"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/oslo-project/crypto"
+	},
 	"author": "pilcrowOnPaper",
 	"license": "MIT",
 	"devDependencies": {
