@@ -4,7 +4,13 @@ title: "@oslojs/crypto documentation"
 
 # @oslojs/crypto documentation
 
-A runtime-agnostic JavaScript crypto library by [Oslo](https://crypto.oslojs.dev). Alongside [`@oslojs/encoding`]() and [`@oslojs/binary`](), it aims to provide a basic toolbox for implementing auth and auth-related standards.
+A basic JavaScript crypto library by [Oslo](https://oslojs.dev). Includes APIs for SHA-1, SHA-2, HMAC, and cryptographically secure random generator.
+
+- Runtime-agnostic
+- No third-party dependencies
+- Fully typed
+
+Alongside [`@oslojs/encoding`]() and [`@oslojs/binary`](), it aims to provide a basic toolbox for implementing auth and auth-related standards.
 
 ## Installation
 
