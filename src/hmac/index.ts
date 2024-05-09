@@ -1,6 +1,6 @@
 import { xor } from "@oslojs/binary";
 
-import type { Hash, HashAlgorithm } from "../index.js";
+import type { Hash, HashAlgorithm } from "../hash/index.js";
 
 export class HMAC {
 	private k0: Uint8Array;

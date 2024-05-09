@@ -1,7 +1,7 @@
 import { bigEndian } from "@oslojs/binary";
 import { rotl32 } from "@oslojs/binary";
 
-import type { Hash } from "../index.js";
+import type { Hash } from "../hash/index.js";
 
 // Faster or comparable to Web Crypto < 2000 bytes.
 export function sha1(data: Uint8Array): Uint8Array {

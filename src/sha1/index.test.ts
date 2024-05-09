@@ -24,9 +24,7 @@ test("SHA1", async () => {
 			hash.update(a);
 			hash.update(b);
 			const result = hash.digest();
-			const expected = new Uint8Array(
-				await crypto.subtle.digest("SHA-1", concatenateBytes(a, b))
-			);
+			const expected = new Uint8Array(await crypto.subtle.digest("SHA-1", concatenateBytes(a, b)));
 			expect(result).toStrictEqual(expected);
 		}
 	}

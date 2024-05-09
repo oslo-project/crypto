@@ -13,6 +13,7 @@
 		"/dist/"
 	],
 	"exports": {
+		"./hash": "./dist/hmac/hash.js",
 		"./hmac": "./dist/hmac/index.js",
 		"./random": "./dist/random/index.js",
 		"./sha1": "./dist/sha1/index.js",
@@ -21,6 +22,9 @@
 	},
 	"typesVersions": {
 		"*": {
+			"hash": [
+				"dist/hash/index.d.ts"
+			],
 			"hmac": [
 				"dist/hmac/index.d.ts"
 			],

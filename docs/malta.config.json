@@ -1,0 +1,29 @@
+{
+	"name": "@oslojs/crypto",
+	"description": "A very basic crypto library for any environment.",
+	"domain": "https://crypto.oslojs.dev",
+	"twitter": "@pilcrowonpaper",
+	"sidebar": [
+		{
+			"title": "Examples",
+			"pages": [
+				["Secure hash algorithms", "/examples/sha"],
+				["HMAC", "/examples/hmac"],
+				["Generate random values", "/examples/random"]
+			]
+		},
+		{
+			"title": "API reference",
+			"pages": [["@oslojs/crypto", "/reference/main"]]
+		},
+		{
+			"title": "Links",
+			"pages": [
+				["GitHub", "https://github.com/oslo-project/crypto"],
+				["Oslo", "https://oslojs.dev"],
+				["Twitter", "https://twitter.com/pilcrowonpaper"],
+				["Donate", "https://github.com/sponsors/pilcrowOnPaper"]
+			]
+		}
+	]
+}

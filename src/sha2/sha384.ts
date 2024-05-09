@@ -1,7 +1,7 @@
 import { bigEndian } from "@oslojs/binary";
 import { rotr64 } from "@oslojs/binary";
 
-import type { Hash } from "../index.js";
+import type { Hash } from "../hash/index.js";
 
 export function sha384(data: Uint8Array): Uint8Array {
 	const hash = new SHA384();

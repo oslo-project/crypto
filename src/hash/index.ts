@@ -6,6 +6,6 @@ export interface Hash {
 	digest: () => Uint8Array;
 }
 
-export type HashAlgorithm = {
+export interface HashAlgorithm {
 	new (): Hash;
-};
+}

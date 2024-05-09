@@ -6,15 +6,15 @@ import { SHA512 } from "../sha2/sha512.js";
 
 describe("HMAC", () => {
 	test("SHA-1", async () => {
-        const key1 = new Uint8Array(20);
-        crypto.getRandomValues(key1);
-        const key2 = new Uint8Array(64);
-        crypto.getRandomValues(key2);
-        const key3 = new Uint8Array(80);
-        crypto.getRandomValues(key1);
-		const cryptoKey1 = await createWebCryptoKey(key1, "SHA-1")
-		const cryptoKey2 = await createWebCryptoKey(key2, "SHA-1")
-		const cryptoKey3 = await createWebCryptoKey(key3, "SHA-1")
+		const key1 = new Uint8Array(20);
+		crypto.getRandomValues(key1);
+		const key2 = new Uint8Array(64);
+		crypto.getRandomValues(key2);
+		const key3 = new Uint8Array(80);
+		crypto.getRandomValues(key1);
+		const cryptoKey1 = await createWebCryptoKey(key1, "SHA-1");
+		const cryptoKey2 = await createWebCryptoKey(key2, "SHA-1");
+		const cryptoKey3 = await createWebCryptoKey(key3, "SHA-1");
 
 		const randomValues = crypto.getRandomValues(new Uint8Array(200));
 		for (let i = 0; i < randomValues.byteLength + 1; i++) {
@@ -39,16 +39,16 @@ describe("HMAC", () => {
 		}
 	});
 
-    test("SHA-256", async () => {
-        const key1 = new Uint8Array(20);
-        crypto.getRandomValues(key1);
-        const key2 = new Uint8Array(64);
-        crypto.getRandomValues(key2);
-        const key3 = new Uint8Array(80);
-        crypto.getRandomValues(key1);
-		const cryptoKey1 = await createWebCryptoKey(key1, "SHA-256")
-		const cryptoKey2 = await createWebCryptoKey(key2, "SHA-256")
-		const cryptoKey3 = await createWebCryptoKey(key3, "SHA-256")
+	test("SHA-256", async () => {
+		const key1 = new Uint8Array(20);
+		crypto.getRandomValues(key1);
+		const key2 = new Uint8Array(64);
+		crypto.getRandomValues(key2);
+		const key3 = new Uint8Array(80);
+		crypto.getRandomValues(key1);
+		const cryptoKey1 = await createWebCryptoKey(key1, "SHA-256");
+		const cryptoKey2 = await createWebCryptoKey(key2, "SHA-256");
+		const cryptoKey3 = await createWebCryptoKey(key3, "SHA-256");
 
 		const randomValues = crypto.getRandomValues(new Uint8Array(200));
 		for (let i = 0; i < randomValues.byteLength + 1; i++) {
@@ -73,17 +73,17 @@ describe("HMAC", () => {
 		}
 	});
 
-    test("SHA-512", async () => {
-        const key1 = new Uint8Array(20);
-        crypto.getRandomValues(key1);
-        const key2 = new Uint8Array(128);
-        crypto.getRandomValues(key2);
-        const key3 = new Uint8Array(160);
-        crypto.getRandomValues(key1);
+	test("SHA-512", async () => {
+		const key1 = new Uint8Array(20);
+		crypto.getRandomValues(key1);
+		const key2 = new Uint8Array(128);
+		crypto.getRandomValues(key2);
+		const key3 = new Uint8Array(160);
+		crypto.getRandomValues(key1);
 
-		const cryptoKey1 = await createWebCryptoKey(key1, "SHA-512")
-		const cryptoKey2 = await createWebCryptoKey(key2, "SHA-512")
-		const cryptoKey3 = await createWebCryptoKey(key3, "SHA-512")
+		const cryptoKey1 = await createWebCryptoKey(key1, "SHA-512");
+		const cryptoKey2 = await createWebCryptoKey(key2, "SHA-512");
+		const cryptoKey3 = await createWebCryptoKey(key3, "SHA-512");
 
 		const randomValues = crypto.getRandomValues(new Uint8Array(200));
 		for (let i = 0; i < randomValues.byteLength + 1; i++) {
@@ -110,15 +110,15 @@ describe("HMAC", () => {
 });
 
 async function createWebCryptoKey(key: Uint8Array, hash: string): Promise<CryptoKey> {
-    const cryptoKey = await crypto.subtle.importKey(
-        "raw",
-        key,
-        {
-            name: "HMAC",
-            hash: hash
-        },
-        false,
-        ["sign"]
-    );
-    return cryptoKey
+	const cryptoKey = await crypto.subtle.importKey(
+		"raw",
+		key,
+		{
+			name: "HMAC",
+			hash: hash
+		},
+		false,
+		["sign"]
+	);
+	return cryptoKey;
 }
