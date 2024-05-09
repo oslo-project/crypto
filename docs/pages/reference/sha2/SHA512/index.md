@@ -4,7 +4,7 @@ title: "SHA512"
 
 # SHA512
 
-Implements [`hash.Hash`]().
+Implements [`hash.Hash`](/reference/hash/Hash).
 
 Synchronous implementation of SHA-512 as specified in [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf).
 
