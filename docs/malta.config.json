@@ -9,7 +9,7 @@
 			"pages": [
 				["Secure hash algorithms", "/examples/sha"],
 				["HMAC", "/examples/hmac"],
-				["Generate random values", "/examples/random"]
+				["Generate random values", "/examples/random-values"]
 			]
 		},
 		{
