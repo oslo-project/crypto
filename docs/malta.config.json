@@ -3,6 +3,7 @@
 	"description": "A very basic crypto library for any environment.",
 	"domain": "https://crypto.oslojs.dev",
 	"twitter": "@pilcrowonpaper",
+	"asset_hashing": true,
 	"sidebar": [
 		{
 			"title": "Examples",
