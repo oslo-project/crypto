@@ -1,7 +1,7 @@
 {
 	"name": "@oslojs/crypto",
 	"type": "module",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"description": "A very basic crypto library",
 	"scripts": {
 		"build": "rm -rf dist/* && tsc --project tsconfig.build.json",
@@ -13,7 +13,7 @@
 		"/dist/"
 	],
 	"exports": {
-		"./hash": "./dist/hmac/hash.js",
+		"./hash": "./dist/hash/index.js",
 		"./hmac": "./dist/hmac/index.js",
 		"./random": "./dist/random/index.js",
 		"./sha1": "./dist/sha1/index.js",
@@ -70,6 +70,6 @@
 		"vitest": "^0.34.6"
 	},
 	"dependencies": {
-		"@oslojs/binary": "^0.1.2"
+		"@oslojs/binary": "0.2.0"
 	}
 }
