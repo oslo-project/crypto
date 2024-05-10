@@ -15,7 +15,14 @@
 		},
 		{
 			"title": "API reference",
-			"pages": [["@oslojs/crypto", "/reference/main"]]
+			"pages": [
+				["@oslojs/crypto/hash", "/reference/hash"],
+				["@oslojs/crypto/hmac", "/reference/hmac"],
+				["@oslojs/crypto/random", "/reference/random"],
+				["@oslojs/crypto/sha1", "/reference/sha1"],
+				["@oslojs/crypto/sha2", "/reference/sha2"],
+				["@oslojs/crypto/subtle", "/reference/subtle"]
+			]
 		},
 		{
 			"title": "Links",
