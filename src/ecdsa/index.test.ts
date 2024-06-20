@@ -1,8 +1,8 @@
 import { describe, test, expect } from "vitest";
 import {
-	parseIEEEP1363ECDSASignatureBytes,
+	decodeIEEEP1363ECDSASignature,
 	verifyECDSA,
-	parseSEC1PublicKeyBytes,
+	decodeSEC1PublicKey,
 	p224,
 	p256,
 	p384,
@@ -27,12 +27,12 @@ describe("verifyECDSA()", () => {
 			format: "der"
 		});
 		const decodedSPKI = parseASN1NoLeftoverBytes(spki);
-		const publicKey = parseSEC1PublicKeyBytes(p224, decodedSPKI.sequence().at(1).bitString().bytes);
+		const publicKey = decodeSEC1PublicKey(p224, decodedSPKI.sequence().at(1).bitString().bytes);
 		const signatureBytes = node.sign("SHA-224", data, {
 			key: keyPair.privateKey,
 			dsaEncoding: "ieee-p1363"
 		});
-		const signature = parseIEEEP1363ECDSASignatureBytes(p224, signatureBytes);
+		const signature = decodeIEEEP1363ECDSASignature(p224, signatureBytes);
 		expect(verifyECDSA(publicKey, sha224(data), signature.r, signature.s)).toBe(true);
 	});
 
@@ -58,8 +58,8 @@ describe("verifyECDSA()", () => {
 		const publicKeyBytes = new Uint8Array(
 			await crypto.subtle.exportKey("raw", webcryptoKeys.publicKey)
 		);
-		const publicKey = parseSEC1PublicKeyBytes(p256, publicKeyBytes);
-		const signature = parseIEEEP1363ECDSASignatureBytes(p256, signatureBytes);
+		const publicKey = decodeSEC1PublicKey(p256, publicKeyBytes);
+		const signature = decodeIEEEP1363ECDSASignature(p256, signatureBytes);
 		expect(verifyECDSA(publicKey, sha256(data), signature.r, signature.s)).toBe(true);
 	});
 
@@ -85,8 +85,8 @@ describe("verifyECDSA()", () => {
 		const publicKeyBytes = new Uint8Array(
 			await crypto.subtle.exportKey("raw", webcryptoKeys.publicKey)
 		);
-		const publicKey = parseSEC1PublicKeyBytes(p384, publicKeyBytes);
-		const signature = parseIEEEP1363ECDSASignatureBytes(p384, signatureBytes);
+		const publicKey = decodeSEC1PublicKey(p384, publicKeyBytes);
+		const signature = decodeIEEEP1363ECDSASignature(p384, signatureBytes);
 		expect(verifyECDSA(publicKey, sha384(data), signature.r, signature.s)).toBe(true);
 	});
 
@@ -112,8 +112,8 @@ describe("verifyECDSA()", () => {
 		const publicKeyBytes = new Uint8Array(
 			await crypto.subtle.exportKey("raw", webcryptoKeys.publicKey)
 		);
-		const publicKey = parseSEC1PublicKeyBytes(p521, publicKeyBytes);
-		const signature = parseIEEEP1363ECDSASignatureBytes(p521, signatureBytes);
+		const publicKey = decodeSEC1PublicKey(p521, publicKeyBytes);
+		const signature = decodeIEEEP1363ECDSASignature(p521, signatureBytes);
 		expect(verifyECDSA(publicKey, sha512(data), signature.r, signature.s)).toBe(true);
 	});
 
@@ -126,7 +126,7 @@ describe("verifyECDSA()", () => {
 			format: "der"
 		});
 		const decodedSPKI = parseASN1NoLeftoverBytes(spki);
-		const publicKey = parseSEC1PublicKeyBytes(
+		const publicKey = decodeSEC1PublicKey(
 			secp256k1,
 			decodedSPKI.sequence().at(1).bitString().bytes
 		);
@@ -134,27 +134,27 @@ describe("verifyECDSA()", () => {
 			key: keyPair.privateKey,
 			dsaEncoding: "ieee-p1363"
 		});
-		const signature = parseIEEEP1363ECDSASignatureBytes(secp256k1, signatureBytes);
+		const signature = decodeIEEEP1363ECDSASignature(secp256k1, signatureBytes);
 		expect(verifyECDSA(publicKey, sha256(data), signature.r, signature.s)).toBe(true);
 	});
 });
 
-test("parseSEC1PublicKeyBytes()", () => {
+test("decodeSEC1PublicKey()", () => {
 	let publicKey = new ECDSAPublicKey(p256, p256.g.x, p256.g.y);
-	expect(parseSEC1PublicKeyBytes(p256, publicKey.sec1UncompressedBytes())).toStrictEqual(publicKey);
+	expect(decodeSEC1PublicKey(p256, publicKey.encodeSEC1Uncompressed())).toStrictEqual(publicKey);
 
 	publicKey = new ECDSAPublicKey(p192, p192.g.x, p192.g.y);
-	expect(parseSEC1PublicKeyBytes(p192, publicKey.sec1CompressedBytes())).toStrictEqual(publicKey);
+	expect(decodeSEC1PublicKey(p192, publicKey.encodeSEC1Compressed())).toStrictEqual(publicKey);
 
 	publicKey = new ECDSAPublicKey(p224, p224.g.x, p224.g.y);
-	expect(parseSEC1PublicKeyBytes(p224, publicKey.sec1CompressedBytes())).toStrictEqual(publicKey);
+	expect(decodeSEC1PublicKey(p224, publicKey.encodeSEC1Compressed())).toStrictEqual(publicKey);
 
 	publicKey = new ECDSAPublicKey(p256, p256.g.x, p256.g.y);
-	expect(parseSEC1PublicKeyBytes(p256, publicKey.sec1CompressedBytes())).toStrictEqual(publicKey);
+	expect(decodeSEC1PublicKey(p256, publicKey.encodeSEC1Compressed())).toStrictEqual(publicKey);
 
 	publicKey = new ECDSAPublicKey(p384, p384.g.x, p384.g.y);
-	expect(parseSEC1PublicKeyBytes(p384, publicKey.sec1CompressedBytes())).toStrictEqual(publicKey);
+	expect(decodeSEC1PublicKey(p384, publicKey.encodeSEC1Compressed())).toStrictEqual(publicKey);
 
 	publicKey = new ECDSAPublicKey(p521, p521.g.x, p521.g.y);
-	expect(parseSEC1PublicKeyBytes(p521, publicKey.sec1CompressedBytes())).toStrictEqual(publicKey);
+	expect(decodeSEC1PublicKey(p521, publicKey.encodeSEC1Compressed())).toStrictEqual(publicKey);
 });

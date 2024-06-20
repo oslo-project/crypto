@@ -53,7 +53,7 @@ export function powmod(x: bigint, y: bigint, p: bigint): bigint {
 
 // assumes p is prime
 // https://en.wikipedia.org/wiki/Tonelli–Shanks_algorithm#The_algorithm
-export function shanksTonelli(n: bigint, p: bigint): bigint {
+export function tonelliShanks(n: bigint, p: bigint): bigint {
 	if (p % 4n === 3n) {
 		return powmod(n, (p + 1n) / 4n, p);
 	}

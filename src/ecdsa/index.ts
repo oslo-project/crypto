@@ -1,7 +1,7 @@
-export { ECDSACurve, Point, p192, p224, p256, p384, p521, secp256k1 } from "./curve.js";
+export { ECDSACurve, ECDSAPoint, p192, p224, p256, p384, p521, secp256k1 } from "./curve.js";
 
-import { Point } from "./curve.js";
-import { euclideanMod, inverseMod, shanksTonelli } from "./math.js";
+import { ECDSAPoint } from "./curve.js";
+import { euclideanMod, inverseMod, tonelliShanks } from "./math.js";
 import { bigIntBytes, bigIntFromBytes } from "@oslojs/binary";
 
 import type { ECDSACurve } from "./curve.js";
@@ -12,7 +12,7 @@ export function verifyECDSA(
 	r: bigint,
 	s: bigint
 ): boolean {
-	const q = new Point(publicKey.x, publicKey.y);
+	const q = new ECDSAPoint(publicKey.x, publicKey.y);
 	if (!publicKey.curve.isOnCurve(q)) {
 		return false;
 	}
@@ -48,7 +48,7 @@ export class ECDSAPublicKey {
 		this.y = y;
 	}
 
-	public sec1UncompressedBytes(): Uint8Array {
+	public encodeSEC1Uncompressed(): Uint8Array {
 		const bytes = new Uint8Array(1 + this.curve.size * 2);
 		bytes[0] = 0x04;
 		const xBytes = bigIntBytes(this.x);
@@ -58,7 +58,7 @@ export class ECDSAPublicKey {
 		return bytes;
 	}
 
-	public sec1CompressedBytes(): Uint8Array {
+	public encodeSEC1Compressed(): Uint8Array {
 		const bytes = new Uint8Array(1 + this.curve.size);
 		if (this.y % 2n === 0n) {
 			bytes[0] = 0x02;
@@ -71,13 +71,13 @@ export class ECDSAPublicKey {
 	}
 }
 
-export function parseSEC1PublicKeyBytes(curve: ECDSACurve, bytes: Uint8Array): ECDSAPublicKey {
+export function decodeSEC1PublicKey(curve: ECDSACurve, bytes: Uint8Array): ECDSAPublicKey {
 	if (bytes.byteLength < 1) {
-		throw new Error();
+		throw new Error("Invalid public key");
 	}
 	if (bytes[0] === 0x04) {
 		if (bytes.byteLength !== curve.size * 2 + 1) {
-			throw new Error();
+			throw new Error("Invalid public key");
 		}
 		const x = bigIntFromBytes(bytes.slice(1, curve.size + 1));
 		const y = bigIntFromBytes(bytes.slice(curve.size + 1));
@@ -85,11 +85,11 @@ export function parseSEC1PublicKeyBytes(curve: ECDSACurve, bytes: Uint8Array): E
 	}
 	if (bytes[0] === 0x02) {
 		if (bytes.byteLength !== curve.size + 1) {
-			throw new Error();
+			throw new Error("Invalid public key");
 		}
 		const x = bigIntFromBytes(bytes.slice(1));
 		const y2 = euclideanMod(x ** 3n + curve.a * x + curve.b, curve.p);
-		const y = shanksTonelli(y2, curve.p);
+		const y = tonelliShanks(y2, curve.p);
 		if (y % 2n === 0n) {
 			return new ECDSAPublicKey(curve, x, y);
 		}
@@ -97,17 +97,17 @@ export function parseSEC1PublicKeyBytes(curve: ECDSACurve, bytes: Uint8Array): E
 	}
 	if (bytes[0] === 0x03) {
 		if (bytes.byteLength !== curve.size + 1) {
-			throw new Error();
+			throw new Error("Invalid public key");
 		}
 		const x = bigIntFromBytes(bytes.slice(1));
 		const y2 = euclideanMod(x ** 3n + curve.a * x + curve.b, curve.p);
-		const y = shanksTonelli(y2, curve.p);
+		const y = tonelliShanks(y2, curve.p);
 		if (y % 2n === 1n) {
 			return new ECDSAPublicKey(curve, x, y);
 		}
 		return new ECDSAPublicKey(curve, x, curve.p - y);
 	}
-	throw new Error("Unknown format");
+	throw new Error("Unknown encoding format");
 }
 
 export class ECDSASignature {
@@ -122,7 +122,7 @@ export class ECDSASignature {
 		this.s = s;
 	}
 
-	public ieeeP1363Bytes(curve: ECDSACurve): Uint8Array {
+	public encodeIEEEP1363(curve: ECDSACurve): Uint8Array {
 		const rs = new Uint8Array(curve.size * 2);
 		const rBytes = bigIntBytes(this.r);
 		if (rBytes.byteLength > curve.size) {
@@ -138,14 +138,20 @@ export class ECDSASignature {
 	}
 }
 
-export function parseIEEEP1363ECDSASignatureBytes(
+export function decodeIEEEP1363ECDSASignature(
 	curve: ECDSACurve,
 	bytes: Uint8Array
 ): ECDSASignature {
 	if (bytes.byteLength !== curve.size * 2) {
-		throw new Error();
+		throw new ECDSADecodeError("Invalid signature size");
 	}
 	const r = bigIntFromBytes(bytes.slice(0, curve.size));
 	const s = bigIntFromBytes(bytes.slice(curve.size));
 	return new ECDSASignature(r, s);
+}
+
+export class ECDSADecodeError extends Error {
+	constructor(message: string) {
+		super(message);
+	}
 }

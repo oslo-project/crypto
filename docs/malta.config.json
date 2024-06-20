@@ -16,6 +16,7 @@
 		{
 			"title": "API reference",
 			"pages": [
+				["@oslojs/crypto/ecdsa", "/reference/ecdsa"],
 				["@oslojs/crypto/hash", "/reference/hash"],
 				["@oslojs/crypto/hmac", "/reference/hmac"],
 				["@oslojs/crypto/random", "/reference/random"],
