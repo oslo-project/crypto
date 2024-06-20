@@ -1,7 +1,7 @@
 {
 	"name": "@oslojs/crypto",
 	"type": "module",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "A very basic crypto library",
 	"scripts": {
 		"build": "rm -rf dist/* && tsc --project tsconfig.build.json",
