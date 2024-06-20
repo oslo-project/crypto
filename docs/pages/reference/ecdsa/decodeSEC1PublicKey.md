@@ -4,7 +4,7 @@ title: "decodeSEC1PublicKey()"
 
 # decodeSEC1PublicKey()
 
-Decodes an SEC 1 encoded public key point. Supports both compressed and uncompressed variants. This does not validate that public key is on the curve. 
+Decodes an SEC 1 encoded public key point. Supports both compressed and uncompressed variants. This does not validate that public key is on the curve.
 
 Throws an error if the encoded bytes is invalid.
 
