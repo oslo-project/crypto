@@ -1,8 +1,8 @@
 ---
-title: "Verify ECDSA"
+title: "Verify ECDSA signatures"
 ---
 
-# Verify ECDSA
+# Verify ECDSA signatures
 
 Oslo provides a low-level API for verifying ECDSA signatures. While it should be fine for most cases, APIs are NOT constant time (hence only we only provide verification).
 
