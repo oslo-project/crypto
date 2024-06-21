@@ -35,3 +35,5 @@ import { decodeIEEEP1363ECDSASignature, p256 } from "@oslojs/crypto/ecdsa";
 const signature = decodeIEEEP1363ECDSASignature(p256, bytes);
 const valid = verifyECDSA(publicKey, hash, signature.r, signature.s);
 ```
+
+Commonly-used curves are provided out-of-the-box, including P-256 and secp256k1, but new curves can be added with [`ECDSACurve`](/reference/ecdsa/ECDSACurve).
