@@ -11,8 +11,15 @@ Represents an ECDSA curve over a prime field.
 ## Constructor
 
 ```ts
-//$ Point=/reference/ecdsa/ECDSAPoint
-function constructor(p: bigint, a: bigint, b: bigint, g: Point, n: bigint, size: number): this;
+//$ ECDSAPoint=/reference/ecdsa/ECDSAPoint
+function constructor(
+	p: bigint,
+	a: bigint,
+	b: bigint,
+	g: $$ECDSAPoint,
+	n: bigint,
+	size: number
+): this;
 ```
 
 ### Parameters

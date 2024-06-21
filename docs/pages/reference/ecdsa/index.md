@@ -19,6 +19,7 @@ Common fields are provided out-of-the-box but you can add new curves with `ECDSA
 ## Classes
 
 - [`ECDSACurve`](/reference/ecdsa/ECDSACurve)
+- [`ECDSAPoint`](/reference/ecdsa/ECDSAPoint)
 - [`ECDSAPublicKey`](/reference/ecdsa/ECDSAPublicKey)
 - [`ECDSASignature`](/reference/ecdsa/ECDSASignature)
 
