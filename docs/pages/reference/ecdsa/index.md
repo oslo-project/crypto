@@ -4,7 +4,7 @@ title: "@oslojs/crypto/ecdsa"
 
 # @oslojs/crypto/ecdsa
 
-Implements the Elliptic Curve Digital Signature Algorithm (ECDSA) over prime fields as specified in [NIST FIPS 186-5](https://csrc.nist.gov/pubs/fips/186-5/final) and [SEC 1](https://www.secg.org/sec1-v2.pdf).
+Implements the Elliptic Curve Digital Signature Algorithm (ECDSA) over prime fields as specified in [NIST FIPS 186-5](https://csrc.nist.gov/pubs/fips/186-5/final) and [SEC 1](https://www.secg.org/sec1-v2.pdf). Binary fields are not supported.
 
 While efforts have been made, **implementations are not fully constant-time.** As such, only APIs for verifying signatures are provided.
 
