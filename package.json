@@ -1,7 +1,7 @@
 {
 	"name": "@oslojs/crypto",
 	"type": "module",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "A very basic crypto library",
 	"scripts": {
 		"build": "rm -rf dist/* && tsc --project tsconfig.build.json",
@@ -13,6 +13,7 @@
 		"/dist/"
 	],
 	"exports": {
+		"./ecdsa": "./dist/ecdsa/index.js",
 		"./hash": "./dist/hash/index.js",
 		"./hmac": "./dist/hmac/index.js",
 		"./random": "./dist/random/index.js",
@@ -22,6 +23,9 @@
 	},
 	"typesVersions": {
 		"*": {
+			"ecdsa": [
+				"dist/ecdsa/index.d.ts"
+			],
 			"hash": [
 				"dist/hash/index.d.ts"
 			],
@@ -50,7 +54,8 @@
 		"random",
 		"hash",
 		"sha",
-		"hmac"
+		"hmac",
+		"ecdsa"
 	],
 	"repository": {
 		"type": "git",
@@ -59,6 +64,7 @@
 	"author": "pilcrowOnPaper",
 	"license": "MIT",
 	"devDependencies": {
+		"@oslojs/asn1": "^0.2.0",
 		"@scure/base": "^1.1.3",
 		"@types/node": "^20.8.6",
 		"@typescript-eslint/eslint-plugin": "^6.7.5",
@@ -70,6 +76,6 @@
 		"vitest": "^0.34.6"
 	},
 	"dependencies": {
-		"@oslojs/binary": "0.2.0"
+		"@oslojs/binary": "0.2.3"
 	}
 }

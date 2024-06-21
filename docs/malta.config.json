@@ -10,12 +10,14 @@
 			"pages": [
 				["Secure hash algorithms", "/examples/sha"],
 				["HMAC", "/examples/hmac"],
+				["Verify ECDSA signatures", "/examples/verify-ecdsa"],
 				["Generate random values", "/examples/random-values"]
 			]
 		},
 		{
 			"title": "API reference",
 			"pages": [
+				["@oslojs/crypto/ecdsa", "/reference/ecdsa"],
 				["@oslojs/crypto/hash", "/reference/hash"],
 				["@oslojs/crypto/hmac", "/reference/hmac"],
 				["@oslojs/crypto/random", "/reference/random"],

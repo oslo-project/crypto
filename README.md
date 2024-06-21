@@ -2,7 +2,7 @@
 
 **Documentation: https://crypto.oslojs.dev**
 
-A basic JavaScript crypto library by [Oslo](https://oslojs.dev). Includes APIs for SHA-1, SHA-2, HMAC, and cryptographically secure random generator.
+A basic JavaScript crypto library by [Oslo](https://oslojs.dev). Includes APIs for SHA-1, SHA-2, HMAC, ECDSA, and cryptographically secure random generator.
 
 - Runtime-agnostic
 - No third-party dependencies
