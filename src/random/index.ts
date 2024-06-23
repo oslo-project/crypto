@@ -1,4 +1,4 @@
-import { bigEndian } from "@oslojs/binary";
+import { bigIntFromBytes } from "@oslojs/binary";
 
 export function random(): number {
 	const buffer = new ArrayBuffer(8);
@@ -13,13 +13,13 @@ export function random(): number {
 	return new DataView(buffer).getFloat64(0) - 1;
 }
 
-export function generateRandomInteger(max: number): number {
-	if (max < 0 || max > 2 ** 32 - 1) {
-		throw new Error("Argument 'max' must be an unsigned 32 bit integer");
+export function generateRandomInteger(max: bigint): bigint {
+	if (max < 2) {
+		throw new Error("Argument 'max' must be a positive integer");
 	}
-	const bitLength = (max - 1).toString(2).length;
-	const shift = bitLength % 8;
-	const bytes = new Uint8Array(Math.ceil(bitLength / 8));
+	const inclusiveMaxBitLength = (max - 1n).toString(2).length;
+	const shift = inclusiveMaxBitLength % 8;
+	const bytes = new Uint8Array(Math.ceil(inclusiveMaxBitLength / 8));
 
 	crypto.getRandomValues(bytes);
 
@@ -28,21 +28,28 @@ export function generateRandomInteger(max: number): number {
 	if (shift !== 0) {
 		bytes[0] &= (1 << shift) - 1;
 	}
-	let result = bigEndian.uint32(bytes);
+	let result = bigIntFromBytes(bytes);
 	while (result >= max) {
 		crypto.getRandomValues(bytes);
 		if (shift !== 0) {
 			bytes[0] &= (1 << shift) - 1;
 		}
-		result = bigEndian.uint32(bytes);
+		result = bigIntFromBytes(bytes);
 	}
 	return result;
+}
+
+export function generateRandomIntegerNumber(max: number): number {
+	if (max < 2 || max > Number.MAX_SAFE_INTEGER) {
+		throw new Error("Argument 'max' must be a positive integer");
+	}
+	return Number(generateRandomInteger(BigInt(max)));
 }
 
 export function generateRandomString(length: number, alphabet: string): string {
 	let result = "";
 	for (let i = 0; i < length; i++) {
-		result += alphabet[generateRandomInteger(alphabet.length)];
+		result += alphabet[generateRandomIntegerNumber(alphabet.length)];
 	}
 	return result;
 }

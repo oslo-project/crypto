@@ -10,5 +10,6 @@ Provides cryptographically-secure random generators with minimal biases.
 
 - [`alphabet()`](/reference/random/alphabet)
 - [`generateRandomInteger()`](/reference/random/generateRandomInteger)
+- [`generateRandomIntegerNumber()`](/reference/random/generateRandomIntegerNumber)
 - [`generateRandomString()`](/reference/random/generateRandomString)
 - [`random()`](/reference/random/random)

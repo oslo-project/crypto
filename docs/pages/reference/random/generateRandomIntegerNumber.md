@@ -1,20 +1,20 @@
 ---
-title: "generateRandomInteger()"
+title: "generateRandomIntegerNumber()"
 ---
 
-# `generateRandomInteger()`
+# `generateRandomIntegerNumber()`
 
 Generates a random integer between 0 (inclusive) and a positive integer (exclusive). Uses cryptographically strong random values.
 
 ## Definition
 
 ```ts
-function generateRandomInteger(max: bigint): bigint;
+function generateRandomIntegerNumber(max: number): number;
 ```
 
 ### Parameters
 
-- `max`: Must be greater than 1
+- `max`: Must be greater than 1 and less than or equal to `Number.MAX_SAFE_INTEGER`
 
 ## Example
 
@@ -22,5 +22,5 @@ function generateRandomInteger(max: bigint): bigint;
 import { generateRandomInteger } from "oslo/crypto";
 
 // random number from 0 to 9
-generateRandomInteger(10n);
+generateRandomInteger(10);
 ```
