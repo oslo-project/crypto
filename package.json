@@ -13,7 +13,6 @@
 		"/dist/"
 	],
 	"exports": {
-		"./ecdsa": "./dist/ecdsa/index.js",
 		"./hash": "./dist/hash/index.js",
 		"./hmac": "./dist/hmac/index.js",
 		"./random": "./dist/random/index.js",
@@ -23,9 +22,6 @@
 	},
 	"typesVersions": {
 		"*": {
-			"ecdsa": [
-				"dist/ecdsa/index.d.ts"
-			],
 			"hash": [
 				"dist/hash/index.d.ts"
 			],

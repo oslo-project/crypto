@@ -6,7 +6,6 @@ title: "API reference"
 
 ## Modules
 
-- [`ecdsa`](/reference/ecdsa)
 - [`hash`](/reference/hash)
 - [`hmac`](/reference/hmac)
 - [`random`](/reference/random)

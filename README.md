@@ -2,13 +2,15 @@
 
 **Documentation: https://crypto.oslojs.dev**
 
-A basic JavaScript crypto library by [Oslo](https://oslojs.dev). Includes APIs for SHA-1, SHA-2, HMAC, ECDSA, and cryptographically secure random generator.
+A basic JavaScript crypto library by [Oslo](https://oslojs.dev). Includes APIs for SHA-1, SHA-2, HMAC, and cryptographically secure random generator.
 
 - Runtime-agnostic
 - No third-party dependencies
 - Fully typed
 
-Alongside [`@oslojs/encoding`](https://encoding.oslojs.dev) and [`@oslojs/binary`](https://binary.oslojs.dev), it aims to provide a basic toolbox for implementing auth and auth-related standards.
+Alongside [`@oslojs/encoding`](https://encoding.oslojs.dev) and [`@oslojs/binary`](https://binary.oslojs.dev), it aims to provide a basic toolbox for implementing auth and auth-related standards. Also see:
+
+- [`@oslojs/ecdsa`](https://ecdsa.oslojs.dev)
 
 ## Installation
 
