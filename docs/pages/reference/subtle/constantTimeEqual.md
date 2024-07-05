@@ -4,7 +4,9 @@ title: "constantTimeEqual()"
 
 # constantTimeEqual()
 
-Compares 2 data in constant time.
+Compares 2 data in constant time (*). 
+
+> Note: While this is algorithmically constant time, the JIT-compiler and garbage collection makes it nearly impossible for JavaScript code to be constant time.
 
 ## Definition
 

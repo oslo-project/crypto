@@ -24,3 +24,17 @@ mac.update(data1);
 mac.update(data2);
 const digest = mac.digest();
 ```
+
+To validate MACs, create the expected MAC and use `constantTimeEqual()` to compare them without leaking timing information (\*).
+
+> Note: While the implementation is algorithmically constant time, the JIT-compiler and garbage collection makes it nearly impossible for JavaScript code to be constant time.
+
+```ts
+import { hmac } from "@oslojs/crypto/hmac";
+import { SHA256 } from "@oslojs/crypto/sha2";
+import { constantTimeEqual } from "@oslojs/crypto/subtle";
+
+const mac = new Uint8Array(/*...*/);
+const expected = hmac(SHA256, key, message);
+const valid = constantTimeEqual(mac, expected);
+```
