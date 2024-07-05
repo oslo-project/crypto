@@ -10,8 +10,6 @@ A basic JavaScript crypto library by [Oslo](https://oslojs.dev). Includes APIs f
 - No third-party dependencies
 - Fully typed
 
-Alongside [`@oslojs/encoding`](https://encoding.oslojs.dev) and [`@oslojs/binary`](https://binary.oslojs.dev), it aims to provide a basic toolbox for implementing auth and auth-related standards.
-
 ## Installation
 
 ```

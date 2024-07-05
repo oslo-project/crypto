@@ -4,7 +4,7 @@ title: "ECDSAPublicKey.encodeSEC1Uncompressed()"
 
 # ECDSAPublicKey.encodeSEC1Uncompressed()
 
-Encodes the signature into a SEC 1 compressed format.
+Encodes the signature into a SEC 1 uncompressed format.
 
 ## Definition
 

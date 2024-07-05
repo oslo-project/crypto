@@ -10,7 +10,7 @@
 			"pages": [
 				["Secure hash algorithms", "/examples/sha"],
 				["HMAC", "/examples/hmac"],
-				["Verify ECDSA signatures", "/examples/verify-ecdsa"],
+				["ECDSA", "/examples/ecdsa"],
 				["Generate random values", "/examples/random-values"]
 			]
 		},

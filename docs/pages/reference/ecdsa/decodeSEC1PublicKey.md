@@ -11,9 +11,9 @@ Throws an error if the encoded bytes is invalid.
 ## Definition
 
 ```ts
-//$ ECDSACurve=/ecdsa/main/ECDSACurve
+//$ ECDSANamedCurve=/reference/ecdsa/ECDSANamedCurve
 //$ ECDSAPublicKey=/reference/ecdsa/ECDSAPublicKey
-function decodeSEC1PublicKey(curve: $$ECDSACurve, bytes: Uint8Array): $$ECDSAPublicKey;
+function decodeSEC1PublicKey(curve: $$ECDSANamedCurve, bytes: Uint8Array): $$ECDSAPublicKey;
 ```
 
 ### Parameters

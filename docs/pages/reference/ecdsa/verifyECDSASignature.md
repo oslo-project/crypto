@@ -1,30 +1,30 @@
 ---
-title: "verifyECDSA()"
+title: "verifyECDSASignature()"
 ---
 
-# verifyECDSA()
+# verifyECDSASignature()
 
-Verifies an ECDSA signature (r,s) against an hash.
+Verifies an ECDSA signature against a hash.
 
 ## Definition
 
 ```ts
 //$ ECDSAPublicKey=/reference/ecdsa/ECDSAPublicKey
-function verifyECDSA(publicKey: $$ECDSAPublicKey, hash: Uint8Array, r: bigint, s: bigint): boolean;
+//$ ECDSASignature=/reference/ecdsa/ECDSASignature
+function verifyECDSA(publicKey: $$ECDSAPublicKey, hash: Uint8Array, signature: $$ECDSASignature): boolean;
 ```
 
 ### Parameters
 
 - `publicKey`
 - `hash`: The hash should be of a size similar to that of the curve (e.g. SHA-256 for P-256, SHA-512 for SHA-521).
-- `r`
-- `s`
+- `signature`
 
 ## Example
 
 ```ts
 import { verifyECDSA, p256, ECDSAPublicKey } from "@oslojs/crypto/ecdsa";
-import { sha256 } from "@oslojs/sha2";
+import { sha256 } from "@oslojs/crypto/sha2";
 
 const hash = sha256(new TextEncoder().encode("hello"));
 const publicKey = new ECDSAPublicKey(p256, x, y);
