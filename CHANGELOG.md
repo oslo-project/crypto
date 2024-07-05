@@ -1,6 +1,6 @@
 # @oslojs/crypto
 
-## next
+## 0.4.0
 
 - [Breaking] Replace `verifyECDSA()` with `verifyECDSASignature()`.
 - [Breaking] Replace `ECDSACurve` with `ECDSANamedCurve`.
