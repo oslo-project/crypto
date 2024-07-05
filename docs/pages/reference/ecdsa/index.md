@@ -29,7 +29,7 @@ While efforts have been made, **implementations are not fully constant-time.** A
 - [`p256`](/reference/ecdsa/p256)
 - [`p384`](/reference/ecdsa/p384)
 - [`p521`](/reference/ecdsa/p521)
- -[`secp192k1`](/reference/ecdsa/secp192k1)
+- [`secp192k1`](/reference/ecdsa/secp192k1)
 - [`secp192r1`](/reference/ecdsa/secp192r1)
 - [`secp224k1`](/reference/ecdsa/secp224k1)
 - [`secp224r1`](/reference/ecdsa/secp224r1)
@@ -37,4 +37,3 @@ While efforts have been made, **implementations are not fully constant-time.** A
 - [`secp256r1`](/reference/ecdsa/secp256r1)
 - [`secp384r1`](/reference/ecdsa/secp384r1)
 - [`secp521r1`](/reference/ecdsa/secp521r1)
-
