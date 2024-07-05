@@ -75,7 +75,7 @@
 		"vitest": "^0.34.6"
 	},
 	"dependencies": {
-		"@oslojs/binary": "0.2.3",
-		"@oslojs/asn1": "^0.2.0"
+		"@oslojs/asn1": "0.2.1",
+		"@oslojs/binary": "0.2.3"
 	}
 }
