@@ -1,11 +1,18 @@
 # @oslojs/crypto
 
+## next
+
+- [Breaking] Replace `verifyECDSA()` with `verifyECDSASignature()`.
+- [Breaking] Replace `ECDSACurve` with `ECDSANamedCurve`.
+- Add all SEC 2 curves.
+- Add `decodeX509ECDSASignature()`, `decodeX509PublicKey()`, `ECDSASignature.encodeX509()`, `ECDSAPublicKey.encodeX509Uncompressed()`, and `ECDSAPublicKey.encodeX509Compressed()`
+
 ## 0.3.0
 
-- [Breaking] `generateRandomInteger()` takes and returns a bigint
-- Add `generateRandomIntegerNumber()`
+- [Breaking] `generateRandomInteger()` takes and returns a `bigint`.
+- Add `generateRandomIntegerNumber()`.
 
 ## 0.2.1
 
-- Add `@oslojs/crypto/ecdsa`
-- Export `sha224()` and `SHA224`
+- Add `@oslojs/crypto/ecdsa`.
+- Export `sha224()` and `SHA224`.
