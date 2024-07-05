@@ -10,7 +10,7 @@ A basic JavaScript crypto library by [Oslo](https://oslojs.dev). Includes APIs f
 - No third-party dependencies
 - Fully typed
 
-s## Installation
+## Installation
 
 ```
 npm i @oslojs/crypto
