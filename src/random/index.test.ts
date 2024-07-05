@@ -6,7 +6,3 @@ test("alphabet()", () => {
 		"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"
 	);
 });
-
-test("generateRandomInteger()", () => {
-	expect(generateRandomInteger(2n)).toBe(1n);
-});

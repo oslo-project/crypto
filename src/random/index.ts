@@ -15,7 +15,7 @@ export function random(): number {
 
 export function generateRandomInteger(max: bigint): bigint {
 	if (max < 2) {
-		throw new Error("Argument 'max' must be a positive integer");
+		throw new Error("Argument 'max' must be a positive integer larger than 1");
 	}
 	const inclusiveMaxBitLength = (max - 1n).toString(2).length;
 	const shift = inclusiveMaxBitLength % 8;
@@ -41,7 +41,7 @@ export function generateRandomInteger(max: bigint): bigint {
 
 export function generateRandomIntegerNumber(max: number): number {
 	if (max < 2 || max > Number.MAX_SAFE_INTEGER) {
-		throw new Error("Argument 'max' must be a positive integer");
+		throw new Error("Argument 'max' must be a positive integer larger than 1");
 	}
 	return Number(generateRandomInteger(BigInt(max)));
 }
