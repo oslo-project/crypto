@@ -59,7 +59,7 @@ export function verifyRSASSAPSSSignature(
 	}
 	const m = powmod(s, publicKey.e, publicKey.n);
 	const maximalEMBits = publicKey.n.toString(2).length - 1;
-	const em = new Uint8Array(Math.ceil((publicKey.n.toString(2).length - 1) / 8));
+	const em = new Uint8Array(Math.ceil(maximalEMBits / 8));
 	for (let i = 0; i < em.byteLength; i++) {
 		em[i] = Number((m >> BigInt((em.byteLength - i - 1) * 8)) & 0xffn);
 	}
@@ -95,7 +95,6 @@ export function verifyRSASSAPSSSignature(
 	mPrime.write(salt);
 	const hPrimeHash = new Hash();
 	hPrimeHash.update(mPrime.bytes());
-
 	return constantTimeEqual(h, hPrimeHash.digest());
 }
 
@@ -110,19 +109,19 @@ export class RSAPublicKey {
 }
 
 function mgf1(Hash: HashAlgorithm, Z: Uint8Array, l: number): Uint8Array {
-	let T = new Uint8Array();
-	let count = 0;
-	while (T.byteLength < l) {
-		const C = new Uint8Array(4);
-		for (let j = 0; j < C.byteLength; j++) {
-			C[j] = Number((count >> ((C.byteLength - j - 1) * 8)) & 0xff);
+	let t = new Uint8Array();
+	let counter = 0;
+	while (t.byteLength < l) {
+		const counterBytes = new Uint8Array(4);
+		for (let j = 0; j < counterBytes.byteLength; j++) {
+			counterBytes[j] = Number((counter >> ((counterBytes.byteLength - j - 1) * 8)) & 0xff);
 		}
 		const zcHash = new Hash();
-		zcHash.update(concatenateBytes(Z, C));
-		T = concatenateBytes(T, zcHash.digest());
-		count++;
+		zcHash.update(concatenateBytes(Z, counterBytes));
+		t = concatenateBytes(t, zcHash.digest());
+		counter++;
 	}
-	return T.slice(0, l);
+	return t.slice(0, l);
 }
 
 function powmod(x: bigint, y: bigint, p: bigint): bigint {
