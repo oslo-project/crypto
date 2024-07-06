@@ -1,3 +1,6 @@
+// Tests based on NIST FIPS-2 RSASSA-PKCS1-v15 signature verification test vectors
+// https://csrc.nist.gov/Projects/Cryptographic-Algorithm-Validation-Program/Digital-Signatures
+
 import { expect, test } from "vitest";
 import { RSAPublicKey, verifyRSASSAPKCS1v15Signature } from "./index.js";
 import { sha1 } from "../sha1/index.js";
