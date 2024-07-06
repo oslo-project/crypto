@@ -13,7 +13,10 @@ Throws an error if the encoded bytes is invalid.
 ```ts
 //$ ECDSANamedCurve=/reference/ecdsa/ECDSANamedCurve
 //$ ECDSAPublicKey=/reference/ecdsa/ECDSAPublicKey
-function decodeIEEEP1363ECDSASignature(curve: $$ECDSANamedCurve, bytes: Uint8Array): $$ECDSAPublicKey;
+function decodeIEEEP1363ECDSASignature(
+	curve: $$ECDSANamedCurve,
+	bytes: Uint8Array
+): $$ECDSAPublicKey;
 ```
 
 ### Parameters
