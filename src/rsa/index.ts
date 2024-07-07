@@ -52,8 +52,8 @@ export function verifyRSASSAPKCS1v15Signature(
 
 export function verifyRSASSAPSSSignature(
 	publicKey: RSAPublicKey,
-	Hash: HashAlgorithm,
-	MGF1Hash: HashAlgorithm,
+	MessageHashAlgorithm: HashAlgorithm,
+	MGF1HashAlgorithm: HashAlgorithm,
 	saltLength: number,
 	hashed: Uint8Array,
 	signature: Uint8Array
@@ -82,7 +82,7 @@ export function verifyRSASSAPSSSignature(
 		return false;
 	}
 
-	const dbMask = mgf1(MGF1Hash, h, em.byteLength - hashed.byteLength - 1);
+	const dbMask = mgf1(MGF1HashAlgorithm, h, em.byteLength - hashed.byteLength - 1);
 	xor(db, dbMask);
 	for (let i = 0; i < Math.floor((em.byteLength - hashed.byteLength - 1) / 8); i++) {
 		db[i] = 0;
@@ -94,7 +94,7 @@ export function verifyRSASSAPSSSignature(
 	mPrime.write(new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
 	mPrime.write(hashed);
 	mPrime.write(salt);
-	const hPrimeHash = new Hash();
+	const hPrimeHash = new MessageHashAlgorithm();
 	hPrimeHash.update(mPrime.bytes());
 	return constantTimeEqual(h, hPrimeHash.digest());
 }
