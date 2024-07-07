@@ -164,11 +164,11 @@ export function decodePKIXRSAPublicKey(pkix: Uint8Array): RSAPublicKey {
 	}
 }
 
-export const SHA1ObjectIdentifier = "1.3.14.3.2.26";
-export const SHA224ObjectIdentifier = "2.16.840.1.101.3.4.2.4";
-export const SHA256ObjectIdentifier = "2.16.840.1.101.3.4.2.1";
-export const SHA384ObjectIdentifier = "2.16.840.1.101.3.4.2.2";
-export const SHA512ObjectIdentifier = "2.16.840.1.101.3.4.2.3";
+export const sha1ObjectIdentifier = "1.3.14.3.2.26";
+export const sha224ObjectIdentifier = "2.16.840.1.101.3.4.2.4";
+export const sha256ObjectIdentifier = "2.16.840.1.101.3.4.2.1";
+export const sha384ObjectIdentifier = "2.16.840.1.101.3.4.2.2";
+export const sha512ObjectIdentifier = "2.16.840.1.101.3.4.2.3";
 
 function mgf1(Hash: HashAlgorithm, Z: Uint8Array, l: number): Uint8Array {
 	let t = new Uint8Array();

@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import {
 	decodePKIXRSAPublicKey,
-	SHA256ObjectIdentifier,
+	sha256ObjectIdentifier,
 	verifyRSASSAPKCS1v15Signature
 } from "./index.js";
 import { sha256 } from "../sha2/sha256.js";
@@ -31,7 +31,7 @@ test("decodePKIXRSAPublicKey()", async () => {
 	);
 	const publicKey = decodePKIXRSAPublicKey(pkcs1);
 	expect(
-		verifyRSASSAPKCS1v15Signature(publicKey, SHA256ObjectIdentifier, sha256(data), signature)
+		verifyRSASSAPKCS1v15Signature(publicKey, sha256ObjectIdentifier, sha256(data), signature)
 	).toBe(true);
 });
 
