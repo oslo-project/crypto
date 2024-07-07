@@ -1,12 +1,17 @@
 import { bigIntFromBytes, concatenateBytes, DynamicBuffer, xor } from "@oslojs/binary";
 import { constantTimeEqual } from "../subtle/index.js";
 import {
+	ASN1BitString,
 	ASN1EncodableSequence,
+	ASN1Integer,
 	ASN1Null,
 	ASN1ObjectIdentifier,
 	ASN1OctetString,
+	ASN1UniversalType,
 	encodeASN1,
-	encodeObjectIdentifier
+	encodeObjectIdentifier,
+	parseASN1NoLeftoverBytes,
+	type ASN1Value
 } from "@oslojs/asn1";
 
 import type { HashAlgorithm } from "../hash/index.js";
@@ -105,6 +110,61 @@ export class RSAPublicKey {
 	constructor(n: bigint, e: bigint) {
 		this.n = n;
 		this.e = e;
+	}
+
+	public encodePKCS1(): Uint8Array {
+		const asn1 = new ASN1EncodableSequence([new ASN1Integer(this.n), new ASN1Integer(this.e)]);
+		return encodeASN1(asn1);
+	}
+
+	public encodePKIX(): Uint8Array {
+		const algorithmIdentifier = new ASN1EncodableSequence([
+			new ASN1ObjectIdentifier(encodeObjectIdentifier("1.2.840.113549.1.1.1")),
+			new ASN1Null()
+		]);
+		const encoded = this.encodePKCS1();
+		const subjectPublicKey = new ASN1BitString(encoded, encoded.byteLength * 8);
+		const subjectPublicKeyInfo = new ASN1EncodableSequence([algorithmIdentifier, subjectPublicKey]);
+		return encodeASN1(subjectPublicKeyInfo);
+	}
+}
+
+export function decodePKCS1RSAPublicKey(pkcs1: Uint8Array): RSAPublicKey {
+	try {
+		const asn1PublicKey = parseASN1NoLeftoverBytes(pkcs1).sequence();
+		return new RSAPublicKey(
+			asn1PublicKey.at(0).integer().value,
+			asn1PublicKey.at(1).integer().value
+		);
+	} catch {
+		throw new Error("Invalid public key");
+	}
+}
+
+export function decodePKIXRSAPublicKey(pkix: Uint8Array): RSAPublicKey {
+	let asn1Algorithm: ASN1ObjectIdentifier;
+	let asn1Parameter: ASN1Value;
+	let asn1PublicKey: ASN1BitString;
+	try {
+		const asn1SubjectPublicKeyInfo = parseASN1NoLeftoverBytes(pkix).sequence();
+		const asn1AlgorithmIdentifier = asn1SubjectPublicKeyInfo.at(0).sequence();
+		asn1Algorithm = asn1AlgorithmIdentifier.at(0).objectIdentifier();
+		asn1Parameter = asn1AlgorithmIdentifier.at(1);
+		asn1PublicKey = asn1SubjectPublicKeyInfo.at(1).bitString();
+	} catch {
+		throw new Error("Failed to parse SubjectPublicKeyInfo");
+	}
+	// TODO: Should other (more-specific) OIDs be supported?
+	if (!asn1Algorithm.is("1.2.840.113549.1.1.1")) {
+		throw new Error("Invalid public key OID");
+	}
+	if (asn1Parameter.universalType() !== ASN1UniversalType.Null) {
+		throw new Error("Invalid public key");
+	}
+	try {
+		return decodePKCS1RSAPublicKey(asn1PublicKey.bytes);
+	} catch {
+		throw new Error("Invalid public key");
 	}
 }
 
