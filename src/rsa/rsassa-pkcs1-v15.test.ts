@@ -2,7 +2,15 @@
 // https://csrc.nist.gov/Projects/Cryptographic-Algorithm-Validation-Program/Digital-Signatures
 
 import { expect, test } from "vitest";
-import { RSAPublicKey, verifyRSASSAPKCS1v15Signature } from "./index.js";
+import {
+	RSAPublicKey,
+	verifyRSASSAPKCS1v15Signature,
+	SHA1ObjectIdentifier,
+	SHA224ObjectIdentifier,
+	SHA256ObjectIdentifier,
+	SHA384ObjectIdentifier,
+	SHA512ObjectIdentifier
+} from "./index.js";
 import { sha1 } from "../sha1/index.js";
 import { sha224, sha256, sha384, sha512 } from "../sha2/index.js";
 
@@ -34,7 +42,7 @@ test("verify", () => {
 		0x57, 0x48, 0x5b, 0x4a, 0x57, 0xed, 0x0c, 0xe8, 0x1e, 0x40, 0x92, 0x45, 0xf5, 0xce, 0x10, 0x14
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xfe3fa1n;
@@ -62,7 +70,7 @@ test("verify", () => {
 		0x1a, 0x99, 0x04, 0x20, 0x4a, 0x3c, 0xfa, 0x30, 0xda, 0x4c, 0x87, 0xde, 0x35, 0xa7, 0x69, 0xa9
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xfe3fa1n;
@@ -90,7 +98,7 @@ test("verify", () => {
 		0x5f, 0x1e, 0x6c, 0xe8, 0x77, 0x05, 0xc2, 0x7a, 0xa5, 0xcd, 0xb0, 0x8d, 0x50, 0xbd, 0x2c, 0xf0
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xfe3fa1n;
@@ -118,7 +126,7 @@ test("verify", () => {
 		0x4b, 0x25, 0xcd, 0x56, 0xfe, 0xd0, 0x4f, 0xf6, 0x47, 0xd5, 0x0c, 0x31, 0x27, 0xfa, 0x35, 0xed
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd20835n;
@@ -146,7 +154,7 @@ test("verify", () => {
 		0xc2, 0xd7, 0x89, 0x11, 0x71, 0x94, 0x9c, 0xe8, 0xc7, 0xcf, 0x20, 0x47, 0x8b, 0x4a, 0xc1, 0xf0
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xfe3fa1n;
@@ -174,7 +182,7 @@ test("verify", () => {
 		0x67, 0x5e, 0x84, 0x4d, 0x6f, 0x75, 0x88, 0xa9, 0xac, 0x12, 0x9c, 0xbb, 0xcf, 0xaf, 0xf3, 0xa3
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -204,12 +212,7 @@ test("verify", () => {
 		0xa7, 0xb1, 0x6a, 0x6b, 0x2f, 0xda, 0x95, 0xf0, 0x22, 0x8f, 0xae, 0x06, 0xe4, 0x84, 0xd3, 0xc2
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xdf05ddn;
@@ -237,12 +240,7 @@ test("verify", () => {
 		0xec, 0xb7, 0xf4, 0x17, 0xee, 0x32, 0x5c, 0xca, 0x88, 0x10, 0xb5, 0x0a, 0xbe, 0xc9, 0xbc, 0x00
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xdf05ddn;
@@ -270,12 +268,7 @@ test("verify", () => {
 		0xb7, 0xd3, 0x6a, 0xd7, 0xd4, 0x98, 0x00, 0x5a, 0x58, 0xfc, 0xb9, 0xb6, 0x57, 0xe5, 0x65, 0x9f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xdf05ddn;
@@ -303,12 +296,7 @@ test("verify", () => {
 		0x55, 0x37, 0xc5, 0xb0, 0x2d, 0x71, 0x7c, 0x4f, 0xba, 0x83, 0x17, 0x00, 0xfc, 0x9a, 0x9d, 0xd5
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x67cca1n;
@@ -336,12 +324,7 @@ test("verify", () => {
 		0xa5, 0x92, 0x31, 0x47, 0x33, 0x32, 0x03, 0x87, 0x48, 0x63, 0x11, 0x1b, 0x5f, 0xd8, 0x29, 0x4c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xdf05ddn;
@@ -369,12 +352,7 @@ test("verify", () => {
 		0xdc, 0xb3, 0x63, 0xe5, 0x0f, 0x03, 0xd8, 0xa1, 0x23, 0x47, 0x7f, 0x75, 0x61, 0xc5, 0xfc, 0x1d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -404,12 +382,7 @@ test("verify", () => {
 		0x71, 0xd4, 0x2f, 0xb7, 0xd7, 0xc6, 0x94, 0x68, 0x2a, 0x9f, 0x4a, 0xf5, 0x99, 0xbf, 0xdf, 0x81
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xeef211n;
@@ -437,12 +410,7 @@ test("verify", () => {
 		0x80, 0x13, 0xfa, 0xc2, 0x71, 0xe0, 0x91, 0xf7, 0x01, 0x8f, 0xe9, 0x6e, 0xc2, 0x60, 0x09, 0xc1
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xeef211n;
@@ -470,12 +438,7 @@ test("verify", () => {
 		0xff, 0xae, 0x04, 0x13, 0x4a, 0x74, 0xcd, 0xe2, 0xb9, 0x9b, 0x8f, 0x8b, 0x53, 0x05, 0x75, 0x9c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x990d05n;
@@ -503,12 +466,7 @@ test("verify", () => {
 		0x22, 0x1e, 0xf8, 0x26, 0x84, 0x44, 0xc4, 0x0f, 0xd8, 0x45, 0x61, 0x74, 0x16, 0x11, 0x97, 0x61
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xeef211n;
@@ -536,12 +494,7 @@ test("verify", () => {
 		0x17, 0xc6, 0xa6, 0xe7, 0x62, 0xc7, 0x39, 0x5e, 0x74, 0x3b, 0x38, 0x34, 0x18, 0x28, 0xac, 0x10
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xeef211n;
@@ -569,12 +522,7 @@ test("verify", () => {
 		0x89, 0x65, 0x35, 0x50, 0xa6, 0x4b, 0xe2, 0x4f, 0xdb, 0x5f, 0x90, 0xa8, 0x01, 0x4d, 0xf6, 0x59
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -604,12 +552,7 @@ test("verify", () => {
 		0xca, 0x76, 0x60, 0xeb, 0xed, 0x30, 0x31, 0x03, 0x32, 0xcb, 0x51, 0xf5, 0xa8, 0x3a, 0xa9, 0x23
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x86ff85n;
@@ -637,12 +580,7 @@ test("verify", () => {
 		0x02, 0xf4, 0x42, 0x2b, 0x83, 0xf6, 0x9c, 0xe6, 0x3e, 0xee, 0xa6, 0xbf, 0x75, 0xff, 0x80, 0x99
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x7f3c2bn;
@@ -670,12 +608,7 @@ test("verify", () => {
 		0xdc, 0x6f, 0x02, 0x04, 0xe6, 0x49, 0x38, 0xb6, 0x65, 0x3f, 0x5c, 0x01, 0xed, 0x01, 0xd4, 0x2b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x7f3c2bn;
@@ -703,12 +636,7 @@ test("verify", () => {
 		0x2e, 0x2d, 0xc0, 0x90, 0x11, 0x34, 0x5d, 0x82, 0x9f, 0x97, 0x02, 0x7c, 0x70, 0xfd, 0x2a, 0x02
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x7f3c2bn;
@@ -736,12 +664,7 @@ test("verify", () => {
 		0x7e, 0xe1, 0xd8, 0xe2, 0x1d, 0xac, 0x98, 0x69, 0x37, 0x93, 0x41, 0xf7, 0x38, 0xb2, 0x0b, 0xfb
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x7f3c2bn;
@@ -769,12 +692,7 @@ test("verify", () => {
 		0x6d, 0x37, 0x2e, 0x17, 0xa4, 0x3a, 0x0e, 0xd3, 0xd0, 0x88, 0x3f, 0x47, 0xb5, 0x9b, 0xb3, 0x61
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -804,12 +722,7 @@ test("verify", () => {
 		0x09, 0x16, 0xfe, 0x3f, 0x35, 0x06, 0xd8, 0xf1, 0x4e, 0xf8, 0xe8, 0xe0, 0x9f, 0x6e, 0x2e, 0x26
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x83a029n;
@@ -837,12 +750,7 @@ test("verify", () => {
 		0x76, 0x9c, 0xfb, 0x85, 0x76, 0xa1, 0x77, 0x60, 0x65, 0x6a, 0x6f, 0x64, 0xdd, 0x68, 0x17, 0xea
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd43d27n;
@@ -870,12 +778,7 @@ test("verify", () => {
 		0x0b, 0xd4, 0xf4, 0x68, 0x66, 0x8f, 0x4f, 0x4f, 0xad, 0x1e, 0xe3, 0xe5, 0xc7, 0x32, 0x7f, 0xbf
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd43d27n;
@@ -903,12 +806,7 @@ test("verify", () => {
 		0x52, 0xfd, 0x35, 0x2e, 0xe6, 0x3e, 0x42, 0x7f, 0x21, 0x97, 0x38, 0x36, 0x58, 0x7a, 0xc4, 0xbe
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd43d27n;
@@ -936,12 +834,7 @@ test("verify", () => {
 		0x2b, 0xaf, 0x43, 0xe9, 0xb5, 0x69, 0xec, 0x26, 0xd8, 0xc4, 0x2c, 0x4a, 0x59, 0x7f, 0x02, 0x6d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd43d27n;
@@ -969,12 +862,7 @@ test("verify", () => {
 		0x64, 0x41, 0xb3, 0x86, 0x3e, 0x8e, 0xe0, 0x4c, 0xd8, 0x3e, 0xc0, 0x8b, 0x45, 0x6b, 0x0f, 0x24
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -1004,7 +892,7 @@ test("verify", () => {
 		0x73, 0x06, 0x6d, 0x83, 0xff, 0x9f, 0x34, 0x3d, 0x41, 0x37, 0x77, 0x8e, 0x3c, 0x09, 0xa5, 0x8e
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa71a21n;
@@ -1032,7 +920,7 @@ test("verify", () => {
 		0x48, 0xc1, 0xe4, 0x97, 0xd2, 0x4d, 0xb1, 0x5f, 0x3b, 0x1a, 0x95, 0x94, 0x38, 0xe1, 0x8f, 0xd5
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa71a21n;
@@ -1060,7 +948,7 @@ test("verify", () => {
 		0x89, 0xe9, 0x53, 0x19, 0x41, 0x06, 0x28, 0x81, 0xb6, 0xec, 0xfe, 0xbb, 0x6d, 0xbf, 0xad, 0x2b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x597bdfn;
@@ -1088,7 +976,7 @@ test("verify", () => {
 		0xb5, 0x15, 0xb3, 0xa1, 0x2f, 0x36, 0x01, 0xba, 0x00, 0x2e, 0xc5, 0x9e, 0xa0, 0x07, 0x21, 0x15
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa71a21n;
@@ -1116,7 +1004,7 @@ test("verify", () => {
 		0xa8, 0xa6, 0x89, 0xff, 0x35, 0xd9, 0x53, 0x43, 0xef, 0xfe, 0x0b, 0xaa, 0x9a, 0x9a, 0x09, 0x0d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa71a21n;
@@ -1144,7 +1032,7 @@ test("verify", () => {
 		0x88, 0x6b, 0x73, 0x50, 0x43, 0x5d, 0xfe, 0x64, 0xe3, 0x99, 0xe5, 0x48, 0x3c, 0x54, 0x01, 0x56
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -1174,12 +1062,7 @@ test("verify", () => {
 		0x1d, 0xdf, 0x6f, 0x8b, 0x4c, 0x4d, 0xf9, 0x5a, 0xad, 0x41, 0x60, 0x07, 0xcb, 0xa1, 0x2c, 0xe7
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xd1a0ffn;
@@ -1207,12 +1090,7 @@ test("verify", () => {
 		0x32, 0xc3, 0xf8, 0xae, 0x3d, 0xc0, 0x54, 0x70, 0xdf, 0x04, 0x4d, 0x77, 0x70, 0x16, 0x2b, 0xbb
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd1a0ffn;
@@ -1240,12 +1118,7 @@ test("verify", () => {
 		0xa9, 0x46, 0xb4, 0xc2, 0x20, 0x99, 0xa9, 0xa4, 0xdd, 0x4b, 0xb3, 0xc4, 0xce, 0xfb, 0x95, 0xb2
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd1a0ffn;
@@ -1273,12 +1146,7 @@ test("verify", () => {
 		0x1f, 0x66, 0x85, 0x05, 0xb8, 0x19, 0x56, 0xcb, 0x6d, 0x1a, 0x97, 0xd7, 0x73, 0x50, 0x89, 0x4e
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd1a0ffn;
@@ -1306,12 +1174,7 @@ test("verify", () => {
 		0x1c, 0xc0, 0x6e, 0x84, 0x2f, 0xeb, 0x82, 0x6b, 0xb4, 0x88, 0xf9, 0xbb, 0x12, 0x23, 0x68, 0x15
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x86ff8bn;
@@ -1339,12 +1202,7 @@ test("verify", () => {
 		0xc3, 0x60, 0x49, 0x16, 0xe8, 0xf7, 0x23, 0x66, 0x67, 0x74, 0x89, 0x95, 0xa5, 0xe4, 0x65, 0x63
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -1374,12 +1232,7 @@ test("verify", () => {
 		0xc4, 0x26, 0x2e, 0x95, 0xfa, 0x87, 0xc1, 0x27, 0x7c, 0x46, 0xa7, 0x59, 0xf9, 0x72, 0x3c, 0xc6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x9ffbdn;
@@ -1407,12 +1260,7 @@ test("verify", () => {
 		0x19, 0xac, 0x99, 0xdc, 0x17, 0xd4, 0x80, 0xef, 0x35, 0x31, 0xed, 0x4c, 0x14, 0xeb, 0x85, 0xbf
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x9ffbdn;
@@ -1440,12 +1288,7 @@ test("verify", () => {
 		0x3b, 0x73, 0x00, 0x56, 0x29, 0x26, 0xcd, 0xca, 0x3b, 0x20, 0x09, 0x7f, 0x1f, 0xfc, 0x24, 0xe2
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x9ffbdn;
@@ -1473,12 +1316,7 @@ test("verify", () => {
 		0xa1, 0x8d, 0x3e, 0xd4, 0x1b, 0x1d, 0xec, 0x22, 0xf3, 0xbf, 0xb0, 0xd5, 0x34, 0xe5, 0x2d, 0xa6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x9ffbdn;
@@ -1506,12 +1344,7 @@ test("verify", () => {
 		0x30, 0x7e, 0xb5, 0x46, 0x57, 0xe0, 0x3a, 0x33, 0x0e, 0x3c, 0xb0, 0x66, 0x1e, 0x6f, 0xb7, 0x96
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x9ffbdn;
@@ -1539,12 +1372,7 @@ test("verify", () => {
 		0x22, 0x32, 0x8f, 0xc0, 0x06, 0x8a, 0xe1, 0xdb, 0xd3, 0x9a, 0x03, 0x37, 0x40, 0x78, 0x95, 0x36
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -1574,12 +1402,7 @@ test("verify", () => {
 		0xeb, 0x40, 0x7d, 0x69, 0xb4, 0x10, 0x8c, 0x20, 0x5a, 0x6b, 0xeb, 0x3e, 0xe9, 0x34, 0x02, 0x25
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x375ba7n;
@@ -1607,12 +1430,7 @@ test("verify", () => {
 		0x2d, 0x33, 0xe8, 0x68, 0x1e, 0x0d, 0x80, 0x63, 0xb5, 0xfc, 0x8c, 0x0e, 0x19, 0xa8, 0x77, 0xca
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd313bdn;
@@ -1640,12 +1458,7 @@ test("verify", () => {
 		0x12, 0x64, 0xd9, 0xad, 0x07, 0xdd, 0xfa, 0x63, 0x89, 0x33, 0x44, 0x48, 0xf2, 0xbf, 0x35, 0x94
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd313bdn;
@@ -1673,12 +1486,7 @@ test("verify", () => {
 		0x70, 0x62, 0xf3, 0x77, 0x29, 0x96, 0x64, 0x3e, 0x03, 0x52, 0xad, 0x3a, 0x25, 0x3d, 0x11, 0x9b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd313bdn;
@@ -1706,12 +1514,7 @@ test("verify", () => {
 		0xa6, 0x4c, 0xbd, 0xfb, 0x66, 0xcb, 0x33, 0xeb, 0x96, 0x90, 0x0a, 0x49, 0x0c, 0x47, 0xef, 0xe3
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd313bdn;
@@ -1739,12 +1542,7 @@ test("verify", () => {
 		0xa0, 0xa0, 0x05, 0x5b, 0x99, 0xdd, 0xed, 0xb2, 0x2e, 0x4d, 0x66, 0x19, 0xc2, 0x4c, 0x53, 0x2a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	n =
@@ -1774,12 +1572,7 @@ test("verify", () => {
 		0x07, 0x7c, 0x77, 0x48, 0x40, 0xdc, 0x93, 0xd4, 0x9e, 0x9e, 0x27, 0xa1, 0x54, 0x7d, 0x13, 0xf7
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa97a77n;
@@ -1807,12 +1600,7 @@ test("verify", () => {
 		0xfa, 0x63, 0x3d, 0x79, 0x49, 0xcf, 0x9d, 0x42, 0x10, 0xe7, 0x91, 0x3d, 0x49, 0xe5, 0xd5, 0xbf
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x30339n;
@@ -1840,12 +1628,7 @@ test("verify", () => {
 		0x3f, 0x4d, 0x95, 0x51, 0x9e, 0x8d, 0x66, 0x12, 0x47, 0xec, 0xf9, 0xbc, 0x54, 0x64, 0xe5, 0x43
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa97a77n;
@@ -1873,12 +1656,7 @@ test("verify", () => {
 		0x80, 0xdc, 0xdc, 0x67, 0x47, 0xd1, 0x9b, 0xb2, 0x87, 0xe8, 0x5c, 0xc7, 0x85, 0x71, 0x4e, 0xba
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa97a77n;
@@ -1906,12 +1684,7 @@ test("verify", () => {
 		0xf4, 0x41, 0x9d, 0xdf, 0x5b, 0x9f, 0x3c, 0x5e, 0xc1, 0xc4, 0x39, 0x0c, 0x86, 0x11, 0x71, 0x3d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa97a77n;
@@ -1939,12 +1712,7 @@ test("verify", () => {
 		0xe8, 0xd2, 0x52, 0xa2, 0xc6, 0x1a, 0xae, 0xe6, 0x9a, 0xbf, 0x62, 0x21, 0x2c, 0x98, 0xf4, 0x4b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	n =
@@ -1974,7 +1742,7 @@ test("verify", () => {
 		0xc9, 0xb5, 0x73, 0x89, 0x15, 0xbe, 0xae, 0x3b, 0x7f, 0x6d, 0x3c, 0xce, 0x8a, 0xf4, 0xba, 0xd0
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x6ff82fn;
@@ -2002,7 +1770,7 @@ test("verify", () => {
 		0x12, 0x1d, 0xcd, 0xc0, 0xcc, 0xdc, 0x8c, 0x10, 0xd9, 0x21, 0x52, 0x60, 0x02, 0x8b, 0xe3, 0xc4
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x6ff82fn;
@@ -2030,7 +1798,7 @@ test("verify", () => {
 		0x61, 0xa4, 0x57, 0x12, 0xd2, 0x21, 0x0c, 0xf1, 0x26, 0x74, 0x44, 0x55, 0x87, 0x10, 0xc8, 0xd2
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x6ff82fn;
@@ -2058,7 +1826,7 @@ test("verify", () => {
 		0x2c, 0x49, 0x63, 0x6e, 0xbf, 0x96, 0xe4, 0x9d, 0x7a, 0x5b, 0x89, 0xce, 0x84, 0x56, 0x52, 0x43
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x6ff82fn;
@@ -2086,7 +1854,7 @@ test("verify", () => {
 		0x23, 0xdb, 0x42, 0xfb, 0x9e, 0xc1, 0x05, 0x4c, 0xc1, 0xf1, 0xe4, 0xde, 0xae, 0x73, 0xea, 0x81
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8aebdfn;
@@ -2114,7 +1882,7 @@ test("verify", () => {
 		0xac, 0x16, 0x1a, 0x33, 0xe6, 0x4a, 0x7f, 0xc8, 0x9f, 0x68, 0xc2, 0x9f, 0xcd, 0x3a, 0x8c, 0x89
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -2144,12 +1912,7 @@ test("verify", () => {
 		0x1c, 0x0b, 0x13, 0xb7, 0x44, 0x57, 0x23, 0x80, 0xa3, 0x7a, 0xf0, 0x8a, 0x2e, 0x99, 0xbb, 0xf6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8cbc43n;
@@ -2177,12 +1940,7 @@ test("verify", () => {
 		0xa2, 0x69, 0x9a, 0x69, 0x81, 0x02, 0xc9, 0x97, 0x1a, 0x47, 0xa9, 0xb7, 0xa5, 0x57, 0x8c, 0x9c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa892bfn;
@@ -2210,12 +1968,7 @@ test("verify", () => {
 		0x64, 0x6b, 0x51, 0x37, 0x7b, 0x8d, 0xda, 0x44, 0x21, 0xc4, 0x9a, 0x38, 0x75, 0x84, 0x19, 0x9d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8cbc43n;
@@ -2243,12 +1996,7 @@ test("verify", () => {
 		0xd5, 0xe7, 0xcb, 0xcb, 0xd9, 0x30, 0x55, 0xf3, 0x09, 0x1b, 0x86, 0x8f, 0x29, 0xac, 0xe5, 0xde
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x8cbc43n;
@@ -2276,12 +2024,7 @@ test("verify", () => {
 		0xdb, 0x51, 0x47, 0xf6, 0xc3, 0xc1, 0xf0, 0x0a, 0x78, 0x5c, 0xbc, 0xe2, 0xdc, 0x0e, 0x91, 0xbe
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8cbc43n;
@@ -2309,12 +2052,7 @@ test("verify", () => {
 		0x80, 0xb0, 0x85, 0x3b, 0x46, 0xfa, 0x67, 0x8d, 0x9d, 0x89, 0xa4, 0xfd, 0x44, 0x49, 0x02, 0x3c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -2344,12 +2082,7 @@ test("verify", () => {
 		0x1f, 0x95, 0x5b, 0x4c, 0x19, 0xda, 0x05, 0xdd, 0x9c, 0x1f, 0x44, 0x87, 0xa0, 0xe0, 0x8f, 0x31
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x681201n;
@@ -2377,12 +2110,7 @@ test("verify", () => {
 		0x52, 0xaa, 0x5b, 0xda, 0x5d, 0x57, 0x90, 0x8f, 0xd5, 0xa8, 0x71, 0x42, 0xdb, 0x8d, 0x98, 0x21
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x681201n;
@@ -2410,12 +2138,7 @@ test("verify", () => {
 		0xd1, 0xe5, 0x24, 0x5b, 0x3a, 0x03, 0xb7, 0x80, 0xf8, 0x14, 0x40, 0x70, 0xcb, 0x66, 0xe6, 0xff
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x681201n;
@@ -2443,12 +2166,7 @@ test("verify", () => {
 		0x2d, 0x64, 0xf3, 0xff, 0x94, 0x47, 0x02, 0x24, 0xfa, 0x07, 0x5c, 0xe3, 0x16, 0x4c, 0xb1, 0xe1
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xeefc9fn;
@@ -2476,12 +2194,7 @@ test("verify", () => {
 		0xa0, 0xd4, 0xda, 0xdd, 0xa2, 0x66, 0x89, 0x5c, 0xb4, 0xb8, 0x4b, 0x84, 0x6d, 0x8f, 0xac, 0x13
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x681201n;
@@ -2509,12 +2222,7 @@ test("verify", () => {
 		0xbf, 0x86, 0x10, 0x66, 0xde, 0x3a, 0x03, 0x4b, 0xbc, 0x00, 0x84, 0x4d, 0xc7, 0x4b, 0x8b, 0x6f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -2544,12 +2252,7 @@ test("verify", () => {
 		0xc9, 0x83, 0xc7, 0xc5, 0x0c, 0xd2, 0x6e, 0x32, 0x1c, 0x5d, 0x8d, 0x1f, 0x00, 0x57, 0xf7, 0x1b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd3735dn;
@@ -2577,12 +2280,7 @@ test("verify", () => {
 		0xf2, 0xe2, 0x08, 0x7c, 0x1a, 0xe6, 0x3b, 0x2e, 0xbf, 0xfb, 0xca, 0x50, 0xe4, 0x0f, 0xf4, 0x0a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd3735dn;
@@ -2610,12 +2308,7 @@ test("verify", () => {
 		0x6c, 0xba, 0x7c, 0x45, 0xd8, 0x96, 0xd4, 0x4f, 0x9a, 0xef, 0x9f, 0xd7, 0x3c, 0xa9, 0x0a, 0x53
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd3735dn;
@@ -2643,12 +2336,7 @@ test("verify", () => {
 		0x7f, 0x00, 0x1f, 0xff, 0x50, 0x8a, 0xb7, 0xce, 0xdc, 0xd3, 0xb8, 0x31, 0x28, 0x25, 0xe1, 0x1c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xd3735dn;
@@ -2676,12 +2364,7 @@ test("verify", () => {
 		0x8b, 0x05, 0x8e, 0x9d, 0xf6, 0x3d, 0x94, 0xc5, 0x13, 0x4f, 0xa7, 0xb4, 0xa3, 0x30, 0xf9, 0xeb
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x6f0b91n;
@@ -2709,12 +2392,7 @@ test("verify", () => {
 		0x11, 0x1a, 0x38, 0x30, 0x82, 0xa0, 0x71, 0x3b, 0x7c, 0xdd, 0x27, 0x16, 0xca, 0x84, 0xeb, 0x67
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -2744,12 +2422,7 @@ test("verify", () => {
 		0x3e, 0x09, 0x65, 0xf3, 0x46, 0x28, 0x41, 0xae, 0x6d, 0x0a, 0x16, 0x26, 0xe0, 0x61, 0xbc, 0x4d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x22478bn;
@@ -2777,12 +2450,7 @@ test("verify", () => {
 		0x44, 0x08, 0x86, 0x3a, 0xe2, 0xe8, 0x04, 0x8b, 0xbf, 0xbd, 0xc9, 0x10, 0x18, 0x57, 0xe8, 0x93
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x22478bn;
@@ -2810,12 +2478,7 @@ test("verify", () => {
 		0x57, 0xcb, 0x1b, 0xe2, 0x50, 0x83, 0xe8, 0xd5, 0xc2, 0x43, 0x03, 0xa5, 0x2b, 0x73, 0xfd, 0xce
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x22478bn;
@@ -2843,12 +2506,7 @@ test("verify", () => {
 		0x1e, 0x6b, 0x53, 0x52, 0xbd, 0x01, 0x70, 0x64, 0x95, 0x5f, 0x2a, 0x07, 0x40, 0xdb, 0x62, 0x8f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x22478bn;
@@ -2876,12 +2534,7 @@ test("verify", () => {
 		0x8a, 0x34, 0x0f, 0xa3, 0x14, 0xdd, 0x67, 0x2d, 0xcb, 0x5d, 0x21, 0x47, 0x28, 0xd5, 0x10, 0x02
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x903695n;
@@ -2909,12 +2562,7 @@ test("verify", () => {
 		0xca, 0xc3, 0x96, 0xef, 0x78, 0x00, 0x1f, 0xec, 0x38, 0x8e, 0xa8, 0xac, 0x9b, 0xb1, 0x7e, 0x9a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -2952,7 +2600,7 @@ test("verify", () => {
 		0x2a, 0x98, 0xc3, 0x46, 0x8a, 0x61, 0x0d, 0x13, 0xca, 0x08, 0x6b, 0xd8, 0xea, 0x89, 0xbb, 0xce
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x748d77n;
@@ -2988,7 +2636,7 @@ test("verify", () => {
 		0x69, 0x1c, 0x3e, 0x4a, 0x95, 0x96, 0x58, 0x67, 0xc6, 0x1d, 0x3c, 0x8e, 0x7b, 0xad, 0xda, 0x1f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x748d77n;
@@ -3024,7 +2672,7 @@ test("verify", () => {
 		0x29, 0x7f, 0x2b, 0x07, 0x43, 0x5d, 0x61, 0xa3, 0x1e, 0x06, 0x3e, 0xc1, 0xa2, 0x79, 0x1a, 0x32
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x748d77n;
@@ -3060,7 +2708,7 @@ test("verify", () => {
 		0xb8, 0xec, 0x94, 0x5e, 0x59, 0xc5, 0x7c, 0xfd, 0x57, 0x47, 0xcd, 0x5d, 0xe5, 0xf3, 0xbf, 0x12
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8ffac3n;
@@ -3096,7 +2744,7 @@ test("verify", () => {
 		0x72, 0x04, 0x4f, 0xb8, 0x65, 0xcc, 0x93, 0x12, 0x40, 0x96, 0xc1, 0x4e, 0x0a, 0x64, 0x59, 0x47
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x748d77n;
@@ -3132,7 +2780,7 @@ test("verify", () => {
 		0x69, 0x98, 0xb3, 0xab, 0xc3, 0xb3, 0xe2, 0xd5, 0xe8, 0x74, 0x1f, 0x31, 0x70, 0xec, 0xc5, 0x74
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -3170,12 +2818,7 @@ test("verify", () => {
 		0xc2, 0xcb, 0x45, 0xa2, 0xdf, 0x33, 0x24, 0x27, 0xe4, 0x1a, 0x19, 0xee, 0x9e, 0x94, 0x7b, 0x74
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xc5a8ffn;
@@ -3211,12 +2854,7 @@ test("verify", () => {
 		0x91, 0xca, 0x22, 0x70, 0x02, 0x6e, 0x94, 0x22, 0xc1, 0x9f, 0xde, 0x67, 0xed, 0x79, 0xc8, 0x42
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc5a8ffn;
@@ -3252,12 +2890,7 @@ test("verify", () => {
 		0x47, 0xb3, 0x54, 0x82, 0xb9, 0xd6, 0x73, 0x0e, 0x94, 0xab, 0x64, 0x04, 0x85, 0xed, 0x03, 0xb3
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x32b6f1n;
@@ -3293,12 +2926,7 @@ test("verify", () => {
 		0x5a, 0xb7, 0x98, 0xa9, 0x0f, 0xc6, 0xe2, 0x78, 0xba, 0x70, 0xd8, 0xea, 0xf5, 0x5a, 0x7f, 0xbe
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc5a8ffn;
@@ -3334,12 +2962,7 @@ test("verify", () => {
 		0x30, 0xc7, 0xf9, 0x86, 0xe3, 0x32, 0x44, 0x10, 0x45, 0x55, 0x68, 0xb4, 0x1b, 0x50, 0xe6, 0x37
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc5a8ffn;
@@ -3375,12 +2998,7 @@ test("verify", () => {
 		0xfb, 0x29, 0x9a, 0x26, 0x0d, 0x48, 0x7f, 0x4f, 0xd1, 0x3f, 0x72, 0x2e, 0x9f, 0xff, 0x12, 0x4c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -3418,12 +3036,7 @@ test("verify", () => {
 		0xc2, 0x7e, 0x7e, 0x26, 0xcf, 0x2a, 0xbc, 0xa4, 0x13, 0xe5, 0xe4, 0x69, 0x3f, 0x4a, 0x94, 0x05
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x49d2a1n;
@@ -3459,12 +3072,7 @@ test("verify", () => {
 		0x3f, 0x4e, 0x9f, 0x18, 0x2f, 0x45, 0x55, 0x3d, 0xff, 0xca, 0x55, 0xe3, 0x93, 0xc5, 0xea, 0xb6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x49d2a1n;
@@ -3500,12 +3108,7 @@ test("verify", () => {
 		0x9f, 0xfb, 0x4c, 0x34, 0xfa, 0x9e, 0x01, 0x60, 0x58, 0x51, 0xd6, 0x58, 0x3a, 0xa1, 0x30, 0x32
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x7485bn;
@@ -3541,12 +3144,7 @@ test("verify", () => {
 		0x35, 0x0c, 0xc9, 0xc9, 0x3f, 0x60, 0x6b, 0x38, 0xf2, 0x1a, 0x3e, 0x5d, 0xe6, 0xd1, 0x40, 0xd2
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x49d2a1n;
@@ -3582,12 +3180,7 @@ test("verify", () => {
 		0x3b, 0x3f, 0xd0, 0x4f, 0x41, 0x7c, 0xf1, 0xc1, 0x6d, 0x98, 0x72, 0x53, 0x8b, 0xf4, 0xe8, 0x7a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x49d2a1n;
@@ -3623,12 +3216,7 @@ test("verify", () => {
 		0x46, 0x9d, 0x51, 0xe2, 0x92, 0xb9, 0xce, 0x33, 0xe1, 0xd8, 0x37, 0x1b, 0xa5, 0xf4, 0x67, 0xb3
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -3666,12 +3254,7 @@ test("verify", () => {
 		0x9c, 0x02, 0xec, 0x38, 0xf0, 0xdf, 0xc7, 0xa4, 0xa3, 0x13, 0x9c, 0x1f, 0xba, 0x6f, 0x59, 0xb4
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x2a26dbn;
@@ -3707,12 +3290,7 @@ test("verify", () => {
 		0xaa, 0x06, 0x83, 0xe0, 0xc1, 0x1d, 0x63, 0x8c, 0xb1, 0x39, 0x07, 0xfc, 0x5c, 0x31, 0x47, 0xe5
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xc74c01n;
@@ -3748,12 +3326,7 @@ test("verify", () => {
 		0xb8, 0xca, 0x1e, 0x84, 0xd0, 0xae, 0xf5, 0x38, 0x79, 0x80, 0x14, 0xae, 0x1c, 0x17, 0x3a, 0x14
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x2a26dbn;
@@ -3789,12 +3362,7 @@ test("verify", () => {
 		0x14, 0x93, 0xaa, 0x41, 0x54, 0x9d, 0xac, 0x8c, 0x35, 0x6e, 0x65, 0x43, 0x5f, 0x70, 0x6d, 0x79
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x2a26dbn;
@@ -3830,12 +3398,7 @@ test("verify", () => {
 		0x8c, 0x56, 0xeb, 0x7f, 0xbf, 0xc5, 0x23, 0xdc, 0x1a, 0xcc, 0xf8, 0x0d, 0xe1, 0x02, 0x3d, 0x8c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x2a26dbn;
@@ -3871,12 +3434,7 @@ test("verify", () => {
 		0x04, 0x70, 0xda, 0x8b, 0x2d, 0x7d, 0x6d, 0x0a, 0x2a, 0x17, 0x2e, 0x64, 0x15, 0xa1, 0xb7, 0xd2
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -3914,12 +3472,7 @@ test("verify", () => {
 		0x5c, 0x1e, 0x2d, 0x82, 0x70, 0x77, 0x97, 0x01, 0x6e, 0xe6, 0x3f, 0xc9, 0xa9, 0x52, 0xd2, 0xd5
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa3e187n;
@@ -3955,12 +3508,7 @@ test("verify", () => {
 		0x52, 0x59, 0x4f, 0x01, 0x32, 0x30, 0x8b, 0x0e, 0x32, 0x9e, 0x34, 0xc0, 0xd2, 0xfd, 0xc5, 0x19
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa3e187n;
@@ -3996,12 +3544,7 @@ test("verify", () => {
 		0x34, 0xe9, 0x07, 0xe4, 0x39, 0xd0, 0x84, 0x64, 0x80, 0xae, 0x6c, 0x88, 0x8c, 0x1e, 0x9b, 0xe2
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xa3e187n;
@@ -4037,12 +3580,7 @@ test("verify", () => {
 		0xed, 0x67, 0x4a, 0x16, 0xb6, 0x67, 0x2b, 0x6e, 0x04, 0xa3, 0x2a, 0xe1, 0x41, 0x57, 0xfe, 0x10
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa3e187n;
@@ -4078,12 +3616,7 @@ test("verify", () => {
 		0x72, 0x03, 0x06, 0xdc, 0xdf, 0x2d, 0x2c, 0xf7, 0xb3, 0x5b, 0x0b, 0xf3, 0x63, 0x0e, 0x03, 0xbb
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa3e187n;
@@ -4119,12 +3652,7 @@ test("verify", () => {
 		0xec, 0x2f, 0x51, 0x4d, 0x8f, 0x75, 0x98, 0x02, 0x47, 0x59, 0x7a, 0x00, 0x6a, 0xb3, 0xdf, 0x80
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -4162,7 +3690,7 @@ test("verify", () => {
 		0x6f, 0xbd, 0xfb, 0xb4, 0xe3, 0x15, 0x8e, 0x29, 0xb4, 0x60, 0x5e, 0x1b, 0x08, 0x2e, 0x56, 0xef
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xb8f69n;
@@ -4198,7 +3726,7 @@ test("verify", () => {
 		0x26, 0x0a, 0x43, 0x5d, 0x51, 0xc1, 0xf2, 0x32, 0x32, 0x57, 0xb5, 0x07, 0xf9, 0x7a, 0x7c, 0x38
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xd0d14fn;
@@ -4234,7 +3762,7 @@ test("verify", () => {
 		0xfd, 0xa3, 0x02, 0xea, 0x7c, 0xe9, 0x44, 0xea, 0x3e, 0x7b, 0xe7, 0x85, 0x37, 0x04, 0xe1, 0xea
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xb8f69n;
@@ -4270,7 +3798,7 @@ test("verify", () => {
 		0xaa, 0x4f, 0x06, 0x51, 0xd7, 0xb1, 0xf0, 0xb4, 0xee, 0x80, 0x8a, 0x2e, 0x1f, 0x49, 0x0e, 0xad
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xb8f69n;
@@ -4306,7 +3834,7 @@ test("verify", () => {
 		0xe3, 0x63, 0x98, 0xe5, 0x30, 0x29, 0xf4, 0x39, 0x7d, 0xff, 0xef, 0x3e, 0xce, 0x22, 0xb9, 0x39
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xb8f69n;
@@ -4342,7 +3870,7 @@ test("verify", () => {
 		0x43, 0xf8, 0x0c, 0x0d, 0x69, 0x1a, 0x1c, 0xfd, 0x1a, 0x72, 0x04, 0xaf, 0x2a, 0x7a, 0x1a, 0x96
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -4380,12 +3908,7 @@ test("verify", () => {
 		0xf7, 0x5e, 0x1b, 0xd5, 0x18, 0x79, 0x62, 0xb3, 0xd7, 0x12, 0x86, 0x96, 0xfb, 0xb4, 0x58, 0x7a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x27378dn;
@@ -4421,12 +3944,7 @@ test("verify", () => {
 		0x66, 0x56, 0x54, 0xea, 0x5a, 0xf4, 0x0a, 0xad, 0x1c, 0xc4, 0xfc, 0x41, 0xdc, 0x2f, 0xec, 0x01
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x912041n;
@@ -4462,12 +3980,7 @@ test("verify", () => {
 		0xa3, 0x6c, 0xc3, 0xe4, 0x09, 0x60, 0xf6, 0x4f, 0x41, 0xc8, 0x1d, 0xab, 0xae, 0x6e, 0x10, 0xe1
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x912041n;
@@ -4503,12 +4016,7 @@ test("verify", () => {
 		0xd6, 0x16, 0xd3, 0xe2, 0x95, 0x5d, 0xe1, 0x3c, 0x17, 0x49, 0x27, 0x88, 0x79, 0x5d, 0xe1, 0xed
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x912041n;
@@ -4544,12 +4052,7 @@ test("verify", () => {
 		0xeb, 0x09, 0x94, 0x47, 0x5a, 0xea, 0xb5, 0x1f, 0x25, 0xe0, 0x63, 0x9e, 0xae, 0xcf, 0x56, 0x10
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x912041n;
@@ -4585,12 +4088,7 @@ test("verify", () => {
 		0x72, 0x63, 0x41, 0xdc, 0xca, 0xd1, 0xf5, 0xe5, 0x37, 0x43, 0x3b, 0x27, 0x23, 0xfa, 0xf4, 0x7f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -4628,12 +4126,7 @@ test("verify", () => {
 		0xa4, 0x82, 0x64, 0xa1, 0x4d, 0xf8, 0x37, 0xce, 0x5f, 0xb8, 0x5a, 0x5a, 0xb9, 0x1b, 0xf6, 0xeb
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x391c9dn;
@@ -4669,12 +4162,7 @@ test("verify", () => {
 		0xaf, 0x18, 0xcb, 0xc1, 0x34, 0xd1, 0xee, 0x8d, 0x30, 0xc1, 0x57, 0xcd, 0xe3, 0xa9, 0xff, 0xbc
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x66a13dn;
@@ -4710,12 +4198,7 @@ test("verify", () => {
 		0x29, 0x28, 0xcb, 0x62, 0x27, 0x31, 0xbb, 0x01, 0x23, 0x17, 0x58, 0xeb, 0xcb, 0x80, 0x5f, 0x5e
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x66a13dn;
@@ -4751,12 +4234,7 @@ test("verify", () => {
 		0x59, 0x35, 0x50, 0x7a, 0x32, 0xf2, 0x04, 0x85, 0x8e, 0x2b, 0x47, 0x5d, 0x28, 0xeb, 0x56, 0xc8
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x66a13dn;
@@ -4792,12 +4270,7 @@ test("verify", () => {
 		0x82, 0x64, 0x12, 0xf1, 0x24, 0x54, 0x7d, 0xdd, 0x92, 0x02, 0x4c, 0x0e, 0xa9, 0x78, 0x46, 0x54
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x66a13dn;
@@ -4833,12 +4306,7 @@ test("verify", () => {
 		0x03, 0x4d, 0xd5, 0xe6, 0x1b, 0xec, 0x44, 0x4f, 0x68, 0xd0, 0xc7, 0xe3, 0x9d, 0x2d, 0xf9, 0x40
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -4876,12 +4344,7 @@ test("verify", () => {
 		0x34, 0x5b, 0xa4, 0xc3, 0x2e, 0xed, 0xfd, 0xd7, 0x6e, 0x78, 0xa0, 0x36, 0x41, 0x4b, 0x18, 0x39
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xee7f0fn;
@@ -4917,12 +4380,7 @@ test("verify", () => {
 		0x72, 0x57, 0x71, 0x80, 0x29, 0xc9, 0x4c, 0xe0, 0x66, 0x65, 0x56, 0x21, 0x08, 0xa8, 0xef, 0x93
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xee7f0fn;
@@ -4958,12 +4416,7 @@ test("verify", () => {
 		0x6b, 0x64, 0x2a, 0xe0, 0x85, 0x32, 0x18, 0x31, 0xc0, 0xf1, 0xdf, 0x20, 0x0a, 0xdf, 0x3a, 0xfa
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xee7f0fn;
@@ -4999,12 +4452,7 @@ test("verify", () => {
 		0x3a, 0xee, 0x0b, 0x35, 0x46, 0x9f, 0xd8, 0x51, 0x6a, 0xe2, 0x52, 0xe4, 0x5d, 0xf0, 0xea, 0x25
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xb9bc79n;
@@ -5040,12 +4488,7 @@ test("verify", () => {
 		0x68, 0x72, 0x49, 0x7f, 0x13, 0x9b, 0xea, 0x71, 0xa4, 0xf8, 0x6c, 0xe0, 0x0e, 0xda, 0xb9, 0x3e
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xee7f0fn;
@@ -5081,12 +4524,7 @@ test("verify", () => {
 		0xa9, 0xca, 0x8c, 0x8d, 0xec, 0xac, 0xbc, 0xfc, 0x4d, 0x3c, 0x6e, 0x61, 0xd1, 0x89, 0x5c, 0x0a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -5124,12 +4562,7 @@ test("verify", () => {
 		0x08, 0x26, 0x75, 0xc6, 0x80, 0xa9, 0x8f, 0xf1, 0x09, 0x64, 0x9f, 0xc4, 0x39, 0x9d, 0x40, 0xaa
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x534f11n;
@@ -5165,12 +4598,7 @@ test("verify", () => {
 		0x2f, 0x5b, 0xca, 0x34, 0x3b, 0xae, 0xf3, 0x6d, 0xd6, 0xb0, 0xba, 0xc1, 0x8c, 0xfa, 0x6b, 0x73
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x534f11n;
@@ -5206,12 +4634,7 @@ test("verify", () => {
 		0xa0, 0x6a, 0x97, 0x10, 0xfd, 0x96, 0xf6, 0x04, 0x7b, 0x8b, 0x16, 0x60, 0xa7, 0x68, 0x0b, 0x34
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x534f11n;
@@ -5247,12 +4670,7 @@ test("verify", () => {
 		0xd5, 0x55, 0x1a, 0xec, 0x3d, 0xc0, 0x9f, 0x29, 0xfd, 0xec, 0xbf, 0xc6, 0xf4, 0x74, 0xde, 0x6b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x534f11n;
@@ -5288,12 +4706,7 @@ test("verify", () => {
 		0xe0, 0x51, 0x4e, 0x2b, 0xae, 0x88, 0x1f, 0x4a, 0xd5, 0xdd, 0xb9, 0xaa, 0xd5, 0x92, 0xd7, 0xab
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8f3795n;
@@ -5329,12 +4742,7 @@ test("verify", () => {
 		0x15, 0x9c, 0xef, 0xd6, 0x3c, 0x97, 0x45, 0x53, 0xa2, 0x4c, 0xf0, 0x60, 0x23, 0x53, 0xfd, 0x4b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -5372,7 +4780,7 @@ test("verify", () => {
 		0x36, 0x43, 0x54, 0x9c, 0xa0, 0xdf, 0x2e, 0xba, 0x94, 0x71, 0x8b, 0x11, 0xb7, 0x3d, 0x6c, 0x9c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x1e5e25n;
@@ -5408,7 +4816,7 @@ test("verify", () => {
 		0xf0, 0xf2, 0xb3, 0x3a, 0x44, 0xc1, 0x9d, 0x3a, 0xad, 0x04, 0xab, 0xfa, 0x17, 0xb8, 0xac, 0x71
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x1e5e25n;
@@ -5444,7 +4852,7 @@ test("verify", () => {
 		0x12, 0x47, 0xb4, 0x6a, 0x58, 0x2f, 0x1d, 0x3f, 0xea, 0x40, 0x4a, 0x5d, 0x29, 0x69, 0x1f, 0x7e
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x1e5e25n;
@@ -5480,7 +4888,7 @@ test("verify", () => {
 		0x0c, 0xd4, 0xa6, 0xce, 0xfc, 0xdf, 0x4b, 0xc5, 0xa6, 0x37, 0xe2, 0x94, 0xa3, 0x68, 0xab, 0x29
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x60e097n;
@@ -5516,7 +4924,7 @@ test("verify", () => {
 		0x21, 0x5e, 0x1f, 0x32, 0x7a, 0xbe, 0x9e, 0xc2, 0x00, 0x4b, 0xf7, 0xb7, 0x05, 0x05, 0xe4, 0x92
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x1e5e25n;
@@ -5552,7 +4960,7 @@ test("verify", () => {
 		0xdc, 0x7f, 0xb1, 0xec, 0x49, 0x4a, 0x86, 0xb0, 0x4d, 0xcc, 0xad, 0xd4, 0x48, 0x62, 0x0a, 0xd2
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -5590,12 +4998,7 @@ test("verify", () => {
 		0xe5, 0x12, 0xa4, 0xa0, 0x9a, 0xa8, 0xe8, 0xb4, 0xef, 0x59, 0x1f, 0x25, 0x87, 0xa0, 0xa6, 0xd5
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x13e4a7n;
@@ -5631,12 +5034,7 @@ test("verify", () => {
 		0x1a, 0xc4, 0x8a, 0xf9, 0x39, 0x5a, 0x65, 0xcf, 0xb5, 0x2b, 0xe2, 0x55, 0x19, 0xed, 0xf1, 0x75
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x13e4a7n;
@@ -5672,12 +5070,7 @@ test("verify", () => {
 		0x6d, 0xcf, 0xab, 0xf8, 0xc5, 0xd5, 0x90, 0xed, 0xfa, 0x97, 0xd8, 0xa0, 0x39, 0x71, 0x31, 0xb7
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x13e4a7n;
@@ -5713,12 +5106,7 @@ test("verify", () => {
 		0xc4, 0xc8, 0xc4, 0x32, 0x86, 0x58, 0xeb, 0x25, 0xbb, 0x9c, 0x94, 0x80, 0x87, 0x15, 0x16, 0x54
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x13e4a7n;
@@ -5754,12 +5142,7 @@ test("verify", () => {
 		0xc0, 0xf2, 0xa8, 0xc6, 0xf1, 0x02, 0x4e, 0x04, 0x5c, 0x4b, 0xe6, 0xdf, 0x56, 0xfd, 0x49, 0x47
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x13e4a7n;
@@ -5795,12 +5178,7 @@ test("verify", () => {
 		0x8b, 0xea, 0xf9, 0xb0, 0xd9, 0xe7, 0xc4, 0xf8, 0xce, 0x3d, 0x2c, 0x80, 0x03, 0xde, 0xc7, 0x86
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	n =
@@ -5838,12 +5216,7 @@ test("verify", () => {
 		0x52, 0xb3, 0x70, 0xba, 0x09, 0x51, 0x5b, 0x93, 0xd9, 0xa6, 0xd3, 0xe4, 0x7c, 0x59, 0x29, 0xaa
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x3c7bf9n;
@@ -5879,12 +5252,7 @@ test("verify", () => {
 		0x69, 0x90, 0xc1, 0x42, 0xe8, 0xa5, 0x80, 0xeb, 0x36, 0x26, 0x6a, 0x3a, 0x96, 0x02, 0xa8, 0xbf
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xb53999n;
@@ -5920,12 +5288,7 @@ test("verify", () => {
 		0x63, 0x33, 0xac, 0x82, 0x26, 0x0c, 0x5e, 0xdb, 0x47, 0xa3, 0x01, 0xac, 0xd0, 0x5c, 0x7c, 0x7f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x3c7bf9n;
@@ -5961,12 +5324,7 @@ test("verify", () => {
 		0xf9, 0xe1, 0x59, 0x40, 0x59, 0x4c, 0xf8, 0x11, 0xe3, 0x4c, 0x60, 0xf3, 0x87, 0x68, 0x24, 0x4c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x3c7bf9n;
@@ -6002,12 +5360,7 @@ test("verify", () => {
 		0xd4, 0x35, 0x84, 0xd8, 0x32, 0xd6, 0xb5, 0x1d, 0x40, 0x65, 0xe0, 0x90, 0x0e, 0xf1, 0x97, 0xa5
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x3c7bf9n;
@@ -6043,12 +5396,7 @@ test("verify", () => {
 		0x81, 0x06, 0x50, 0x52, 0x9e, 0x72, 0x43, 0xbd, 0xaf, 0xda, 0x7e, 0xde, 0xf7, 0x6f, 0xc7, 0x48
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -6086,12 +5434,7 @@ test("verify", () => {
 		0xe7, 0x13, 0x18, 0x9d, 0x47, 0xd4, 0x68, 0x13, 0x16, 0xde, 0x68, 0x68, 0x3c, 0x1f, 0xc9, 0x4f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x9885f3n;
@@ -6127,12 +5470,7 @@ test("verify", () => {
 		0x09, 0x6b, 0xbe, 0xf7, 0x43, 0xb0, 0xfe, 0xb1, 0x5b, 0x30, 0xe2, 0x95, 0x4c, 0xdf, 0x3e, 0xd2
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x19aee1n;
@@ -6168,12 +5506,7 @@ test("verify", () => {
 		0x49, 0xbe, 0x4c, 0xb7, 0xa3, 0x79, 0x4f, 0x89, 0xe1, 0xa4, 0xc8, 0xab, 0x29, 0x5f, 0x70, 0xc1
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x19aee1n;
@@ -6209,12 +5542,7 @@ test("verify", () => {
 		0x1b, 0x26, 0xbd, 0x5d, 0xd2, 0xce, 0xfc, 0x22, 0xfa, 0x09, 0xca, 0x06, 0x0f, 0xf1, 0x68, 0x01
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x19aee1n;
@@ -6250,12 +5578,7 @@ test("verify", () => {
 		0x99, 0x95, 0x3e, 0x00, 0xb8, 0x1d, 0xe4, 0x5d, 0x01, 0xeb, 0x3d, 0xac, 0xc0, 0x9c, 0x10, 0x83
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x19aee1n;
@@ -6291,12 +5614,7 @@ test("verify", () => {
 		0xfd, 0x45, 0x0b, 0xb2, 0xd9, 0xd5, 0x2a, 0x95, 0xcc, 0x96, 0x07, 0xcc, 0x3c, 0xd1, 0xce, 0x15
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -6334,12 +5652,7 @@ test("verify", () => {
 		0x2e, 0xd0, 0x2a, 0xb3, 0x5d, 0x11, 0x28, 0x41, 0xf8, 0xe4, 0x11, 0xb2, 0x84, 0x35, 0xdd, 0xbb
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xfd8739n;
@@ -6375,12 +5688,7 @@ test("verify", () => {
 		0x8c, 0x85, 0x8c, 0x66, 0xe6, 0x47, 0xdd, 0xcb, 0x59, 0xc2, 0x0c, 0x2b, 0xb8, 0xe8, 0x6a, 0xbc
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8475bn;
@@ -6416,12 +5724,7 @@ test("verify", () => {
 		0xd5, 0x41, 0x1c, 0x99, 0x70, 0x00, 0xd8, 0x82, 0xb2, 0x68, 0x62, 0x3b, 0xdc, 0x5d, 0xc9, 0xd9
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8475bn;
@@ -6457,12 +5760,7 @@ test("verify", () => {
 		0xfa, 0x1e, 0x1d, 0x02, 0x9b, 0xba, 0x61, 0xc1, 0xca, 0x19, 0x20, 0xfb, 0x36, 0xea, 0x6e, 0x2f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8475bn;
@@ -6498,12 +5796,7 @@ test("verify", () => {
 		0xc8, 0x94, 0x71, 0xf2, 0x49, 0x4e, 0x94, 0x87, 0x02, 0xf6, 0x18, 0xce, 0x38, 0x2f, 0xde, 0x3d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8475bn;
@@ -6539,12 +5832,7 @@ test("verify", () => {
 		0x36, 0x92, 0xc1, 0x0f, 0xa3, 0xae, 0xd5, 0x9e, 0xb7, 0x01, 0x72, 0xd7, 0xf4, 0x70, 0x8b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -6590,7 +5878,7 @@ test("verify", () => {
 		0xcc, 0xb6, 0x7d, 0x75, 0xa7, 0x1a, 0xe7, 0x90, 0x8a, 0xac, 0xff, 0x6a, 0xdf, 0x55, 0xd0, 0xff
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xedc8a7n;
@@ -6634,7 +5922,7 @@ test("verify", () => {
 		0xae, 0x95, 0xf1, 0xff, 0xc2, 0x3a, 0xb0, 0x45, 0x75, 0x99, 0xab, 0xf9, 0x27, 0x32, 0xa8, 0x7d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x9fbb4fn;
@@ -6678,7 +5966,7 @@ test("verify", () => {
 		0x2c, 0xa0, 0x62, 0x56, 0x7c, 0xdd, 0x87, 0xc5, 0xa5, 0x3d, 0xae, 0x37, 0x80, 0xba, 0x13, 0xee
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xedc8a7n;
@@ -6722,7 +6010,7 @@ test("verify", () => {
 		0xc5, 0xb3, 0xa5, 0xb2, 0xdf, 0x62, 0x6f, 0x34, 0xeb, 0x95, 0x04, 0x3b, 0xf1, 0x60, 0xeb, 0x0a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xedc8a7n;
@@ -6766,7 +6054,7 @@ test("verify", () => {
 		0x22, 0xce, 0x45, 0x1d, 0x09, 0x4c, 0x19, 0xd9, 0x66, 0x1d, 0xc4, 0x13, 0xe0, 0x70, 0xc5, 0xa6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xedc8a7n;
@@ -6810,7 +6098,7 @@ test("verify", () => {
 		0x88, 0x8d, 0xc9, 0x48, 0x54, 0x01, 0x7c, 0x8e, 0x55, 0x51, 0xf0, 0xfd, 0xa6, 0x8e, 0x68, 0x1a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -6856,12 +6144,7 @@ test("verify", () => {
 		0x87, 0xb2, 0x8d, 0x82, 0xeb, 0x66, 0x7e, 0xb8, 0x2d, 0xfe, 0xcc, 0x48, 0xdc, 0x54, 0x21, 0x37
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x81cecbn;
@@ -6905,12 +6188,7 @@ test("verify", () => {
 		0xce, 0x1c, 0xc0, 0x20, 0xa4, 0xf9, 0x54, 0x43, 0xae, 0x8c, 0xa5, 0x30, 0x89, 0xe1, 0x2f, 0x04
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x81cecbn;
@@ -6954,12 +6232,7 @@ test("verify", () => {
 		0xb3, 0xe5, 0xeb, 0x96, 0x1d, 0xd7, 0xf5, 0xe0, 0x1a, 0x20, 0xf7, 0x92, 0x4b, 0xcf, 0x9b, 0x67
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x81cecbn;
@@ -7003,12 +6276,7 @@ test("verify", () => {
 		0xe4, 0x6d, 0xda, 0xd3, 0x0b, 0x74, 0xf2, 0x5f, 0x15, 0xf1, 0x68, 0x70, 0x53, 0xdc, 0x84, 0xc6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x81cecbn;
@@ -7052,12 +6320,7 @@ test("verify", () => {
 		0x21, 0xee, 0x14, 0xc5, 0x6b, 0x6d, 0xe7, 0x6b, 0x06, 0xad, 0x40, 0x48, 0x8a, 0x5b, 0x78, 0xe3
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x81cecbn;
@@ -7101,12 +6364,7 @@ test("verify", () => {
 		0x50, 0x5d, 0x29, 0x0e, 0x16, 0x64, 0x16, 0x15, 0xd6, 0xc0, 0xec, 0x6b, 0xf4, 0x8d, 0x2b, 0x03
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -7152,12 +6410,7 @@ test("verify", () => {
 		0x80, 0x43, 0xe1, 0x79, 0xa3, 0x6f, 0x28, 0x15, 0xe7, 0x91, 0x63, 0x78, 0xb0, 0xfb, 0xdb, 0x8e
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x1ed02dn;
@@ -7201,12 +6454,7 @@ test("verify", () => {
 		0x03, 0x50, 0xda, 0x15, 0x61, 0x0f, 0x45, 0x53, 0x1a, 0xe8, 0x5f, 0xae, 0x5f, 0xf9, 0xa3, 0x1a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xac6db1n;
@@ -7250,12 +6498,7 @@ test("verify", () => {
 		0x6b, 0xea, 0xaa, 0xf6, 0x83, 0x02, 0x08, 0x68, 0x6a, 0x1f, 0xde, 0x47, 0x33, 0xf0, 0x78, 0xac
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xac6db1n;
@@ -7299,12 +6542,7 @@ test("verify", () => {
 		0x02, 0x76, 0x19, 0x07, 0x37, 0xa1, 0x23, 0x00, 0x8a, 0x4f, 0x0b, 0xe5, 0x57, 0xca, 0x66, 0x28
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xac6db1n;
@@ -7348,12 +6586,7 @@ test("verify", () => {
 		0x76, 0xd7, 0xe7, 0xfd, 0x71, 0x22, 0xd3, 0xfd, 0x90, 0x83, 0xfe, 0xeb, 0x9a, 0x44, 0xad, 0x7c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xac6db1n;
@@ -7397,12 +6630,7 @@ test("verify", () => {
 		0x89, 0x86, 0xdd, 0x1b, 0x60, 0x7a, 0x2d, 0xb0, 0xfe, 0x04, 0x96, 0x64, 0xd1, 0x36, 0x51, 0x7f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -7448,12 +6676,7 @@ test("verify", () => {
 		0xe5, 0xca, 0x99, 0xd2, 0x81, 0xb3, 0x62, 0x4c, 0x38, 0xc3, 0x30, 0x98, 0xc1, 0xc1, 0x84, 0x48
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x3bd4ffn;
@@ -7497,12 +6720,7 @@ test("verify", () => {
 		0x8f, 0xb4, 0x4c, 0x3e, 0x1b, 0xcc, 0x9f, 0x01, 0x8b, 0xec, 0x51, 0xf8, 0xe6, 0x8e, 0x8c, 0x19
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x3bd4ffn;
@@ -7546,12 +6764,7 @@ test("verify", () => {
 		0xb0, 0x26, 0x01, 0x6d, 0xcc, 0x65, 0xa6, 0x74, 0xd9, 0xea, 0x03, 0xbf, 0x19, 0x58, 0xe5, 0x91
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x3bd4ffn;
@@ -7595,12 +6808,7 @@ test("verify", () => {
 		0x91, 0x46, 0x48, 0x0d, 0x2c, 0x1c, 0x8c, 0x6c, 0x5e, 0x52, 0xad, 0xde, 0x60, 0x1b, 0xdb, 0xc1
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x3bd4ffn;
@@ -7644,12 +6852,7 @@ test("verify", () => {
 		0x5d, 0x73, 0xf3, 0x8a, 0xc0, 0x34, 0xcc, 0x14, 0xdc, 0xc0, 0xb9, 0x61, 0xbb, 0x0a, 0xf5, 0xcc
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x10143dn;
@@ -7693,12 +6896,7 @@ test("verify", () => {
 		0x00, 0x7d, 0x71, 0x61, 0x58, 0x62, 0x03, 0x42, 0xe9, 0x69, 0x61, 0xd6, 0xb7, 0x94, 0x2a, 0x57
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -7744,12 +6942,7 @@ test("verify", () => {
 		0x7d, 0x8c, 0xaa, 0xa3, 0x6e, 0x16, 0x77, 0x60, 0x20, 0x9c, 0x80, 0x36, 0x2e, 0x8c, 0x76, 0x3a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xfa3751n;
@@ -7793,12 +6986,7 @@ test("verify", () => {
 		0xe6, 0x7f, 0x87, 0x72, 0x4b, 0x0a, 0x6e, 0x86, 0x8f, 0x3a, 0x2e, 0xea, 0xfb, 0x68, 0xc5, 0x3b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xfa3751n;
@@ -7842,12 +7030,7 @@ test("verify", () => {
 		0xc7, 0x67, 0x2f, 0x1c, 0x65, 0xa1, 0xf2, 0x8d, 0x40, 0x2c, 0x69, 0x1e, 0x80, 0x24, 0x55, 0x9a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xfa3751n;
@@ -7891,12 +7074,7 @@ test("verify", () => {
 		0x13, 0xaa, 0x60, 0x7f, 0xa8, 0x9e, 0x44, 0xa5, 0x42, 0xda, 0xc0, 0x0b, 0x80, 0xbd, 0x24, 0x6f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xfa3751n;
@@ -7940,12 +7118,7 @@ test("verify", () => {
 		0x65, 0x58, 0xfa, 0x7a, 0xde, 0xa9, 0xd8, 0xc4, 0xfe, 0x08, 0x43, 0x24, 0x1b, 0xd6, 0x7f, 0x2a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xfa3751n;
@@ -7989,12 +7162,7 @@ test("verify", () => {
 		0x2f, 0x5a, 0x0e, 0xdf, 0xb4, 0xe0, 0x85, 0xc0, 0x40, 0x2c, 0xc5, 0x6e, 0x69, 0x93, 0x0f, 0x59
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -8040,7 +7208,7 @@ test("verify", () => {
 		0x17, 0xc1, 0x3e, 0xbe, 0xb9, 0x0a, 0x9e, 0x4f, 0xd2, 0x35, 0x67, 0x1c, 0xfc, 0xa8, 0x97, 0x69
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8a381fn;
@@ -8084,7 +7252,7 @@ test("verify", () => {
 		0x36, 0x38, 0x29, 0xcc, 0xe7, 0xcc, 0x3a, 0xc2, 0xba, 0x1f, 0xf9, 0x0c, 0xf8, 0xc0, 0x9d, 0xbc
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8a381fn;
@@ -8128,7 +7296,7 @@ test("verify", () => {
 		0x6f, 0xe8, 0x71, 0xdc, 0x7a, 0xdc, 0x98, 0x29, 0x3f, 0xd8, 0x69, 0x30, 0xaa, 0x56, 0x65, 0x23
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x7e024dn;
@@ -8172,7 +7340,7 @@ test("verify", () => {
 		0x17, 0xda, 0xa9, 0x8a, 0xac, 0x9c, 0x1f, 0x71, 0xf7, 0x49, 0xbc, 0x1d, 0xc2, 0xbb, 0x24, 0x28
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8a381fn;
@@ -8216,7 +7384,7 @@ test("verify", () => {
 		0x41, 0x09, 0x2a, 0x6a, 0xbe, 0x7d, 0x21, 0xb5, 0xbf, 0x55, 0x28, 0xb2, 0x38, 0x3c, 0x20, 0xe6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x8a381fn;
@@ -8260,7 +7428,7 @@ test("verify", () => {
 		0xbc, 0xd6, 0xef, 0xb9, 0xfb, 0x85, 0x1c, 0xac, 0x96, 0x17, 0xa4, 0xda, 0x16, 0xe1, 0x71, 0x66
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	n =
@@ -8306,12 +7474,7 @@ test("verify", () => {
 		0x18, 0xe8, 0x9d, 0x7f, 0xfa, 0xf2, 0x5d, 0x82, 0x8c, 0x1b, 0x73, 0xf4, 0x0d, 0x07, 0x72, 0x89
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xae3e15n;
@@ -8355,12 +7518,7 @@ test("verify", () => {
 		0x25, 0x75, 0x04, 0xc2, 0x01, 0xd8, 0xca, 0x40, 0x91, 0x0d, 0x7b, 0x89, 0xbc, 0x62, 0x75, 0x45
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xae3e15n;
@@ -8404,12 +7562,7 @@ test("verify", () => {
 		0x60, 0x6b, 0xa9, 0xce, 0xa7, 0xc3, 0x03, 0x6b, 0x35, 0x9e, 0x35, 0x2d, 0x75, 0x0d, 0xd5, 0xee
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xae3e15n;
@@ -8453,12 +7606,7 @@ test("verify", () => {
 		0x91, 0xfe, 0xa4, 0x8f, 0x85, 0x66, 0xa5, 0xfa, 0x46, 0x19, 0xb5, 0x23, 0x07, 0xbe, 0x0d, 0xcc
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xae3e15n;
@@ -8502,12 +7650,7 @@ test("verify", () => {
 		0x52, 0xc3, 0x5d, 0xc6, 0x30, 0xda, 0x42, 0x21, 0x9a, 0xb8, 0xec, 0x48, 0x95, 0x20, 0xac, 0xcc
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xae3e15n;
@@ -8551,12 +7694,7 @@ test("verify", () => {
 		0x08, 0xe4, 0x0e, 0x69, 0x5d, 0xdd, 0x50, 0x29, 0xc0, 0x32, 0xfa, 0x61, 0x81, 0xf3, 0xf2, 0xbb
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	n =
@@ -8602,12 +7740,7 @@ test("verify", () => {
 		0x04, 0x76, 0xc1, 0x4f, 0xa1, 0x21, 0x02, 0x01, 0x48, 0x72, 0xb8, 0x1b, 0xc5, 0xdc, 0xf2, 0x92
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x74ef0bn;
@@ -8651,12 +7784,7 @@ test("verify", () => {
 		0xc7, 0xdd, 0x96, 0x9d, 0x59, 0x77, 0x12, 0x7c, 0xa5, 0xa6, 0xc3, 0xd0, 0xef, 0x7f, 0xf7, 0x7a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xf1d0f1n;
@@ -8700,12 +7828,7 @@ test("verify", () => {
 		0x8d, 0x91, 0xf6, 0x1f, 0xf0, 0xb8, 0xf2, 0x04, 0x23, 0x45, 0xc2, 0x7a, 0x92, 0x8b, 0x78, 0x65
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x74ef0bn;
@@ -8749,12 +7872,7 @@ test("verify", () => {
 		0xc7, 0x24, 0x47, 0xb5, 0x24, 0xa6, 0x13, 0x2d, 0xde, 0x51, 0xf9, 0x25, 0xfc, 0xbb, 0x94, 0x85
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x74ef0bn;
@@ -8798,12 +7916,7 @@ test("verify", () => {
 		0x8b, 0x06, 0x2a, 0x98, 0x2a, 0x53, 0x33, 0x92, 0x54, 0x72, 0xeb, 0x00, 0x4d, 0x82, 0xd8, 0xe4
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x74ef0bn;
@@ -8847,12 +7960,7 @@ test("verify", () => {
 		0x04, 0x5c, 0x9a, 0x22, 0x9d, 0x30, 0x15, 0xa4, 0x86, 0x7e, 0xfe, 0x88, 0x79, 0x15, 0x54, 0xf8
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -8898,12 +8006,7 @@ test("verify", () => {
 		0x17, 0xc0, 0xac, 0x75, 0x92, 0x8a, 0xb0, 0x68, 0xa1, 0x6d, 0x55, 0x36, 0xdf, 0x11, 0x17, 0x0d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc31179n;
@@ -8947,12 +8050,7 @@ test("verify", () => {
 		0x9b, 0x00, 0xa8, 0x03, 0x10, 0xea, 0x3a, 0x1c, 0xa6, 0xe7, 0x13, 0x27, 0x7e, 0x6b, 0xc1, 0x27
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc31179n;
@@ -8996,12 +8094,7 @@ test("verify", () => {
 		0xab, 0x61, 0xff, 0xf3, 0x82, 0xae, 0x72, 0x74, 0x66, 0x9d, 0x5b, 0xaa, 0x20, 0xd0, 0x2a, 0x6f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x7fd99dn;
@@ -9045,12 +8138,7 @@ test("verify", () => {
 		0x53, 0x56, 0xe8, 0x93, 0x25, 0x9a, 0x7a, 0x2a, 0xad, 0xcb, 0xc7, 0x35, 0x18, 0x62, 0x74, 0xb7
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc31179n;
@@ -9094,12 +8182,7 @@ test("verify", () => {
 		0x8e, 0x0a, 0x8c, 0xc1, 0x40, 0x33, 0xf2, 0x74, 0x00, 0xc9, 0x60, 0x1d, 0x90, 0x18, 0xc3, 0x63
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xc31179n;
@@ -9143,12 +8226,7 @@ test("verify", () => {
 		0x3b, 0xe7, 0xaf, 0xd7, 0x96, 0x49, 0xeb, 0x29, 0x3d, 0x61, 0x06, 0x9b, 0x44, 0x79, 0xab, 0x6a
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -9194,12 +8272,7 @@ test("verify", () => {
 		0xf8, 0x53, 0x35, 0x03, 0x0a, 0x70, 0xab, 0x73, 0x28, 0x3e, 0x53, 0x94, 0x98, 0xf2, 0x76, 0x1e
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa1befdn;
@@ -9243,12 +8316,7 @@ test("verify", () => {
 		0xb7, 0x8b, 0xa2, 0xf1, 0xc3, 0x48, 0x81, 0xc6, 0x21, 0x2a, 0xf2, 0xa7, 0x68, 0x9e, 0xcf, 0x51
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa1befdn;
@@ -9292,12 +8360,7 @@ test("verify", () => {
 		0x21, 0x5a, 0x4d, 0x88, 0x18, 0xbd, 0x64, 0x26, 0xc4, 0xad, 0xc9, 0xb1, 0xc6, 0x95, 0x65, 0xa6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa1befdn;
@@ -9341,12 +8404,7 @@ test("verify", () => {
 		0x9e, 0x84, 0x4a, 0x3f, 0xf2, 0xe1, 0x45, 0xd7, 0xb4, 0xb1, 0x19, 0x3f, 0x72, 0x4a, 0xa0, 0x14
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xa1befdn;
@@ -9390,12 +8448,7 @@ test("verify", () => {
 		0x3a, 0xc8, 0xae, 0x5b, 0x02, 0x00, 0x13, 0x28, 0x02, 0x87, 0x83, 0x27, 0x03, 0xaf, 0x91, 0xd6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xa1befdn;
@@ -9439,12 +8492,7 @@ test("verify", () => {
 		0x54, 0xd6, 0x80, 0x9d, 0xa7, 0xa9, 0x0a, 0x3d, 0xa5, 0x3d, 0x81, 0x14, 0x8e, 0xac, 0xea, 0x68
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -9490,7 +8538,7 @@ test("verify", () => {
 		0xed, 0xa8, 0xb3, 0x3b, 0x6c, 0x8e, 0xa9, 0xde, 0x43, 0xe8, 0xbc, 0x18, 0x4f, 0x18, 0x82, 0xb9
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x2fda05n;
@@ -9534,7 +8582,7 @@ test("verify", () => {
 		0x19, 0x5b, 0x03, 0x92, 0x46, 0xcd, 0x42, 0x42, 0x33, 0xc8, 0x8f, 0xef, 0x25, 0x1f, 0xf7, 0x7c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x6ce901n;
@@ -9578,7 +8626,7 @@ test("verify", () => {
 		0xfd, 0x18, 0x24, 0x07, 0x0c, 0xd4, 0x6b, 0x10, 0x02, 0xb6, 0x1c, 0x1e, 0x57, 0x24, 0x37, 0xaf
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x2fda05n;
@@ -9622,7 +8670,7 @@ test("verify", () => {
 		0xc0, 0x86, 0xa2, 0xe2, 0x0d, 0xae, 0x9b, 0x99, 0xc4, 0xf4, 0xf8, 0x3c, 0x5e, 0xdc, 0x0a, 0xd6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x2fda05n;
@@ -9666,7 +8714,7 @@ test("verify", () => {
 		0x5a, 0x91, 0xb4, 0x1a, 0x90, 0x81, 0x58, 0x64, 0x39, 0xcd, 0x17, 0x8e, 0xdf, 0xe7, 0xf9, 0x09
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x2fda05n;
@@ -9710,7 +8758,7 @@ test("verify", () => {
 		0x8f, 0xec, 0xef, 0x40, 0x5b, 0xcf, 0xb1, 0x6e, 0xc1, 0xfb, 0xec, 0xef, 0x8b, 0xc1, 0xc7, 0x87
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), "1.3.14.3.2.26", hashed, signature)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA1ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -9756,12 +8804,7 @@ test("verify", () => {
 		0x93, 0x84, 0x90, 0x06, 0x57, 0x14, 0x6e, 0xb6, 0xbb, 0xaf, 0x10, 0x0a, 0x29, 0xa8, 0x86, 0x12
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x5ac725n;
@@ -9805,12 +8848,7 @@ test("verify", () => {
 		0xc0, 0xf8, 0xde, 0xd5, 0x9e, 0x8e, 0x7b, 0xbf, 0x42, 0xb1, 0x39, 0xca, 0x3b, 0x78, 0xc0, 0xed
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x5ac725n;
@@ -9854,12 +8892,7 @@ test("verify", () => {
 		0x9d, 0xcf, 0x5b, 0x6a, 0x74, 0xc7, 0x24, 0x9a, 0xe1, 0x32, 0x5b, 0xb0, 0xda, 0xe0, 0x0b, 0x70
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x5ac725n;
@@ -9903,12 +8936,7 @@ test("verify", () => {
 		0x4a, 0x2c, 0xde, 0xa8, 0x1c, 0xa9, 0x88, 0x43, 0x11, 0xf5, 0x3f, 0x1f, 0x06, 0xa5, 0x76, 0x0c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x17f67fn;
@@ -9952,12 +8980,7 @@ test("verify", () => {
 		0x74, 0x69, 0xd2, 0x60, 0x6d, 0xd7, 0xf5, 0xa7, 0xcc, 0xbe, 0x2d, 0x3a, 0x57, 0xea, 0xd8, 0xd1
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x5ac725n;
@@ -10001,12 +9024,7 @@ test("verify", () => {
 		0x7c, 0x76, 0x1c, 0x14, 0xfb, 0xd5, 0xe9, 0x8b, 0xc8, 0x9b, 0x44, 0xc1, 0x10, 0xef, 0x31, 0x1b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.4",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA224ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -10052,12 +9070,7 @@ test("verify", () => {
 		0x91, 0x76, 0x08, 0x47, 0x10, 0x9d, 0xc0, 0xc7, 0x72, 0x72, 0xa5, 0x5a, 0xfb, 0x0d, 0x3f, 0x58
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xe5a4b3n;
@@ -10101,12 +9114,7 @@ test("verify", () => {
 		0x12, 0x29, 0x56, 0xc2, 0x1c, 0xae, 0x47, 0xbb, 0xa9, 0xe4, 0xec, 0x1a, 0xfb, 0x70, 0x7e, 0x5f
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0xc15efdn;
@@ -10150,12 +9158,7 @@ test("verify", () => {
 		0x7e, 0x73, 0x95, 0xde, 0x92, 0x7e, 0x94, 0x89, 0x3a, 0x8a, 0x17, 0x5c, 0x65, 0xf0, 0xdd, 0x43
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xe5a4b3n;
@@ -10199,12 +9202,7 @@ test("verify", () => {
 		0xab, 0xc6, 0xe7, 0xc8, 0xb3, 0xb4, 0x37, 0x59, 0xf2, 0x12, 0xd0, 0x1d, 0xef, 0x91, 0x51, 0xdc
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xe5a4b3n;
@@ -10248,12 +9246,7 @@ test("verify", () => {
 		0xee, 0x43, 0xfb, 0x12, 0x34, 0x2a, 0x4c, 0x06, 0x6d, 0xc9, 0x71, 0xb8, 0x93, 0xa7, 0xdb, 0xcf
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xe5a4b3n;
@@ -10297,12 +9290,7 @@ test("verify", () => {
 		0xac, 0x6a, 0x27, 0x02, 0xb8, 0x71, 0x1d, 0x52, 0xed, 0xc1, 0xcc, 0x96, 0xce, 0x07, 0x1e, 0xab
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.1",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA256ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -10348,12 +9336,7 @@ test("verify", () => {
 		0xb5, 0x79, 0x13, 0xf7, 0x10, 0xd4, 0x7e, 0x31, 0xae, 0xee, 0xfa, 0x42, 0xcb, 0xfc, 0x60, 0x15
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(true);
 
 	e = 0x872bfn;
@@ -10397,12 +9380,7 @@ test("verify", () => {
 		0x35, 0xb7, 0xd9, 0x3b, 0x76, 0xd4, 0x6a, 0xcc, 0xe9, 0x49, 0x6f, 0xdb, 0x6f, 0xfa, 0x4f, 0xda
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x872bfn;
@@ -10446,12 +9424,7 @@ test("verify", () => {
 		0x2e, 0x13, 0xb6, 0x4f, 0x06, 0xc7, 0xbd, 0xac, 0x7f, 0x81, 0xe6, 0xc0, 0x31, 0xd9, 0x54, 0x78
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x74dea3n;
@@ -10495,12 +9468,7 @@ test("verify", () => {
 		0x3f, 0x49, 0xa0, 0x28, 0x7d, 0x7a, 0x11, 0x14, 0xb8, 0x76, 0x12, 0x02, 0xc6, 0xa4, 0xdd, 0xa3
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x872bfn;
@@ -10544,12 +9512,7 @@ test("verify", () => {
 		0x49, 0xdd, 0x1a, 0xd1, 0x83, 0x80, 0x80, 0xaf, 0x68, 0xca, 0x61, 0x06, 0xc6, 0xfe, 0x73, 0x05
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x872bfn;
@@ -10593,12 +9556,7 @@ test("verify", () => {
 		0x0b, 0x69, 0x34, 0xa0, 0xf2, 0x5e, 0x15, 0x9f, 0xa8, 0x9a, 0x70, 0xc0, 0x77, 0xf2, 0x1a, 0x0b
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.2",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA384ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	n =
@@ -10644,12 +9602,7 @@ test("verify", () => {
 		0x1a, 0xb0, 0x79, 0x6d, 0x61, 0x1b, 0x15, 0xb9, 0x7e, 0x4f, 0x6b, 0x35, 0x18, 0x69, 0xef, 0x3c
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0x5b1365n;
@@ -10693,12 +9646,7 @@ test("verify", () => {
 		0x6f, 0x03, 0xdd, 0xaa, 0xcf, 0x68, 0xb0, 0x67, 0xbd, 0xf0, 0xed, 0xd1, 0xdd, 0xb8, 0x2d, 0x2d
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc4d755n;
@@ -10742,12 +9690,7 @@ test("verify", () => {
 		0x55, 0x45, 0x09, 0x48, 0xd2, 0xc7, 0x2c, 0x59, 0x2f, 0x1a, 0x31, 0x82, 0xbe, 0x99, 0xd7, 0x60
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc4d755n;
@@ -10791,12 +9734,7 @@ test("verify", () => {
 		0xb9, 0x68, 0xe0, 0xd6, 0x08, 0xd7, 0x82, 0x87, 0x8e, 0xd7, 0x5f, 0xd7, 0x11, 0x3b, 0x7d, 0x67
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc4d755n;
@@ -10840,12 +9778,7 @@ test("verify", () => {
 		0x97, 0x85, 0x01, 0x4c, 0x59, 0x66, 0x5c, 0xd2, 0xb9, 0x30, 0x05, 0x01, 0x61, 0xd9, 0x46, 0xe6
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(false);
 
 	e = 0xc4d755n;
@@ -10889,11 +9822,6 @@ test("verify", () => {
 		0x89, 0x09, 0x3d, 0xd5, 0x29, 0x65, 0x70, 0x42, 0xa8, 0x65, 0x07, 0x42, 0x6c, 0xaa, 0x64, 0x88
 	]);
 	expect(
-		verifyRSASSAPKCS1v15Signature(
-			new RSAPublicKey(n, e),
-			"2.16.840.1.101.3.4.2.3",
-			hashed,
-			signature
-		)
+		verifyRSASSAPKCS1v15Signature(new RSAPublicKey(n, e), SHA512ObjectIdentifier, hashed, signature)
 	).toBe(true);
 });

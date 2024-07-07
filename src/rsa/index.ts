@@ -108,6 +108,12 @@ export class RSAPublicKey {
 	}
 }
 
+export const SHA1ObjectIdentifier = "1.3.14.3.2.26";
+export const SHA224ObjectIdentifier = "2.16.840.1.101.3.4.2.4";
+export const SHA256ObjectIdentifier = "2.16.840.1.101.3.4.2.1";
+export const SHA384ObjectIdentifier = "2.16.840.1.101.3.4.2.2";
+export const SHA512ObjectIdentifier = "2.16.840.1.101.3.4.2.3";
+
 function mgf1(Hash: HashAlgorithm, Z: Uint8Array, l: number): Uint8Array {
 	let t = new Uint8Array();
 	let counter = 0;
