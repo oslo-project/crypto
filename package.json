@@ -17,6 +17,7 @@
 		"./hash": "./dist/hash/index.js",
 		"./hmac": "./dist/hmac/index.js",
 		"./random": "./dist/random/index.js",
+		"./rsa": "./dist/rsa/index.js",
 		"./sha1": "./dist/sha1/index.js",
 		"./sha2": "./dist/sha2/index.js",
 		"./subtle": "./dist/subtle/index.js"
@@ -34,6 +35,9 @@
 			],
 			"random": [
 				"dist/random/index.d.ts"
+			],
+			"rsa": [
+				"dist/rsa/index.d.ts"
 			],
 			"sha1": [
 				"dist/sha1/index.d.ts"
