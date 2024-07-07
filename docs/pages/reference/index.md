@@ -10,6 +10,7 @@ title: "API reference"
 - [`hash`](/reference/hash)
 - [`hmac`](/reference/hmac)
 - [`random`](/reference/random)
+- [`rsa`](/reference/rsa)
 - [`sha1`](/reference/sha1)
 - [`sha2`](/reference/sha2)
 - [`subtle`](/reference/subtle)
