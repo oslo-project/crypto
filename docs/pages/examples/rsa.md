@@ -14,7 +14,7 @@ Also see [Public key encoding](#public-key-encoding) for commonly used encoding 
 
 ## RSASSA-PKCS1-v1_5
 
-The API expects the message to be hashed before verification. It also requires the object identifier for the hash function. The package provides OIDs for SHA-224, SHA-256, SHA-384, and SHA-512.
+The API expects the message to be hashed before verification. It also requires the object identifier for the hash function. The package provides OIDs for SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512.
 
 ```ts
 import {
