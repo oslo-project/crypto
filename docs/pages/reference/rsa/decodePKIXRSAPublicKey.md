@@ -12,5 +12,5 @@ Throws an `Error` if the public key is invalid.
 
 ```ts
 //$ RSAPublicKey=/reference/rsa/RSAPublicKey
-function decodePKCS1RSAPublicKey(pkcs1: Uint8Array): $$RSAPublicKey
+function decodePKCS1RSAPublicKey(pkcs1: Uint8Array): $$RSAPublicKey;
 ```
