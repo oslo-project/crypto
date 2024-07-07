@@ -59,7 +59,8 @@
 		"hash",
 		"sha",
 		"hmac",
-		"ecdsa"
+		"ecdsa",
+		"rsa"
 	],
 	"repository": {
 		"type": "git",
