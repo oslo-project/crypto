@@ -55,7 +55,7 @@ export function verifyRSASSAPSSSignature(
 	Hash: HashAlgorithm,
 	MGF1Hash: HashAlgorithm,
 	saltLength: number,
-	message: Uint8Array,
+	hashed: Uint8Array,
 	signature: Uint8Array
 ): boolean {
 	const s = bigIntFromBytes(signature);
@@ -69,34 +69,30 @@ export function verifyRSASSAPSSSignature(
 		em[i] = Number((m >> BigInt((em.byteLength - i - 1) * 8)) & 0xffn);
 	}
 
-	const messageHash = new Hash();
-	messageHash.update(message);
-	const mHash = messageHash.digest();
-
-	if (em.byteLength < mHash.byteLength + saltLength + 2) {
+	if (em.byteLength < hashed.byteLength + saltLength + 2) {
 		return false;
 	}
 	if (em[em.byteLength - 1] !== 0xbc) {
 		return false;
 	}
 
-	const db = em.slice(0, em.byteLength - mHash.byteLength - 1);
-	const h = em.slice(em.byteLength - mHash.byteLength - 1, em.byteLength - 1);
+	const db = em.slice(0, em.byteLength - hashed.byteLength - 1);
+	const h = em.slice(em.byteLength - hashed.byteLength - 1, em.byteLength - 1);
 	if (db[0] >> (8 - (8 * em.byteLength - maximalEMBits)) !== 0) {
 		return false;
 	}
 
-	const dbMask = mgf1(MGF1Hash, h, em.byteLength - mHash.byteLength - 1);
+	const dbMask = mgf1(MGF1Hash, h, em.byteLength - hashed.byteLength - 1);
 	xor(db, dbMask);
-	for (let i = 0; i < Math.floor((em.byteLength - mHash.byteLength - 1) / 8); i++) {
+	for (let i = 0; i < Math.floor((em.byteLength - hashed.byteLength - 1) / 8); i++) {
 		db[i] = 0;
 	}
-	db[Math.floor((em.byteLength - mHash.byteLength - 1) / 8)] &=
-		(1 << (8 - ((em.byteLength - mHash.byteLength - 1) % 8))) - 1;
+	db[Math.floor((em.byteLength - hashed.byteLength - 1) / 8)] &=
+		(1 << (8 - ((em.byteLength - hashed.byteLength - 1) % 8))) - 1;
 	const salt = db.slice(db.byteLength - saltLength);
-	const mPrime = new DynamicBuffer(8 + mHash.byteLength + saltLength);
+	const mPrime = new DynamicBuffer(8 + hashed.byteLength + saltLength);
 	mPrime.write(new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
-	mPrime.write(mHash);
+	mPrime.write(hashed);
 	mPrime.write(salt);
 	const hPrimeHash = new Hash();
 	hPrimeHash.update(mPrime.bytes());
