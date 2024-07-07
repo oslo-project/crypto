@@ -14,7 +14,7 @@ Also see [Public key encoding](#public-key-encoding) for commonly used encoding 
 
 ## RSASSA-PKCS1-v1_5
 
-The API expects the message to be hashed before verification. It also requires the object identifier for the hash function. The package provides OIDs for SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512.
+`verifyRSASSAPKCS1v15Signature()` requires the message hash and the algorithm used for the hash. The package provides OIDs for SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512.
 
 ```ts
 import {
@@ -33,7 +33,7 @@ const valid = verifyRSASSAPKCS1v15Signature(publicKey, SHA256ObjectIdentifier, h
 
 ## RSASSA-PSS
 
-The API expects the message to be hashed before verification. Aside from the public key, message hash, and signature, it also requires the hash function used for the hashing the message, MGF1 function hash (usually the same as the hash function), and the salt length.
+`verifyRSASSASignature()` requires the message hash, the hash function used for the hashing the message, the MGF1 function hash (usually the same as the hash function), and the salt length.
 
 ```ts
 import { RSAPublicKey, verifyRSASSASignature } from "@oslojs/crypto/rsa";
@@ -71,7 +71,7 @@ try {
 
 ### PKIX
 
-The public key is ASN.1 DER encoded as a `SubjectPublicKeyInfo` structure.
+The public key is an ASN.1 DER encoding of a `SubjectPublicKeyInfo` structure.
 
 ```ts
 import { RSAPublicKey } from "@oslojs/crypto/rsa";
