@@ -21,6 +21,6 @@ function verifyRSASSAPKCS1v15Signature(
 ### Parameters
 
 - `publicKey`
-- `hashObjectIdentifier`
+- `hashObjectIdentifier`: The object identifier of the hash algorithm used to hash the message.
 - `hashed`
 - `message`
