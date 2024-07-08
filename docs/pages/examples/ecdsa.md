@@ -14,7 +14,6 @@ The API expects the message to be hashed before verification. For example, for E
 
 Also see [Public key encoding](#public-key-encoding) and [Signature encoding](#signature-encoding) for commonly used encoding formats.
 
-
 ```ts
 import { ECDSAPublicKey, ECDSASignature, p256, verifyECDSASignature } from "@oslojs/crypto/ecdsa";
 import { sha256 } from "@oslojs/crypto/sha2";

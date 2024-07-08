@@ -251,7 +251,6 @@ describe("ECDSAPublicKey", async () => {
 		).resolves.toBe(true);
 	});
 
-
 	test("ECDSAPublicKey.encodeX509Compressed()", async () => {
 		const der1 = new Uint8Array(await crypto.subtle.exportKey("spki", webcryptoKeys.publicKey));
 		const publicKey = decodeX509ECDSAPublicKey(der1, [p256]);
@@ -279,4 +278,3 @@ describe("ECDSAPublicKey", async () => {
 		).resolves.toBe(true);
 	});
 });
-

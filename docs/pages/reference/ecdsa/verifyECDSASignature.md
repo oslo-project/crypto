@@ -11,7 +11,11 @@ Verifies an ECDSA signature against a hash.
 ```ts
 //$ ECDSAPublicKey=/reference/ecdsa/ECDSAPublicKey
 //$ ECDSASignature=/reference/ecdsa/ECDSASignature
-function verifyECDSA(publicKey: $$ECDSAPublicKey, hash: Uint8Array, signature: $$ECDSASignature): boolean;
+function verifyECDSA(
+	publicKey: $$ECDSAPublicKey,
+	hash: Uint8Array,
+	signature: $$ECDSASignature
+): boolean;
 ```
 
 ### Parameters
