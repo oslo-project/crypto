@@ -1,5 +1,9 @@
 # @oslojs/crypto
 
+## next
+
+- Add SHA-512/224 and SHA-512/256
+
 ## 0.5.0
 
 - [Breaking] Rename `decodeX509ECDSAPublicKey()`, `decodeX509ECDSASignature()`, `ECDSAPublicKey.encodeX509Compressed()`, `ECDSAPublicKey.encodeX509Uncompressed()`, and `ECDSASignature.encodeX509()` to `decodePKIXECDSAPublicKey()`, `decodePKIXECDSASignature()`, `ECDSAPublicKey.encodePKIXCompressed()`, `ECDSAPublicKey.encodePKIXUncompressed()`, and `ECDSASignature.encodePKIX()`
