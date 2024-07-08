@@ -1,6 +1,6 @@
 # @oslojs/crypto
 
-## next
+## 0.5.1
 
 - Add SHA-512/224 and SHA-512/256
 
