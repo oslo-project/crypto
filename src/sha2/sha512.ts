@@ -9,24 +9,23 @@ export function sha512(data: Uint8Array): Uint8Array {
 	return hash.digest();
 }
 
-export class SHA512 implements Hash {
+export class SharedSHA512 {
 	public blockSize = 128;
 	public size = 64;
 
 	private blocks = new Uint8Array(128);
 	private currentBlockSize = 0;
-	private H = new BigUint64Array([
-		0x6a09e667f3bcc908n,
-		0xbb67ae8584caa73bn,
-		0x3c6ef372fe94f82bn,
-		0xa54ff53a5f1d36f1n,
-		0x510e527fade682d1n,
-		0x9b05688c2b3e6c1fn,
-		0x1f83d9abfb41bd6bn,
-		0x5be0cd19137e2179n
-	]);
 	private l = 0n;
 	private w = new BigUint64Array(80);
+
+	private H: BigUint64Array;
+
+	constructor(H: BigUint64Array) {
+		if (H.byteLength !== 64) {
+			throw new TypeError();
+		}
+		this.H = H;
+	}
 
 	public update(data: Uint8Array): void {
 		this.l += BigInt(data.byteLength) * 8n;
@@ -57,7 +56,10 @@ export class SHA512 implements Hash {
 		}
 	}
 
-	public digest(): Uint8Array {
+	public putDigest(result: Uint8Array): void {
+		if (result.byteLength > 64 || result.byteLength % 8 !== 0) {
+			throw new TypeError();
+		}
 		this.blocks[this.currentBlockSize] = 0x80;
 		this.currentBlockSize += 1;
 		if (128 - this.currentBlockSize < 16) {
@@ -68,11 +70,9 @@ export class SHA512 implements Hash {
 		this.blocks.fill(0, this.currentBlockSize);
 		bigEndian.putUint64(this.blocks, this.l, this.blockSize - 8);
 		this.process();
-		const result = new Uint8Array(64);
-		for (let i = 0; i < 8; i++) {
+		for (let i = 0; i < result.byteLength / 8; i++) {
 			bigEndian.putUint64(result, this.H[i], i * 8);
 		}
-		return result;
 	}
 
 	private process(): void {
@@ -128,6 +128,34 @@ export class SHA512 implements Hash {
 		this.H[5] = (f + this.H[5]) & 0xffffffffffffffffn;
 		this.H[6] = (g + this.H[6]) & 0xffffffffffffffffn;
 		this.H[7] = (h + this.H[7]) & 0xffffffffffffffffn;
+	}
+}
+
+export class SHA512 implements Hash {
+	public blockSize = 128;
+	public size = 64;
+
+	private sha512 = new SharedSHA512(
+		new BigUint64Array([
+			0x6a09e667f3bcc908n,
+			0xbb67ae8584caa73bn,
+			0x3c6ef372fe94f82bn,
+			0xa54ff53a5f1d36f1n,
+			0x510e527fade682d1n,
+			0x9b05688c2b3e6c1fn,
+			0x1f83d9abfb41bd6bn,
+			0x5be0cd19137e2179n
+		])
+	);
+
+	public update(data: Uint8Array): void {
+		this.sha512.update(data);
+	}
+
+	public digest(): Uint8Array {
+		const result = new Uint8Array(64);
+		this.sha512.putDigest(result);
+		return result;
 	}
 }
 

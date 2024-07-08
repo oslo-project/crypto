@@ -2,26 +2,26 @@ import { SharedSHA512 } from "./sha512.js";
 
 import type { Hash } from "../hash/index.js";
 
-export function sha384(data: Uint8Array): Uint8Array {
-	const hash = new SHA384();
+export function sha512_256(data: Uint8Array): Uint8Array {
+	const hash = new SHA512_256();
 	hash.update(data);
 	return hash.digest();
 }
 
-export class SHA384 implements Hash {
+export class SHA512_256 implements Hash {
 	public blockSize = 128;
-	public size = 48;
+	public size = 28;
 
 	private sha512 = new SharedSHA512(
 		new BigUint64Array([
-			0xcbbb9d5dc1059ed8n,
-			0x629a292a367cd507n,
-			0x9159015a3070dd17n,
-			0x152fecd8f70e5939n,
-			0x67332667ffc00b31n,
-			0x8eb44a8768581511n,
-			0xdb0c2e0d64f98fa7n,
-			0x47b5481dbefa4fa4n
+			0x22312194fc2bf72cn,
+			0x9f555fa3c84c64c2n,
+			0x2393b86b6f53b151n,
+			0x963877195940eabdn,
+			0x96283ee2a88effe3n,
+			0xbe5e1e2553863992n,
+			0x2b0199fc2c85b8aan,
+			0x0eb72ddc81c52ca2n
 		])
 	);
 
@@ -30,7 +30,7 @@ export class SHA384 implements Hash {
 	}
 
 	public digest(): Uint8Array {
-		const result = new Uint8Array(48);
+		const result = new Uint8Array(32);
 		this.sha512.putDigest(result);
 		return result;
 	}
