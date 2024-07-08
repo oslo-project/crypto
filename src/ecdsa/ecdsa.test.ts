@@ -1,133 +1,42 @@
 import { describe, test, expect } from "vitest";
 import {
 	decodeIEEEP1363ECDSASignature,
-	verifyECDSASignature,
 	decodeSEC1PublicKey,
+	decodePKIXECDSASignature,
 	ECDSAPublicKey,
 	decodePKIXECDSAPublicKey
 } from "./ecdsa.js";
 import { p192, p224, p256, p384, p521 } from "./curve-nist.js";
-import { secp256k1 } from "./curve-sec.js";
-import { sha224, sha256, sha384, sha512 } from "../sha2/index.js";
 import * as nodeCrypto from "node:crypto";
 
-describe("verifyECDSASignature()", () => {
+test("ECDSASignature.encodeIEEEP1363() and decodeIEEEP1363ECDSASignature()", async () => {
 	const data = new TextEncoder().encode("hello world");
-
-	test("P-224 with SHA-224", async () => {
-		const keyPair = nodeCrypto.generateKeyPairSync("ec", {
-			namedCurve: "secp224r1"
-		});
-		const spki = keyPair.publicKey.export({
-			type: "spki",
-			format: "der"
-		});
-		const publicKey = decodePKIXECDSAPublicKey(spki, [p224]);
-		const signatureBytes = nodeCrypto.sign("SHA224", data, {
+	const keyPair = nodeCrypto.generateKeyPairSync("ec", {
+		namedCurve: "P-256"
+	});
+	const expected = new Uint8Array(
+		nodeCrypto.sign("SHA256", data, {
 			key: keyPair.privateKey,
 			dsaEncoding: "ieee-p1363"
-		});
-		const signature = decodeIEEEP1363ECDSASignature(p224, signatureBytes);
-		expect(verifyECDSASignature(publicKey, sha224(data), signature)).toBe(true);
-	});
+		})
+	);
+	const signature = decodeIEEEP1363ECDSASignature(p256, expected);
+	expect(signature.encodeIEEEP1363(p256)).toStrictEqual(expected);
+});
 
-	test("P-256 with SHA-256", async () => {
-		const webcryptoKeys = await crypto.subtle.generateKey(
-			{
-				name: "ECDSA",
-				namedCurve: "P-256"
-			},
-			true,
-			["sign", "verify"]
-		);
-		const signatureBytes = new Uint8Array(
-			await crypto.subtle.sign(
-				{
-					name: "ECDSA",
-					hash: "SHA-256"
-				},
-				webcryptoKeys.privateKey,
-				data
-			)
-		);
-		const publicKeyBytes = new Uint8Array(
-			await crypto.subtle.exportKey("raw", webcryptoKeys.publicKey)
-		);
-		const publicKey = decodeSEC1PublicKey(p256, publicKeyBytes);
-		const signature = decodeIEEEP1363ECDSASignature(p256, signatureBytes);
-		expect(verifyECDSASignature(publicKey, sha256(data), signature)).toBe(true);
+test("ECDSASignature.encodePKIX() and decodePKIXECDSASignature()", async () => {
+	const data = new TextEncoder().encode("hello world");
+	const keyPair = nodeCrypto.generateKeyPairSync("ec", {
+		namedCurve: "P-256"
 	});
-
-	test("P-384 with SHA-384", async () => {
-		const webcryptoKeys = await crypto.subtle.generateKey(
-			{
-				name: "ECDSA",
-				namedCurve: "P-384"
-			},
-			true,
-			["sign", "verify"]
-		);
-		const signatureBytes = new Uint8Array(
-			await crypto.subtle.sign(
-				{
-					name: "ECDSA",
-					hash: "SHA-384"
-				},
-				webcryptoKeys.privateKey,
-				data
-			)
-		);
-		const publicKeyBytes = new Uint8Array(
-			await crypto.subtle.exportKey("raw", webcryptoKeys.publicKey)
-		);
-		const publicKey = decodeSEC1PublicKey(p384, publicKeyBytes);
-		const signature = decodeIEEEP1363ECDSASignature(p384, signatureBytes);
-		expect(verifyECDSASignature(publicKey, sha384(data), signature)).toBe(true);
-	});
-
-	test("P-521 with SHA-512", async () => {
-		const webcryptoKeys = await crypto.subtle.generateKey(
-			{
-				name: "ECDSA",
-				namedCurve: "P-521"
-			},
-			true,
-			["sign", "verify"]
-		);
-		const signatureBytes = new Uint8Array(
-			await crypto.subtle.sign(
-				{
-					name: "ECDSA",
-					hash: "SHA-512"
-				},
-				webcryptoKeys.privateKey,
-				data
-			)
-		);
-		const publicKeyBytes = new Uint8Array(
-			await crypto.subtle.exportKey("raw", webcryptoKeys.publicKey)
-		);
-		const publicKey = decodeSEC1PublicKey(p521, publicKeyBytes);
-		const signature = decodeIEEEP1363ECDSASignature(p521, signatureBytes);
-		expect(verifyECDSASignature(publicKey, sha512(data), signature)).toBe(true);
-	});
-
-	test("secp256k1 with SHA-256", async () => {
-		const keyPair = nodeCrypto.generateKeyPairSync("ec", {
-			namedCurve: "secp256k1"
-		});
-		const der = keyPair.publicKey.export({
-			type: "spki",
-			format: "der"
-		});
-		const publicKey = decodePKIXECDSAPublicKey(der, [secp256k1]);
-		const signatureBytes = nodeCrypto.sign("SHA-256", data, {
+	const expected = new Uint8Array(
+		nodeCrypto.sign("SHA256", data, {
 			key: keyPair.privateKey,
-			dsaEncoding: "ieee-p1363"
-		});
-		const signature = decodeIEEEP1363ECDSASignature(secp256k1, signatureBytes);
-		expect(verifyECDSASignature(publicKey, sha256(data), signature)).toBe(true);
-	});
+			dsaEncoding: "der"
+		})
+	);
+	const signature = decodePKIXECDSASignature(expected);
+	expect(signature.encodePKIX()).toStrictEqual(expected);
 });
 
 test("decodeSEC1PublicKey()", () => {
