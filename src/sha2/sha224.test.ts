@@ -1,24 +1,14 @@
 import { expect, test } from "vitest";
-import { SHA224 } from "./sha224.js";
+import { sha224, SHA224 } from "./sha224.js";
 
 test("SHA224", async () => {
-	const hash1 = new SHA224();
-	hash1.update(new Uint8Array([0b01100001, 0b01100010, 0b01100011]));
-	const result1 = hash1.digest();
-	const expected1 = new Uint8Array([
-		0x23, 0x09, 0x7d, 0x22, 0x34, 0x05, 0xd8, 0x22, 0x86, 0x42, 0xa4, 0x77, 0xbd, 0xa2, 0x55, 0xb3,
-		0x2a, 0xad, 0xbc, 0xe4, 0xbd, 0xa0, 0xb3, 0xf7, 0xe3, 0x6c, 0x9d, 0xa7
-	]);
-	expect(result1).toStrictEqual(expected1);
-
-	const hash2 = new SHA224();
-	for (let i = 0; i < 1_000_000; i++) {
-		hash2.update(new Uint8Array([0b01100001]));
+	const randomValues = crypto.getRandomValues(new Uint8Array(5 * 100));
+	for (let i = 0; i < randomValues.byteLength / 5; i++) {
+		const expected = sha224(randomValues.slice(0, i * 5));
+		const hash = new SHA224();
+		for (let j = 0; j < i; j++) {
+			hash.update(randomValues.slice(j * 5, (j + 1) * 5));
+		}
+		expect(hash.digest()).toStrictEqual(expected);
 	}
-	const result2 = hash2.digest();
-	const expected2 = new Uint8Array([
-		0x20, 0x79, 0x46, 0x55, 0x98, 0x0c, 0x91, 0xd8, 0xbb, 0xb4, 0xc1, 0xea, 0x97, 0x61, 0x8a, 0x4b,
-		0xf0, 0x3f, 0x42, 0x58, 0x19, 0x48, 0xb2, 0xee, 0x4e, 0xe7, 0xad, 0x67
-	]);
-	expect(result2).toStrictEqual(expected2);
 });

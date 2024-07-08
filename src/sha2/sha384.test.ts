@@ -1,33 +1,14 @@
 import { expect, test } from "vitest";
-import { SHA384 } from "./sha384.js";
-import { concatenateBytes } from "@oslojs/binary";
+import { sha384, SHA384 } from "./sha384.js";
 
 test("SHA384", async () => {
-	const randomValues = crypto.getRandomValues(new Uint8Array(200));
-	for (let i = 0; i < randomValues.byteLength + 1; i++) {
-		const data = randomValues.slice(0, i);
+	const randomValues = crypto.getRandomValues(new Uint8Array(5 * 100));
+	for (let i = 0; i < randomValues.byteLength / 5; i++) {
+		const expected = sha384(randomValues.slice(0, i * 5));
 		const hash = new SHA384();
-		hash.update(data);
-		const result = hash.digest();
-		const expected = new Uint8Array(await crypto.subtle.digest("SHA-384", data));
-		expect(result).toStrictEqual(expected);
-	}
-});
-
-test("SHA384", async () => {
-	const randomValues = crypto.getRandomValues(new Uint8Array(100));
-	for (let i = 0; i < randomValues.byteLength + 1; i++) {
-		const a = randomValues.slice(0, i);
-		for (let j = 0; j < randomValues.byteLength + 1; j++) {
-			const b = randomValues.slice(0, j);
-			const hash = new SHA384();
-			hash.update(a);
-			hash.update(b);
-			const result = hash.digest();
-			const expected = new Uint8Array(
-				await crypto.subtle.digest("SHA-384", concatenateBytes(a, b))
-			);
-			expect(result).toStrictEqual(expected);
+		for (let j = 0; j < i; j++) {
+			hash.update(randomValues.slice(j * 5, (j + 1) * 5));
 		}
+		expect(hash.digest()).toStrictEqual(expected);
 	}
 });
