@@ -2,6 +2,7 @@
 
 ## next
 
+- [Breaking] Rename `decodeX509ECDSAPublicKey()`, `decodeX509ECDSASignature()`, `ECDSAPublicKey.encodeX509Compressed()`, `ECDSAPublicKey.encodeX509Uncompressed()`, and `ECDSASignature.encodeX509()` to `decodePKIXECDSAPublicKey()`, `decodePKIXECDSASignature()`, `ECDSAPublicKey.encodePKIXCompressed()`, `ECDSAPublicKey.encodePKIXUncompressed()`, and `ECDSASignature.encodePKIX()`
 - Add `@oslojs/crypto/rsa`
 
 ## 0.4.1

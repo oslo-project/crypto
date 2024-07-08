@@ -60,7 +60,7 @@ const pkcs1 = publicKey.encodePKCS1();
 ```
 
 ```ts
-import { decodePKCS1RSAPublicKey } from "@oslojs/ecdsa";
+import { decodePKCS1RSAPublicKey } from "@oslojs/crypto/ecdsa";
 
 try {
 	const publicKey = decodePKCS1RSAPublicKey(pkcs1);
@@ -81,7 +81,7 @@ const pkix = publicKey.encodePKIX();
 ```
 
 ```ts
-import { decodePKIXRSAPublicKey } from "@oslojs/ecdsa";
+import { decodePKIXRSAPublicKey } from "@oslojs/crypto/ecdsa";
 
 try {
 	const publicKey = decodePKIXRSAPublicKey(pkix);

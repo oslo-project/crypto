@@ -1,8 +1,8 @@
 ---
-title: "decodeX509ECDSASignature()"
+title: "decodePKIXECDSASignature()"
 ---
 
-# decodeX509ECDSASignature()
+# decodePKIXECDSASignature()
 
 Decodes an ASN.1 DER encoded signature.
 
@@ -12,7 +12,7 @@ Throws an error if the signature is invalid.
 
 ```ts
 //$ ECDSASignature=/reference/ecdsa/ECDSASignature
-function decodeX509ECDSASignature(der: Uint8Array): $$ECDSASignature;
+function decodePKIXECDSASignature(der: Uint8Array): $$ECDSASignature;
 ```
 
 ### Parameters

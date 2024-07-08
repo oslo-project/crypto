@@ -4,7 +4,7 @@ title: "@oslojs/crypto/ecdsa"
 
 # @oslojs/crypto/ecdsa
 
-Implements ECDSA over prime fields as specified in [NIST FIPS 186-5](https://csrc.nist.gov/pubs/fips/186-5/final) and [SEC 1](https://www.secg.org/sec1-v2.pdf). Binary fields are not supported. It also includes APIs for working with X.509 formats. All curves defined in [SEC 2](https://www.secg.org/sec2-v2.pdf) are provided out of the box.
+Implements ECDSA over prime fields as specified in [NIST FIPS 186-5](https://csrc.nist.gov/pubs/fips/186-5/final) and [SEC 1](https://www.secg.org/sec1-v2.pdf). Binary fields are not supported. It also includes APIs for working with X.509/PKIX formats. All curves defined in [SEC 2](https://www.secg.org/sec2-v2.pdf) are provided out of the box.
 
 While efforts have been made, **implementations are not fully constant-time.** As such, only APIs for verifying signatures and parsing data are provided. Performance is comparable to any pure-JS implementations but slower than native APIs.
 
@@ -12,8 +12,8 @@ While efforts have been made, **implementations are not fully constant-time.** A
 
 - [`decodeIEEEP1363ECDSASignature()`](/reference/ecdsa/decodeIEEEP1363ECDSASignature)
 - [`decodeSEC1PublicKey()`](/reference/ecdsa/decodeSEC1PublicKey)
-- [`decodeX509ECDSAPublicKey()`](/reference/ecdsa/decodeX509ECDSAPublicKey)
-- [`decodeX509ECDSASignature()`](/reference/ecdsa/decodeX509ECDSASignature)
+- [`decodePKIXECDSAPublicKey()`](/reference/ecdsa/decodePKIXECDSAPublicKey)
+- [`decodePKIXECDSASignature()`](/reference/ecdsa/decodePKIXECDSASignature)
 - [`verifyECDSASignature()`](/reference/ecdsa/verifyECDSASignature)
 
 ## Classes

@@ -20,7 +20,7 @@ function constructor(r: bigint, s: bigint): this;
 ## Methods
 
 - [`encodeIEEEP1363()`](/reference/ecdsa/ECDSASignature/encodeIEEEP1363)
-- [`encodeX509()`](/reference/ecdsa/ECDSASignature/encodeX509)
+- [`encodePKIX()`](/reference/ecdsa/ECDSASignature/encodePKIX)
 
 ## Properties
 

@@ -86,7 +86,7 @@ export class ECDSAPublicKey {
 		return bytes;
 	}
 
-	public encodeX509Uncompressed(): Uint8Array {
+	public encodePKIXUncompressed(): Uint8Array {
 		const algorithmIdentifier = new ASN1EncodableSequence([
 			new ASN1ObjectIdentifier(encodeObjectIdentifier("1.2.840.10045.2.1")),
 			new ASN1ObjectIdentifier(encodeObjectIdentifier(this.curve.objectIdentifier))
@@ -97,7 +97,7 @@ export class ECDSAPublicKey {
 		return encodeASN1(subjectPublicKeyInfo);
 	}
 
-	public encodeX509Compressed(): Uint8Array {
+	public encodePKIXCompressed(): Uint8Array {
 		const algorithmIdentifier = new ASN1EncodableSequence([
 			new ASN1ObjectIdentifier(encodeObjectIdentifier("1.2.840.10045.2.1")),
 			new ASN1ObjectIdentifier(encodeObjectIdentifier(this.curve.objectIdentifier))
@@ -175,7 +175,7 @@ export class ECDSASignature {
 		return rs;
 	}
 
-	public encodeX509(): Uint8Array {
+	public encodePKIX(): Uint8Array {
 		const asn1 = new ASN1EncodableSequence([new ASN1Integer(this.r), new ASN1Integer(this.s)]);
 		return encodeASN1(asn1);
 	}
@@ -193,7 +193,7 @@ export function decodeIEEEP1363ECDSASignature(
 	return new ECDSASignature(r, s);
 }
 
-export function decodeX509ECDSASignature(der: Uint8Array): ECDSASignature {
+export function decodePKIXECDSASignature(der: Uint8Array): ECDSASignature {
 	try {
 		const sequence = parseASN1NoLeftoverBytes(der).sequence();
 		return new ECDSASignature(sequence.at(0).integer().value, sequence.at(1).integer().value);
@@ -202,7 +202,7 @@ export function decodeX509ECDSASignature(der: Uint8Array): ECDSASignature {
 	}
 }
 
-export function decodeX509ECDSAPublicKey(
+export function decodePKIXECDSAPublicKey(
 	bytes: Uint8Array,
 	curves: ECDSANamedCurve[]
 ): ECDSAPublicKey {
