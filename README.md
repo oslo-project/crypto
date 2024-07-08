@@ -8,6 +8,8 @@ A basic JavaScript crypto library by [Oslo](https://oslojs.dev). Includes APIs f
 - No third-party dependencies
 - Fully typed
 
+Algorithms such as SHA and ECDSA are tested against NIST test vectors.
+
 ## Installation
 
 ```
