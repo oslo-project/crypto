@@ -166,7 +166,7 @@ export class ECDSASignature {
 		if (rBytes.byteLength > curve.size) {
 			throw new Error("'r' is too large");
 		}
-		const sBytes = bigIntBytes(this.r);
+		const sBytes = bigIntBytes(this.s);
 		if (rBytes.byteLength > curve.size) {
 			throw new Error("'s' is too large");
 		}
