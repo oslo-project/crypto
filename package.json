@@ -8,7 +8,8 @@
 		"format": "prettier -w . !**/*.nist.test.ts",
 		"format.nist-test": "prettier -w **/*.nist.test.ts",
 		"lint": "eslint src",
-		"test": "vitest run --sequence.concurrent"
+		"test": "vitest run --sequence.concurrent --exclude **/*.nist.test.ts",
+		"test.nist": "vitest run --sequence.concurrent src/**/*.nist.test.ts"
 	},
 	"files": [
 		"/dist/"
@@ -79,7 +80,7 @@
 		"eslint": "^8.51.0",
 		"prettier": "^3.0.3",
 		"typescript": "^5.2.2",
-		"vitest": "^0.34.6"
+		"vitest": "1.6.0"
 	},
 	"dependencies": {
 		"@oslojs/asn1": "0.2.2",
