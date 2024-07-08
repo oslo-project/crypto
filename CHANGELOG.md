@@ -1,5 +1,9 @@
 # @oslojs/crypto
 
+## next
+
+- Add `@oslojs/crypto/rsa`
+
 ## 0.4.1
 
 - Update dependencies.
