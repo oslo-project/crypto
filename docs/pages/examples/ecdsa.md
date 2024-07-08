@@ -37,7 +37,7 @@ ECDSA public keys are a point on the elliptic curve, represented using the x and
 SEC 1 encodes the public key by concatenating the x and y coordinate in the uncompressed form, or just the x coordinate in the compressed form. Compressed keys are around 50% smaller but are much more computationally expensive to decode (relatively).
 
 ```ts
-import { ECDSAPublicKey, p256 } from "@oslojs/ecdsa";
+import { ECDSAPublicKey, p256 } from "@oslojs/crypto/ecdsa";
 
 const publicKey = new ECDSAPublicKey(p256, x, y);
 const uncompressed = publicKey.encodeSEC1Uncompressed();
@@ -45,7 +45,7 @@ const compressed = publicKey.encodeSEC1Compressed();
 ```
 
 ```ts
-import { decodeSEC1ECDSAPublicKey } from "@oslojs/ecdsa";
+import { decodeSEC1ECDSAPublicKey } from "@oslojs/crypto/ecdsa";
 
 try {
 	const publicKey = decodeSEC1ECDSAPublicKey(p256, sec1);
@@ -54,37 +54,37 @@ try {
 }
 ```
 
-### X.509
+### PKIX
 
-X.509 elliptic curve public keys are encoded with ASN.1 DER. They hold the algorithm (ECDSA), curve, and the SEC encoded public key (either uncompressed or compressed).
+PKIX elliptic curve public keys are encoded with ASN.1 DER. They hold the algorithm (ECDSA), curve, and the SEC encoded public key (either uncompressed or compressed).
 
 ```ts
-import { ECDSAPublicKey, p256 } from "@oslojs/ecdsa";
+import { ECDSAPublicKey, p256 } from "@oslojs/crypto/ecdsa";
 
 const publicKey = new ECDSAPublicKey(p256, x, y);
-const x509Uncompressed = publicKey.encodeX509Uncompressed();
-const x509Compressed = publicKey.encodeX509Compressed();
+const pkixUncompressed = publicKey.encodePKIXUncompressed();
+const pkixCompressed = publicKey.encodePKIXCompressed();
 ```
 
 ```ts
-import { decodeX509ECDSAPublicKey, p256 } from "@oslojs/ecdsa";
+import { decodePKIXECDSAPublicKey, p256 } from "@oslojs/crypto/ecdsa";
 
 try {
 	// Can be compressed or uncompressed.
-	const publicKey = decodeX509ECDSAPublicKey(der, [p256]);
+	const publicKey = decodePKIXECDSAPublicKey(der, [p256]);
 } catch {
 	// Invalid key
 }
 ```
 
-You can pass multiple curves to `decodeX509ECDSAPublicKey()` if you accept multiple curves. Use `PublicKey.isCurve()` to compare curves.
+You can pass multiple curves to `decodePKIXECDSAPublicKey()` if you accept multiple curves. Use `PublicKey.isCurve()` to compare curves.
 
 ```ts
-import { decodeX509ECDSAPublicKey, p256, p384 } from "@oslojs/ecdsa";
+import { decodePKIXECDSAPublicKey, p256, p384 } from "@oslojs/crypto/ecdsa";
 
 try {
 	// Can be compressed or uncompressed.
-	const publicKey = decodeX509ECDSAPublicKey(der, [p256, p384]);
+	const publicKey = decodePKIXECDSAPublicKey(der, [p256, p384]);
 	if (publicKey.isCurve(p256)) {
 		// ...
 	}
@@ -118,22 +118,22 @@ try {
 }
 ```
 
-### X.509
+### PKIX
 
-ECDSA signatures in X.509 are ASN.1 DER encoded sequences.
+ECDSA signatures in PKIX are ASN.1 DER encoded sequences.
 
 ```ts
 import { ECDSASignature } from "@oslojs/p256";
 
 const signature = new ECDSASignature(r, s);
-const der = signature.encodeX509();
+const der = signature.encodePKIX();
 ```
 
 ```ts
-import { decodeX509ECDSASignature } from "@oslojs/p256";
+import { decodePKIXECDSASignature } from "@oslojs/p256";
 
 try {
-	const signature = decodeX509ECDSASignature(der);
+	const signature = decodePKIXECDSASignature(der);
 } catch {
 	// Invalid signature
 }

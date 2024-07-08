@@ -1,8 +1,8 @@
 export {
 	decodeIEEEP1363ECDSASignature,
 	decodeSEC1PublicKey,
-	decodeX509ECDSAPublicKey,
-	decodeX509ECDSASignature,
+	decodePKIXECDSAPublicKey,
+	decodePKIXECDSASignature,
 	ECDSAPublicKey,
 	ECDSASignature,
 	verifyECDSASignature

@@ -23,8 +23,8 @@ function constructor(curve: $$ECDSANamedCurve, x: bigint, y: bigint): this;
 
 - [`encodeSEC1Compressed()`](/reference/ecdsa/ECDSAPublicKey/encodeSEC1Compressed)
 - [`encodeSEC1Uncompressed()`](/reference/ecdsa/ECDSAPublicKey/encodeSEC1Uncompressed)
-- [`encodeX509Compressed()`](/reference/ecdsa/ECDSAPublicKey/encodeX509Compressed)
-- [`encodeX509Uncompressed()`](/reference/ecdsa/ECDSAPublicKey/encodeX509Uncompressed)
+- [`encodePKIXCompressed()`](/reference/ecdsa/ECDSAPublicKey/encodePKIXCompressed)
+- [`encodePKIXUncompressed()`](/reference/ecdsa/ECDSAPublicKey/encodePKIXUncompressed)
 - [`isCurve()`](/referecen/main/ECDSAPublicKey/isCurve)
 
 ## Properties

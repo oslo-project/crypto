@@ -4,7 +4,7 @@ import {
 	verifyECDSASignature,
 	decodeSEC1PublicKey,
 	ECDSAPublicKey,
-	decodeX509ECDSAPublicKey
+	decodePKIXECDSAPublicKey
 } from "./ecdsa.js";
 import { p192, p224, p256, p384, p521 } from "./curve-nist.js";
 import { secp256k1 } from "./curve-sec.js";
@@ -22,7 +22,7 @@ describe("verifyECDSASignature()", () => {
 			type: "spki",
 			format: "der"
 		});
-		const publicKey = decodeX509ECDSAPublicKey(spki, [p224]);
+		const publicKey = decodePKIXECDSAPublicKey(spki, [p224]);
 		const signatureBytes = nodeCrypto.sign("SHA224", data, {
 			key: keyPair.privateKey,
 			dsaEncoding: "ieee-p1363"
@@ -120,7 +120,7 @@ describe("verifyECDSASignature()", () => {
 			type: "spki",
 			format: "der"
 		});
-		const publicKey = decodeX509ECDSAPublicKey(der, [secp256k1]);
+		const publicKey = decodePKIXECDSAPublicKey(der, [secp256k1]);
 		const signatureBytes = nodeCrypto.sign("SHA-256", data, {
 			key: keyPair.privateKey,
 			dsaEncoding: "ieee-p1363"
@@ -224,10 +224,10 @@ describe("ECDSAPublicKey", async () => {
 		).resolves.toBe(true);
 	});
 
-	test("ECDSAPublicKey.encodeX509Uncompressed()", async () => {
+	test("ECDSAPublicKey.encodePKIXUncompressed()", async () => {
 		const der1 = new Uint8Array(await crypto.subtle.exportKey("spki", webcryptoKeys.publicKey));
-		const publicKey = decodeX509ECDSAPublicKey(der1, [p256]);
-		const der2 = publicKey.encodeX509Uncompressed();
+		const publicKey = decodePKIXECDSAPublicKey(der1, [p256]);
+		const der2 = publicKey.encodePKIXUncompressed();
 		const webcryptoPublicKey = await crypto.subtle.importKey(
 			"spki",
 			der2,
@@ -251,10 +251,10 @@ describe("ECDSAPublicKey", async () => {
 		).resolves.toBe(true);
 	});
 
-	test("ECDSAPublicKey.encodeX509Compressed()", async () => {
+	test("ECDSAPublicKey.encodePKIXCompressed()", async () => {
 		const der1 = new Uint8Array(await crypto.subtle.exportKey("spki", webcryptoKeys.publicKey));
-		const publicKey = decodeX509ECDSAPublicKey(der1, [p256]);
-		const der2 = publicKey.encodeX509Compressed();
+		const publicKey = decodePKIXECDSAPublicKey(der1, [p256]);
+		const der2 = publicKey.encodePKIXCompressed();
 		const webcryptoPublicKey = await crypto.subtle.importKey(
 			"spki",
 			der2,
