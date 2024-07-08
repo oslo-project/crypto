@@ -4,7 +4,7 @@ title: "@oslojs/crypto/rsa"
 
 # @oslojs/crypto/rsa
 
-Implements RSASSA-PKCS1-v1_5 and RSASSA_PSS as specified in [RFC 8017](https://datatracker.ietf.org/doc/html/rfc8017).
+Implements RSASSA-PKCS1-v1_5 and RSASSA-PSS as specified in [RFC 8017](https://datatracker.ietf.org/doc/html/rfc8017).
 
 ## Functions
 
