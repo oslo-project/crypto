@@ -4,7 +4,7 @@ title: "RSAPublicKey"
 
 # RSAPublicKey
 
-Represents an
+Represents an RSA public key.
 
 ## Constructor
 
