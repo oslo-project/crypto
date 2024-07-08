@@ -1,3 +1,6 @@
+// Tests based on NIST FIPS 186-4 ECDSA signature verification test vectors
+// https://csrc.nist.gov/Projects/Cryptographic-Algorithm-Validation-Program/Digital-Signatures
+
 import { test, expect } from "vitest";
 import { verifyECDSASignature, ECDSAPublicKey, ECDSASignature } from "./ecdsa.js";
 import { p192, p224, p256, p384, p521 } from "./curve-nist.js";
