@@ -5,12 +5,13 @@
 	"description": "A very basic crypto library",
 	"scripts": {
 		"build": "rm -rf dist/* && tsc --project tsconfig.build.json",
-		"format": "prettier -w . !**/*.nist.test.ts",
-		"format.nist-test": "prettier -w **/*.nist.test.ts",
+		"format": "prettier -w . !test-vectors/**",
+		"format.all": "prettier -w .",
+		"format.test-vectors": "prettier -w test-vectors/**",
 		"lint": "eslint src",
-		"test": "vitest run --sequence.concurrent",
-		"test.lib": "vitest run --sequence.concurrent --exclude **/*.nist.test.ts",
-		"test.nist": "vitest run --sequence.concurrent src/**/*.nist.test.ts"
+		"test": "vitest run --sequence.concurrent src/**",
+		"test.all": "vitest run --sequence.concurrent",
+		"test-vectors": "vitest run --sequence.concurrent test-vectors/**"
 	},
 	"files": [
 		"/dist/"
