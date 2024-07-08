@@ -8,7 +8,8 @@
 		"format": "prettier -w . !**/*.nist.test.ts",
 		"format.nist-test": "prettier -w **/*.nist.test.ts",
 		"lint": "eslint src",
-		"test": "vitest run --sequence.concurrent --exclude **/*.nist.test.ts",
+		"test": "vitest run --sequence.concurrent",
+		"test.lib": "vitest run --sequence.concurrent --exclude **/*.nist.test.ts",
 		"test.nist": "vitest run --sequence.concurrent src/**/*.nist.test.ts"
 	},
 	"files": [
