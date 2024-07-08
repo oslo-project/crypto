@@ -5,7 +5,8 @@
 	"description": "A very basic crypto library",
 	"scripts": {
 		"build": "rm -rf dist/* && tsc --project tsconfig.build.json",
-		"format": "prettier -w .",
+		"format": "prettier -w . !**/*.nist.test.ts",
+		"format.nist-test": "prettier -w **/*.nist.test.ts",
 		"lint": "eslint src",
 		"test": "vitest run --sequence.concurrent"
 	},
