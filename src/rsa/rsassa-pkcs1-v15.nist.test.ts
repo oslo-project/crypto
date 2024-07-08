@@ -14,7 +14,7 @@ import {
 import { sha1 } from "../sha1/index.js";
 import { sha224, sha256, sha384, sha512 } from "../sha2/index.js";
 
-test("verify", () => {
+test("NIST RSASSA-PKCS1-v1_5 test vectors", () => {
 	let n =
 		0xdd07f43534adefb5407cc163aacc7abe9f93cb749643eaec22a3ef16e77813d77df20e84a755088872fde21d3d3192f9a78d726ef3d0daa9d6bc19daf6822eb834fbf837ed03d0f84a7fc7709be382e880e77ba3ce3d91ca1cbf567fc2e62169843489188a128ec853079e7942e6590508ea2faab1cf87b860b21b9546442455n;
 	let e = 0xfe3fa1n;

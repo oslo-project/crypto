@@ -6,7 +6,7 @@ import { RSAPublicKey, verifyRSASSAPSSSignature } from "./index.js";
 import { sha1, SHA1 } from "../sha1/index.js";
 import { sha224, sha256, sha384, sha512, SHA224, SHA256, SHA384, SHA512 } from "../sha2/index.js";
 
-test("verify", () => {
+test("NIST RSASSA-PSS test vectors", () => {
 	let n: bigint;
 	let e: bigint;
 	let hashed: Uint8Array;

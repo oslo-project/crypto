@@ -138,7 +138,6 @@ export class ECDSANamedCurve {
 
 	// Assumes the point is already on the curve
 	public multiply(k: bigint, point: ECDSAPoint): ECDSAPoint | null {
-		// For co-factor h > 1, ensure the point is in the prime order subgroup
 		const kBytes = bigIntBytes(k);
 		// montgomery ladder
 		const r = [pointAtInfinity(), new JacobianPoint(point.x, point.y, 1n)];
