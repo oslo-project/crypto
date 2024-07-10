@@ -28,7 +28,17 @@ export class SHA3 {
 			0x06n << (BigInt(this.absorbedBytes % 8) * 8n);
 		this.state[Math.floor((this.rate - 1) / 8)] ^= 0x8000000000000000n;
 		keccak(this.state);
-		return new Uint8Array(this.state.buffer).slice(0, this.outputSize);
+		if (this.outputSize <= this.rate) {
+			return new Uint8Array(this.state.buffer).slice(0, this.outputSize);
+		}
+		const keccakCount = Math.ceil(this.outputSize / this.rate);
+		const z = new Uint8Array(keccakCount * this.rate);
+		z.set(new Uint8Array(this.state.buffer).slice(0, this.rate));
+		for (let i = 1; i < keccakCount; i++) {
+			keccak(this.state);
+			z.set(new Uint8Array(this.state.buffer).slice(0, this.rate), i * this.rate);
+		}
+		return z.slice(0, this.outputSize);
 	}
 }
 
@@ -60,7 +70,17 @@ export class SHA3XOF {
 			0x1fn << (BigInt(this.absorbedBytes % 8) * 8n);
 		this.state[Math.floor((this.rate - 1) / 8)] ^= 0x8000000000000000n;
 		keccak(this.state);
-		return new Uint8Array(this.state.buffer).slice(0, this.outputSize);
+		if (this.outputSize <= this.rate) {
+			return new Uint8Array(this.state.buffer).slice(0, this.outputSize);
+		}
+		const keccakCount = Math.ceil(this.outputSize / this.rate);
+		const z = new Uint8Array(keccakCount * this.rate);
+		z.set(new Uint8Array(this.state.buffer).slice(0, this.rate));
+		for (let i = 1; i < keccakCount; i++) {
+			keccak(this.state);
+			z.set(new Uint8Array(this.state.buffer).slice(0, this.rate), i * this.rate);
+		}
+		return z.slice(0, this.outputSize);
 	}
 }
 
