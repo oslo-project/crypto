@@ -24,6 +24,7 @@
 		"./rsa": "./dist/rsa/index.js",
 		"./sha1": "./dist/sha1/index.js",
 		"./sha2": "./dist/sha2/index.js",
+		"./sha3": "./dist/sha3/index.js",
 		"./subtle": "./dist/subtle/index.js"
 	},
 	"typesVersions": {
@@ -49,6 +50,9 @@
 			"sha2": [
 				"dist/sha2/index.d.ts"
 			],
+			"sha3": [
+				"dist/sha3/index.d.ts"
+			],
 			"subtle": [
 				"dist/subtle/index.d.ts"
 			]
@@ -64,7 +68,10 @@
 		"sha",
 		"hmac",
 		"ecdsa",
-		"rsa"
+		"rsa",
+		"sha1",
+		"sha2",
+		"sha3"
 	],
 	"repository": {
 		"type": "git",
