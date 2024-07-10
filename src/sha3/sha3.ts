@@ -32,6 +32,38 @@ export class SHA3 {
 	}
 }
 
+export class SHA3XOF {
+	private rate: number;
+	private outputSize: number;
+	private state = new BigUint64Array(25);
+	private absorbedBytes = 0;
+
+	constructor(rate: number, outputSize: number) {
+		this.rate = rate;
+		this.outputSize = outputSize;
+	}
+
+	public absorb(bytes: Uint8Array): void {
+		for (let i = 0; i < bytes.byteLength; i++) {
+			this.state[Math.floor(this.absorbedBytes / 8)] ^=
+				BigInt(bytes[i]) << (BigInt(this.absorbedBytes % 8) * 8n);
+			this.absorbedBytes++;
+			if (this.absorbedBytes === this.rate) {
+				keccak(this.state);
+				this.absorbedBytes = 0;
+			}
+		}
+	}
+
+	public squeeze(): Uint8Array {
+		this.state[Math.floor(this.absorbedBytes / 8)] ^=
+			0x1fn << (BigInt(this.absorbedBytes % 8) * 8n);
+		this.state[Math.floor((this.rate - 1) / 8)] ^= 0x8000000000000000n;
+		keccak(this.state);
+		return new Uint8Array(this.state.buffer).slice(0, this.outputSize);
+	}
+}
+
 function keccak(a: BigUint64Array): void {
 	for (let i = 0; i < 24; i++) {
 		theta(a);

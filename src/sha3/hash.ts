@@ -1,5 +1,6 @@
-import type { Hash } from "../hash/index.js";
 import { SHA3 } from "./sha3.js";
+
+import type { Hash } from "../hash/index.js";
 
 export function sha3_224(data: Uint8Array): Uint8Array {
 	const hash = new SHA3_224();

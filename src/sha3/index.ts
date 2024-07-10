@@ -8,3 +8,4 @@ export {
 	SHA3_384,
 	SHA3_512
 } from "./hash.js";
+export { shake128, shake256, SHAKE128, SHAKE256 } from "./xof.js";
