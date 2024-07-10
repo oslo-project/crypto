@@ -102,14 +102,14 @@ ECDSA signature is a pair of integers (r, s).
 Sometimes called the "raw" format, this just concatenates the r and s values.
 
 ```ts
-import { ECDSASignature, p256 } from "@oslojs/p256";
+import { ECDSASignature, p256 } from "@oslojs/crypto/ecdsa";
 
 const signature = new ECDSASignature(r, s);
 const raw = signature.encodeIEEEP1363(p256);
 ```
 
 ```ts
-import { decodeIEEEP1363ECDSASignature, p256 } from "@oslojs/p256";
+import { decodeIEEEP1363ECDSASignature, p256 } from "@oslojs/crypto/ecdsa";
 
 try {
 	const signature = decodeIEEEP1363ECDSASignature(p256, raw);
@@ -123,14 +123,14 @@ try {
 ECDSA signatures in PKIX are ASN.1 DER encoded sequences.
 
 ```ts
-import { ECDSASignature } from "@oslojs/p256";
+import { ECDSASignature } from "@oslojs/crypto/ecdsa";
 
 const signature = new ECDSASignature(r, s);
 const der = signature.encodePKIX();
 ```
 
 ```ts
-import { decodePKIXECDSASignature } from "@oslojs/p256";
+import { decodePKIXECDSASignature } from "@oslojs/crypto/ecdsa";
 
 try {
 	const signature = decodePKIXECDSASignature(der);
