@@ -1,5 +1,5 @@
 export {
-	sha3_244,
+	sha3_224,
 	sha3_256,
 	sha3_384,
 	sha3_512,
