@@ -6,6 +6,8 @@ title: "@oslojs/crypto/rsa"
 
 Implements RSASSA-PKCS1-v1_5 and RSASSA-PSS as specified in [RFC 8017](https://datatracker.ietf.org/doc/html/rfc8017).
 
+**Implementations are not fully constant-time.** As such, only APIs for verifying signatures and parsing data are provided.
+
 ## Functions
 
 - [`decodePKCS1RSAPublicKey()`](/reference/rsa/decodePKCS1RSAPublicKey)

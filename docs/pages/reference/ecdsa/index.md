@@ -6,7 +6,7 @@ title: "@oslojs/crypto/ecdsa"
 
 Implements ECDSA over prime fields as specified in [NIST FIPS 186-5](https://csrc.nist.gov/pubs/fips/186-5/final) and [SEC 1](https://www.secg.org/sec1-v2.pdf). Binary fields are not supported. It also includes APIs for working with X.509/PKIX formats. All curves defined in [SEC 2](https://www.secg.org/sec2-v2.pdf) are provided out of the box.
 
-While efforts have been made, **implementations are not fully constant-time.** As such, only APIs for verifying signatures and parsing data are provided. Performance is comparable to any pure-JS implementations but slower than native APIs.
+**Implementations are not fully constant-time.** As such, only APIs for verifying signatures and parsing data are provided.
 
 ## Functions
 
