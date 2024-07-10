@@ -6,11 +6,12 @@ title: "API reference"
 
 ## Modules
 
-- [`ecdsa`](/reference/ecdsa)
-- [`hash`](/reference/hash)
-- [`hmac`](/reference/hmac)
-- [`random`](/reference/random)
-- [`rsa`](/reference/rsa)
-- [`sha1`](/reference/sha1)
-- [`sha2`](/reference/sha2)
-- [`subtle`](/reference/subtle)
+- [`@oslojs/crypto/ecdsa`](/reference/ecdsa)
+- [`@oslojs/crypto/hash`](/reference/hash)
+- [`@oslojs/crypto/hmac`](/reference/hmac)
+- [`@oslojs/crypto/random`](/reference/random)
+- [`@oslojs/crypto/rsa`](/reference/rsa)
+- [`@oslojs/crypto/sha1`](/reference/sha1)
+- [`@oslojs/crypto/sha2`](/reference/sha2)
+- [`@oslojs/crypto/sha3`](/reference/sha3)
+- [`@oslojs/crypto/subtle`](/reference/subtle)

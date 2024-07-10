@@ -24,6 +24,7 @@
 				["@oslojs/crypto/rsa", "/reference/rsa"],
 				["@oslojs/crypto/sha1", "/reference/sha1"],
 				["@oslojs/crypto/sha2", "/reference/sha2"],
+				["@oslojs/crypto/sha3", "/reference/sha3"],
 				["@oslojs/crypto/subtle", "/reference/subtle"]
 			]
 		},
