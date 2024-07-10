@@ -1,4 +1,5 @@
 import { SHA3XOF } from "./sha3.js";
+import type { Hash } from "../hash/index.js";
 
 export function shake128(size: number, data: Uint8Array): Uint8Array {
 	const hash = new SHAKE128(size);
@@ -12,7 +13,7 @@ export function shake256(size: number, data: Uint8Array): Uint8Array {
 	return hash.digest();
 }
 
-export class SHAKE128 {
+export class SHAKE128 implements Hash {
 	public blockSize = 168;
 	public size: number;
 
@@ -35,7 +36,7 @@ export class SHAKE128 {
 	}
 }
 
-export class SHAKE256 {
+export class SHAKE256 implements Hash {
 	public blockSize = 136;
 	public size: number;
 
