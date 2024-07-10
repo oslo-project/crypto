@@ -1,6 +1,6 @@
 # @oslojs/crypto
 
-## next
+## 0.5.3
 
 - Add SHA-3 hash and extended hash functions.
 
