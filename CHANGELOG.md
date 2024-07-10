@@ -1,5 +1,9 @@
 # @oslojs/crypto
 
+## next
+
+- Add SHA-3 hash and extended hash functions.
+
 ## 0.5.2
 
 - Fix `ECDSASignature.encodeIEEEP1363()`
