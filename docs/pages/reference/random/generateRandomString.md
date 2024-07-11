@@ -9,12 +9,13 @@ Generates a random string of given length using the provided characters (`alphab
 ## Definition
 
 ```ts
-function generateRandomString(length: number, alphabet: string): string;
+//$ RandomReader=/reference/random/RandomReader
+function generateRandomString(random: $$RandomReader, alphabet: string, length: number): string;
 ```
 
 ### Parameters
 
-- `length`
+- `random`
 - `alphabet`: A string with all possible characters
 
 ## Example
@@ -22,6 +23,7 @@ function generateRandomString(length: number, alphabet: string): string;
 ```ts
 import { generateRandomString, alphabet } from "oslo/crypto";
 
-// 10-characters long string consisting of the lowercase alphabet and numbers
-generateRandomString(10, alphabet("a-z", "0-9"));
+// 10-characters long string consisting of the upper case letters
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+generateRandomString(crypto.getRandomValues, alphabet, 10);
 ```

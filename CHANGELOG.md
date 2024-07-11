@@ -1,5 +1,10 @@
 # @oslojs/crypto
 
+## next
+
+- [Breaking] Update `generateRandomInteger()`, `generateRandomIntegerNumber()`, and `generateRandomString()` parameters.
+- [Breaking] Remove `alphabet()` and `random()` from `random` module.
+
 ## 0.5.3
 
 - Add SHA-3 hash and extended hash functions.

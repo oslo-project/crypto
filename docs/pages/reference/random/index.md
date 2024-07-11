@@ -4,12 +4,14 @@ title: "@oslojs/crypto/random"
 
 # @oslojs/crypto/random
 
-Provides cryptographically-secure random generators with minimal biases.
+Utilities for generating numbers and strings using a random source with minimal biases.
 
 ## Functions
 
-- [`alphabet()`](/reference/random/alphabet)
 - [`generateRandomInteger()`](/reference/random/generateRandomInteger)
 - [`generateRandomIntegerNumber()`](/reference/random/generateRandomIntegerNumber)
 - [`generateRandomString()`](/reference/random/generateRandomString)
-- [`random()`](/reference/random/random)
+
+## Types
+
+- [`RandomReader()`](/reference/random/RandomReader)
