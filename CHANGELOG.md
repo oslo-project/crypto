@@ -1,6 +1,6 @@
 # @oslojs/crypto
 
-## next
+## 0.6.0
 
 - [Breaking] Update `generateRandomInteger()`, `generateRandomIntegerNumber()`, and `generateRandomString()` parameters.
 - [Breaking] Remove `alphabet()` and `random()` from `random` module.
