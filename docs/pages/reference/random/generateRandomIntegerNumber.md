@@ -9,11 +9,13 @@ Generates a random integer between 0 (inclusive) and a positive integer (exclusi
 ## Definition
 
 ```ts
-function generateRandomIntegerNumber(max: number): number;
+//$ RandomReader=/reference/random/RandomReader
+function generateRandomIntegerNumber(random: $$RandomReader, max: number): number;
 ```
 
 ### Parameters
 
+- `random`
 - `max`: Must be greater than 1 and less than or equal to `Number.MAX_SAFE_INTEGER`
 
 ## Example
@@ -22,5 +24,5 @@ function generateRandomIntegerNumber(max: number): number;
 import { generateRandomInteger } from "oslo/crypto";
 
 // random number from 0 to 9
-generateRandomInteger(10);
+generateRandomInteger(random, 10);
 ```
