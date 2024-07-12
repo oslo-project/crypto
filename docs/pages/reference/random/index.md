@@ -12,6 +12,6 @@ Utilities for generating numbers and strings using a random source with minimal 
 - [`generateRandomIntegerNumber()`](/reference/random/generateRandomIntegerNumber)
 - [`generateRandomString()`](/reference/random/generateRandomString)
 
-## Types
+## Interfaces
 
 - [`RandomReader()`](/reference/random/RandomReader)
