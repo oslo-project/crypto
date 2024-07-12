@@ -1,5 +1,3 @@
-import { xor } from "@oslojs/binary";
-
 import type { Hash, HashAlgorithm } from "../hash/index.js";
 
 export class HMAC {
@@ -23,12 +21,16 @@ export class HMAC {
 		this.inner = new Algorithm();
 
 		const ipad = new Uint8Array(this.k0.byteLength).fill(0x36);
-		xor(ipad, this.k0);
+		for (let i = 0; i < ipad.byteLength; i++) {
+			ipad[i] ^= this.k0[i];
+		}
 		this.inner.update(ipad);
 
 		this.outer = new Algorithm();
 		const opad = new Uint8Array(this.k0.byteLength).fill(0x5c);
-		xor(opad, this.k0);
+		for (let i = 0; i < opad.byteLength; i++) {
+			opad[i] ^= this.k0[i];
+		}
 		this.outer.update(opad);
 	}
 

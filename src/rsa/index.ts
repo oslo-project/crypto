@@ -1,4 +1,4 @@
-import { bigIntFromBytes, concatenateBytes, DynamicBuffer, xor } from "@oslojs/binary";
+import { bigIntFromBytes, concatenateBytes, DynamicBuffer } from "@oslojs/binary";
 import { constantTimeEqual } from "../subtle/index.js";
 import {
 	ASN1BitString,
@@ -83,7 +83,9 @@ export function verifyRSASSAPSSSignature(
 	}
 
 	const dbMask = mgf1(MGF1HashAlgorithm, h, em.byteLength - hashed.byteLength - 1);
-	xor(db, dbMask);
+	for (let i = 0; i < db.byteLength; i++) {
+		db[i] ^= dbMask[i];
+	}
 	for (let i = 0; i < Math.floor((em.byteLength - hashed.byteLength - 1) / 8); i++) {
 		db[i] = 0;
 	}
@@ -179,7 +181,8 @@ function mgf1(Hash: HashAlgorithm, Z: Uint8Array, l: number): Uint8Array {
 			counterBytes[j] = Number((counter >> ((counterBytes.byteLength - j - 1) * 8)) & 0xff);
 		}
 		const zcHash = new Hash();
-		zcHash.update(concatenateBytes(Z, counterBytes));
+		zcHash.update(Z);
+		zcHash.update(counterBytes);
 		t = concatenateBytes(t, zcHash.digest());
 		counter++;
 	}
