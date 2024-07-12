@@ -76,7 +76,7 @@ const random: RandomReader = {
 };
 ```
 
-Use `fillRandomSync()` for older versions of APIs.
+Use `fillRandomSync()` for older versions of Node.js.
 
 ```ts
 import { fillRandomSync } from "node:crypto";
