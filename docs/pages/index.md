@@ -15,4 +15,3 @@ A basic JavaScript crypto library by [Oslo](https://oslojs.dev). Includes APIs f
 ```
 npm i @oslojs/crypto
 ```
-
