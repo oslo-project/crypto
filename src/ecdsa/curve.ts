@@ -139,16 +139,17 @@ export class ECDSANamedCurve {
 	// Assumes the point is already on the curve
 	public multiply(k: bigint, point: ECDSAPoint): ECDSAPoint | null {
 		const kBytes = bigIntBytes(k);
-		// montgomery ladder
-		const r = [pointAtInfinity(), new JacobianPoint(point.x, point.y, 1n)];
-		for (let i = 0; i < kBytes.byteLength * 8; i++) {
-			const byte = kBytes[Math.floor(i / 8)];
-			const bit = (byte >> (7 - (i % 8))) & 0x01;
-			const notBit = bit ^ 1;
-			r[notBit] = this.addJacobian(r[notBit], r[bit]);
-			r[bit] = this.doubleJacobian(r[bit]);
+		const bitLength = k.toString(2).length;
+		let res = pointAtInfinity();
+		let temp = new JacobianPoint(point.x, point.y, 1n);
+		for (let i = 0; i < bitLength; i++) {
+			const byte = kBytes[kBytes.byteLength - 1 - Math.floor(i / 8)];
+			if ((byte >> i % 8) & 0x01) {
+				res = this.addJacobian(res, temp);
+			}
+			temp = this.doubleJacobian(temp);
 		}
-		return this.toAffine(r[0]);
+		return this.toAffine(res);
 	}
 
 	public isOnCurve(point: ECDSAPoint): boolean {
