@@ -1,5 +1,9 @@
 # @oslojs/crypto
 
+## 1.0.0
+
+- No changes.
+
 ## 0.6.2
 
 - Update dependencies.

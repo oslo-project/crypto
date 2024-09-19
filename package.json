@@ -92,7 +92,7 @@
 		"vitest": "1.6.0"
 	},
 	"dependencies": {
-		"@oslojs/asn1": "0.2.3",
-		"@oslojs/binary": "0.4.0"
+		"@oslojs/asn1": "1.0.0",
+		"@oslojs/binary": "1.0.0"
 	}
 }
