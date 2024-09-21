@@ -1,5 +1,9 @@
 # @oslojs/crypto
 
+## 1.0.1
+
+- Fix `ECDSAPublicKey.encodePKIXCompressed()` creating uncompressed keys.
+
 ## 1.0.0
 
 - No changes.
