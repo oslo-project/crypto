@@ -102,7 +102,7 @@ export class ECDSAPublicKey {
 			new ASN1ObjectIdentifier(encodeObjectIdentifier("1.2.840.10045.2.1")),
 			new ASN1ObjectIdentifier(encodeObjectIdentifier(this.curve.objectIdentifier))
 		]);
-		const encoded = this.encodeSEC1Uncompressed();
+		const encoded = this.encodeSEC1Compressed();
 		const subjectPublicKey = new ASN1BitString(encoded, encoded.byteLength * 8);
 		const subjectPublicKeyInfo = new ASN1EncodableSequence([algorithmIdentifier, subjectPublicKey]);
 		return encodeASN1(subjectPublicKeyInfo);
