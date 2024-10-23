@@ -14,4 +14,4 @@ Utilities for generating numbers and strings using a random source with minimal 
 
 ## Interfaces
 
-- [`RandomReader()`](/reference/random/RandomReader)
+- [`RandomReader`](/reference/random/RandomReader)
