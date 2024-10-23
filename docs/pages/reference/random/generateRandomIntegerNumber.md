@@ -23,6 +23,14 @@ function generateRandomIntegerNumber(random: $$RandomReader, max: number): numbe
 ```ts
 import { generateRandomInteger } from "oslo/crypto";
 
+import type { RandomReader } from "@oslojs/crypto/random";
+
+const random: RandomReader = {
+	read(bytes) {
+		crypto.getRandomValues(bytes);
+	}
+};
+
 // random number from 0 to 9
-generateRandomInteger(random, 10);
+const i = generateRandomInteger(random, 10);
 ```

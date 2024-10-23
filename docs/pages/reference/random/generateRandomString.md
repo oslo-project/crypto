@@ -23,7 +23,15 @@ function generateRandomString(random: $$RandomReader, alphabet: string, length: 
 ```ts
 import { generateRandomString, alphabet } from "oslo/crypto";
 
-// 10-characters long string consisting of the upper case letters
+import type { RandomReader } from "@oslojs/crypto/random";
+
+const random: RandomReader = {
+	read(bytes) {
+		crypto.getRandomValues(bytes);
+	}
+};
+
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-generateRandomString(crypto.getRandomValues, alphabet, 10);
+// 10-characters long string consisting of the upper case letters
+const s = generateRandomString(random, alphabet, 10);
 ```
