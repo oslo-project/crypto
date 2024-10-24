@@ -21,7 +21,7 @@ function generateRandomInteger(random: $$RandomReader, max: bigint): bigint;
 ## Example
 
 ```ts
-import { generateRandomInteger } from "oslo/crypto";
+import { generateRandomInteger } from "@oslojs/crypto/random";
 
 import type { RandomReader } from "@oslojs/crypto/random";
 

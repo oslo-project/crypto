@@ -21,7 +21,7 @@ function generateRandomIntegerNumber(random: $$RandomReader, max: number): numbe
 ## Example
 
 ```ts
-import { generateRandomInteger } from "oslo/crypto";
+import { generateRandomIntegerNumber } from "@oslojs/crypto/random";
 
 import type { RandomReader } from "@oslojs/crypto/random";
 
@@ -32,5 +32,5 @@ const random: RandomReader = {
 };
 
 // random number from 0 to 9
-const i = generateRandomInteger(random, 10);
+const i = generateRandomIntegerNumber(random, 10);
 ```

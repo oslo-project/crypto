@@ -21,7 +21,7 @@ function generateRandomString(random: $$RandomReader, alphabet: string, length: 
 ## Example
 
 ```ts
-import { generateRandomString, alphabet } from "oslo/crypto";
+import { generateRandomString } from "@oslojs/crypto/random";
 
 import type { RandomReader } from "@oslojs/crypto/random";
 
