@@ -11,7 +11,7 @@ Since this package attempts to reduce the biases involved, APIs can be comparati
 Use [`generateRandomInteger()`](/reference/random/generateRandomInteger) or [`generateRandomIntegerNumber()`](/reference/random/generateRandomIntegerNumber) to generate random integers between 0 (inclusive) and maximum (exclusive).
 
 ```ts
-import { generateRandomInteger, generateRandomIntegerNumber } from "oslo/crypto";
+import { generateRandomInteger, generateRandomIntegerNumber } from "@oslojs/crypto/random";
 
 // random number from 0 to 9
 const num: bigint = generateRandomInteger(random, 10n);
@@ -23,7 +23,7 @@ const num: number = generateRandomIntegerNumber(random, 10);
 Use [`generateRandomString()`](/reference/random/generateRandomString) to generate random strings with a predefined set of characters. This also requires a `RandomReader` function.
 
 ```ts
-import { generateRandomString } from "oslo/crypto";
+import { generateRandomString } from "@oslojs/crypto/random";
 
 // 10-characters long string consisting of upper case letters
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
