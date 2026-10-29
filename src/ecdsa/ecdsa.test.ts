@@ -59,6 +59,15 @@ test("decodeSEC1PublicKey()", () => {
 	expect(decodeSEC1PublicKey(p521, publicKey.encodeSEC1Compressed())).toStrictEqual(publicKey);
 });
 
+test("ECDSAPublicKey.encodeSEC1Uncompressed() keeps the leading zero bytes of y", () => {
+	const x = 0x1bb3fdcb501eac1689a3e7de1944d3836fa0aeead0f8152cf8f5e02d19c715bdn;
+	const y = 0x002809d5ebc97d5771c3c562e1b8188905665fa76df0c36a32ea895f09dfd988n;
+	const publicKey = new ECDSAPublicKey(p256, x, y);
+	const encoded = publicKey.encodeSEC1Uncompressed();
+	expect(encoded.byteLength).toBe(65);
+	expect(decodeSEC1PublicKey(p256, encoded)).toStrictEqual(publicKey);
+});
+
 describe("ECDSAPublicKey", async () => {
 	const data = new TextEncoder().encode("hello world");
 

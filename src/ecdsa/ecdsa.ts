@@ -70,7 +70,7 @@ export class ECDSAPublicKey {
 		const xBytes = bigIntBytes(this.x);
 		const yBytes = bigIntBytes(this.y);
 		bytes.set(xBytes, 1 + this.curve.size - xBytes.byteLength);
-		bytes.set(yBytes, 1 + this.curve.size);
+		bytes.set(yBytes, 1 + this.curve.size * 2 - yBytes.byteLength);
 		return bytes;
 	}
 
